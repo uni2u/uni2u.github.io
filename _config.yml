@@ -108,6 +108,3 @@ JB :
   #   ./_includes/custom/[HELPER]
   # where [HELPER] is the name of the helper you are overriding.
   
-remote_theme : abhn/Soot-Spirits
-url : "https://uni2u.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
-baseurl : "" # the subpath of your site, e.g. "/blog"
