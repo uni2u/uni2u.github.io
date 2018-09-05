@@ -58,7 +58,7 @@ HTTP에는 식별자가 위치하기 때문에 파일을 호스팅하고있는 �
 IPFS에서는 단계를 두 부분으로 나눕니다:
 
 - content addressing 을 사용하여 파일 식별
-- Go and find it - hash가 생겼을 때 네트워크에 누가 '이 콘텐츠를 가지고 있는가? (hash)' 를 물어 보고 해당 노드에 연결하여 다운로드
+- Go and find it: hash가 생겼을 때 네트워크에 누가 '이 콘텐츠를 가지고 있는가? (hash)' 를 물어 보고 해당 노드에 연결하여 다운로드
 
 그 결과 매우 빠른 라우팅이 가능한 peer-to-peer 오버레이가 생성됩니다.
 
@@ -66,7 +66,7 @@ IPFS에서는 단계를 두 부분으로 나눕니다:
 
 ## IPFS by Example
 
-IPFS (InterPlanetary File System)는 [DHT](https://en.wikipedia.org/wiki/Distributed_hash_table), [Git 버전 시스템](https://git-scm.com/) 및 [Bittorrent](https://en.wikipedia.org/wiki/BitTorrent) 와 같이 잘 테스트 된 인터넷 기술을 종합 한 것입니다. 그것은 _IPFS Object_의 교환을 허용하는 P2P swarm 을 만듭니다. 전체 _IPFS Object_ 는 _Merkle DAG_ 로 알려진 인증 된 데이터 구조를 형성하며 이 데이터 구조는 다른 많은 데이터 구조를 모델링하는 데 사용될 수 있습니다. 이 글에서는 IPFS 개체와 Merkle DAG를 소개하고 IPFS를 사용하여 모델링 할 수있는 구조의 예를 제시합니다.
+IPFS (InterPlanetary File System)는 [DHT](https://en.wikipedia.org/wiki/Distributed_hash_table), [Git 버전 시스템](https://git-scm.com/) 및 [Bittorrent](https://en.wikipedia.org/wiki/BitTorrent) 와 같이 잘 테스트 된 인터넷 기술을 종합 한 것입니다. 그것은 _IPFS Object_ 의 교환을 허용하는 P2P swarm 을 만듭니다. 전체 _IPFS Object_ 는 _Merkle DAG_ 로 알려진 인증 된 데이터 구조를 형성하며 이 데이터 구조는 다른 많은 데이터 구조를 모델링하는 데 사용될 수 있습니다. 이 글에서는 IPFS 개체와 Merkle DAG를 소개하고 IPFS를 사용하여 모델링 할 수있는 구조의 예를 제시합니다.
 
 ### IPFS Objects
 
