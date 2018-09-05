@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "IPFS (InterPlanetary File System)"
+title: "IPFS (InterPlanetary File System) 첫번째"
 categories: 
   - ipfs
   - Distributed File System
