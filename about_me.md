@@ -16,10 +16,10 @@ His research interests are in OpenStack, Neutron, Cloud Networking with SDN.
 
 ## Project
 
-- ![](https://www.linkedin.com/in/yongyoon-shin-80a8b557/)
+- [Linked_IN](https://www.linkedin.com/in/yongyoon-shin-80a8b557/)
 
 ## Site
 
-- blog: http://uni2u.tistory.com
-- facebook: https://www.facebook.com/uni2u
-- slideshare: http://www.slideshare.net/uni2u
+- blog: <http://uni2u.tistory.com>
+- facebook: <https://www.facebook.com/uni2u>
+- slideshare: <http://www.slideshare.net/uni2u>
