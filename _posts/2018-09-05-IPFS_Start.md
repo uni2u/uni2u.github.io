@@ -226,3 +226,9 @@ Commit Object 의 주요 속성은 이전 커밋을 가리키는 _parent0_, _par
 그러나 온체인과 오프체인 데이터 스토리지를 구분할 수 있습니다. 새로운 블록을 만들 때 마이너가 처리해야하는 것을 살펴봄으로써 이를 수행합니다. 현재 Ethereum 네트워크에서 마이너는 상태 데이터베이스를 업데이트 할 트랜잭션을 처리해야 합니다. 이렇게 하려면 전체 상태 데이터베이스에 액세스 하여야 변경된 곳마다 데이터베이스를 업데이트 할 수 있습니다.
 
 따라서 IPFS로 표현 된 블록 체인 상태 데이터베이스에서 "온체인"또는 "오프체인"으로 데이터에 태그를 지정해야 합니다. 마이너가 마이닝을 위해 국부적으로 유지하기 위해서는 "온체인" 데이터가 필요하며 이 데이터는 거래의 직접적인 영향을받습니다. "오프체인" 데이터는 사용자가 업데이트 해야하며 마이너가 접촉 할 필요가 없습니다.
+
+## IPFS 를 지탱하는 기반 기술
+
+IPFS 에서는 [Kademlia DHT](https://www.youtube.com/watch?v=kXyVqk3EbwE&t=5s) 와 [BitTorrent](https://youtu.be/6PWUCFmOQwQ) 그리고 [Git](https://youtu.be/SWYqp7iY_Tc), [Self-certifying File System](https://en.wikipedia.org/wiki/Self-certifying_File_System) 에 대한 이해를 필요로 합니다.
+
+앞으로 차근차근 이에대한 이야기를 하도록 하겠습니다.
