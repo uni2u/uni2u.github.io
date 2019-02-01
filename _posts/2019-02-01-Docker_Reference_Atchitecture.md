@@ -15,7 +15,7 @@ meta: "Springfield"
 
 > 원문: [Docker Reference Architecture: Designing Scalable, Portable Docker Container Networks](https://success.docker.com/article/networking)
 
-##배우게 될 것
+## 배우게 될 것
 
 도커 컨테이너는 실행에 필요한 모든 것, 즉 코드, 런타임, 시스템 도구, 시스템 라이브러리 등 서버에 설치할 수 있는 모든 것을 포함하는 완전한 파일 시스템에 있는 소프트웨어 하나를 래핑한다. 이는 소프트웨어가 환경에 관계없이 항상 동일한 기능을 실행할 것을 보장한다. 기본적으로 컨테이너는 애플리케이션을 서로 격리하고, 애플리케이션을 위한 추가적인 보호 계층을 제공한다.
 
@@ -62,7 +62,7 @@ CNM에는 몇 가지 상위 레벨의 구성물이 있다. 이들은 모두 OS �
 
 - **샌드박스** - 샌드박스는 컨테이너 네트워크 스택의 설정을 포함한다. 여기에는 컨테이너 인터페이스, 라우팅 테이블 및 DNS 설정 관리가 포함된다. 샌드박스의 구현은 Linux 네트워크 네임스페이스, FreeBSD Jail 또는 기타 유사한 개념일 수 있다. 샌드박스는 여러 네트워크의 많은 엔드포인트를 포함할 수 있다.
 - **엔드포인트** - 엔드포인트가 샌드박스를 네트워크에 연결한다. 엔드포인트는 네트워크에 대한 실제 연결을 애플리케이션에서 추상화할 수 있도록 존재한다. 이는 서비스가 네트워크에 어떻게 연결되어 있는지에 신경쓰지 않으며 여러 유형의 네트워크 드라이버를 사용할 수 있도록 이식성을 유지하는데 도움을 준다.
-- **네트워크** — CNM은 OSI 모델 측면에서 네트워크를 명시하지 않는다. 네트워크의 구현은 리눅스 브리지, VLAN 등이 될 수 있다. 네트워크는 이들 사이에 연결성이 있는 엔드포인트의 모음이다. 네트워크에 연결되지 않은 엔드포인트는 네트워크에 연결되어 있지 않다.
+- **네트워크** - CNM은 OSI 모델 측면에서 네트워크를 명시하지 않는다. 네트워크의 구현은 리눅스 브리지, VLAN 등이 될 수 있다. 네트워크는 이들 사이에 연결성이 있는 엔드포인트의 모음이다. 네트워크에 연결되지 않은 엔드포인트는 네트워크에 연결되어 있지 않다.
 
 ### CNM 드라이버 인터페이스
 
@@ -181,12 +181,12 @@ $ docker run -itd --net host --name nginx
 
 #호스트 eth0 표시
 $ ip add | grep eth0
-2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc mq state UP group default qlen 1000
+2: eth0: <BROADCAST, MULTICAST, UP, LOWER_UP> mtu 9001 qdisc mq state UP group default qlen 1000
 	inet 172.31.21.213/20 brd 172.31.31.255 scope global eth0
 
 #C1으로부터 eth0 표시
 $ docker run -it --net host --name C1 alpine ip add | grep eth0
-2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc mq state UP qlen 1000
+2: eth0: <BROADCAST, MULTICAST, UP, LOWER_UP> mtu 9001 qdisc mq state UP qlen 1000
 	inet 172.31.21.213/20 brd 172.31.31.255 scope global eth0
 
 #C1의 locahost를 통해 nginx 컨테이너에 연결
