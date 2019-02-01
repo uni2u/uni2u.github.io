@@ -7,6 +7,7 @@ permalink: /about_me/
 ## About Me
 
 YongYoon SHIN
+
 He worked as a senior engineer at [ETRI](https://etri.re.kr/eng/main/main.etri), KOREA, between 2010 and NOW.
 
 He has been working for ETRI as a Senior Engineer since 2011.
