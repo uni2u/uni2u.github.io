@@ -1,13 +1,15 @@
 ---
 layout: post
-title: "Docker Reference Architecture: Designing Scalable, Portable Docker Container Networks"
+title: "[논문분석] Docker Reference Architecture: Designing Scalable, Portable Docker Container Networks"
 categories:
   - Docker
   - Docker Reference Architecture
   - Container
+  - Paper Review
 tags:
   - Docker
   - Docker Reference Architecture
+  - Paper Review
 lang: ko
 author: "uni2u"
 meta: "Springfield"
