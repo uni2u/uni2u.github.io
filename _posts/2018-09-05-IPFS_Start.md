@@ -2,10 +2,10 @@
 layout: post
 title: "IPFS (InterPlanetary File System) 첫번째"
 categories: 
-  - ipfs
+  - IPFS
   - Distributed File System
 tags:
-  - ipfs
+  - IPFS
 lang: ko
 author: "uni2u"
 meta: "Springfield"
