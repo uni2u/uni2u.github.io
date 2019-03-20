@@ -1,8 +1,6 @@
 ---
 layout: post
 title: "[논문분석] Docker Reference Architecture: Designing Scalable, Portable Docker Container Networks"
-category_archives:
-  - Docker
 categories:
   - Docker
   - Docker Reference Architecture
