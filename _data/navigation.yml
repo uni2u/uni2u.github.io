@@ -5,6 +5,8 @@ main:
     url: /about_me/
   - title: "Archives"
     url: /archives/
+  - title: "Tags"
+    url: /tags/
   - title: "GitHub"
     url: https://github.com/uni2u
   - title: "Facebook"
