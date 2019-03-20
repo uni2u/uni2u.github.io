@@ -1,5 +1,5 @@
 ---
-layout: category_archives
+layout: archive
 title: "Blog Tag"
-permalink: /tags/
+permalink: /category_archives/
 ---
