@@ -96,6 +96,6 @@ node exit 0
 
 위 그림과 같이 노드는 파일 해시를 통해 네트워크에서 해당 파일을 찾을 수 있고 파란색 노드는 노란색 노드를 통해 빨간색 노드에 저장된 파일을 찾을 수 있습니다. 노란색으로 연결된 노드가 빨간색 네트워크에 대한 연결을 삭제하면 파란색 부분은 다음 그림과 같이 사설 IPFS 네트워크를 형성합니다.
 
-![ipfs bootstrap 노드 삭제](/images/ipfs_bootstrap01.png)
+![ipfs bootstrap 노드 삭제](/images/ipfs_bootstrap02.png)
 
 위 그림의 사설 IPFS 네트워크는 _bootstrap_ 을 통해 구현됩니다.
