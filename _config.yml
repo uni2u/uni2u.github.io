@@ -15,8 +15,8 @@ slideshare_username: uni2u
 disqus_shortname: uni2u
 favicon: "/images/favicon.ico"
 aboutme: YongYoon SHIN; Senior Engineer @ETRI # these are shown on aboutme-sidebar.
-aboutme_photo: # your photo.
-google_analytics_key: # put YOUR key here to enable tracking! (blank to disable)
+### aboutme_photo: # your photo.
+### google_analytics_key: # put YOUR key here to enable tracking! (blank to disable)
 
 
 ### Site setting:
