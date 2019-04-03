@@ -5,23 +5,21 @@ comments: yes
 permalink: /about/
 ---
 
+## About Me
+YongYoon SHIN
 
-### Freshman21 is a Jekyll theme.
+He worked as a senior engineer at [ETRI](https://etri.re.kr/eng/main/main.etri), KOREA, between 2010 and NOW.
 
-A tribute to Twenty Twelve and Twenty eleven.
+He has been working for ETRI as a Senior Engineer since 2011.
 
-I like wordpress's theme Twenty Twelve and Twenty eleven very much. 
-So I called my Jekyll theme Freshman21 (Freshman <q>twenty-first</q> , it means twenty-first century, not twenty-one), this theme is based on my former theme [Freshman](https://github.com/yulijia/freshman/).
+He is member of OpenStack Community Korea and member of ONOS project.
 
-Freshman21 have two main page format, one is [single column](http://yulijia.net/en/  "see demo"), the other is two columns. For more details, please see the articles on the site.
+His research interests are in OpenStack, Neutron, Cloud Networking with SDN, Kubernetes, IPFS, NDN.
 
-<cite>Proudly enjoy using Freshman21 theme.</cite> <code>;)</code>
+## Project
+- [Linked_IN](https://www.linkedin.com/in/yongyoon-shin-80a8b557/)
 
-![麋鹿](https://i.imgur.com/Mdc4szJl.jpg){: .img-about}
-
-#### Hi, the picture you have seen in the sample-page is a Père David's deer photoed by my friend at Beijing Milu Park, China.
-
-Milu(麋鹿) is the chinese name of Père David's deer.
-
-
-
+## Site
+- blog: <http://uni2u.tistory.com>
+- facebook: <https://www.facebook.com/uni2u>
+- slideshare: <http://www.slideshare.net/uni2u>
