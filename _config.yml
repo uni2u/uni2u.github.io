@@ -13,7 +13,7 @@ facebook_username: uni2u
 github_username: uni2u
 slideshare_username: uni2u
 disqus_shortname: uni2u
-favicon:     "/images/favicon.ico"
+favicon: "/images/favicon.ico"
 aboutme: YongYoon SHIN; Senior Engineer @ETRI # these are shown on aboutme-sidebar.
 aboutme_photo: # your photo.
 google_analytics_key: # put YOUR key here to enable tracking! (blank to disable)
@@ -172,14 +172,13 @@ locales:
 
 ### your Blogroll info, only name can shown on the page.
 
-Blogroll:
-      - name: uni2u LinkedIn
-        href: https://www.linkedin.com/in/yongyoon-shin-80a8b557/
-        title: uni2u's LinkedIn
-      - name: uni2u Tistory
-        href: https://uni2u.tistory.com/
-        title: uni2u's Tistory blog
-
+##Blogroll:
+##      - name: uni2u LinkedIn
+##        href: https://www.linkedin.com/in/yongyoon-shin-80a8b557/
+##        title: uni2u's LinkedIn
+##      - name: uni2u Tistory
+##        href: https://uni2u.tistory.com/
+##        title: uni2u's Tistory blog
 
 ### Build settings
 markdown: kramdown
