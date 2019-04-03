@@ -4,7 +4,7 @@ tagline: Network Simple??? Simple!!
 author: uni2u
 description: "uni2u is a Jekyll blog theme." # You can edit this line in _config.yml. It will appear in your document head meta and in your feed.xml site description
 keywords: "Jekyll, theme, uni2u"
-baseurl: "/uni2u" # the subpath of your site, e.g. /blog/
+### baseurl: "/uni2u" # the subpath of your site, e.g. /blog/
 url:  # the base hostname & protocol for your site
 locale: en_US
 
@@ -172,13 +172,13 @@ locales:
 
 ### your Blogroll info, only name can shown on the page.
 
-##Blogroll:
-##      - name: uni2u LinkedIn
-##        href: https://www.linkedin.com/in/yongyoon-shin-80a8b557/
-##        title: uni2u's LinkedIn
-##      - name: uni2u Tistory
-##        href: https://uni2u.tistory.com/
-##        title: uni2u's Tistory blog
+###Blogroll:
+###      - name: uni2u LinkedIn
+###        href: https://www.linkedin.com/in/yongyoon-shin-80a8b557/
+###        title: uni2u's LinkedIn
+###      - name: uni2u Tistory
+###        href: https://uni2u.tistory.com/
+###        title: uni2u's Tistory blog
 
 ### Build settings
 markdown: kramdown
