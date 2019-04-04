@@ -29,6 +29,6 @@ His research interests are in OpenStack, Neutron, Cloud Networking with SDN, Kub
 
 - blog: <https://uni2u.tistory.com>
 - facebook: <https://www.facebook.com/uni2u>
-- slideshare: <http://www.slideshare.net/uni2u>
+- slideshare: <https://www.slideshare.net/uni2u>
 
 ---
