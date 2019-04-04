@@ -1,9 +1,9 @@
 ### Site info:
-title: UNI2U's etcland
+title: uni2u's etcLand
 tagline: Network Simple??? Simple!!
 author: uni2u
-description: "uni2u is a Jekyll blog theme." # You can edit this line in _config.yml. It will appear in your document head meta and in your feed.xml site description
-keywords: "Jekyll, theme, uni2u"
+description: "Think and Talk of uni2u." # You can edit this line in _config.yml. It will appear in your document head meta and in your feed.xml site description
+keywords: "Network, Tech, uni2u"
 baseurl: "https://uni2u.github.io" # the subpath of your site, e.g. /blog/
 url:  # the base hostname & protocol for your site
 locale: en_US
@@ -14,7 +14,7 @@ github_username: uni2u
 slideshare_username: uni2u
 disqus_shortname: uni2u
 favicon: "/images/favicon.ico"
-aboutme: YongYoon SHIN; Senior Engineer @ETRI # these are shown on aboutme-sidebar.
+aboutme: Senior Engineer @ETRI # these are shown on aboutme-sidebar.
 ### aboutme_photo: # your photo.
 ### google_analytics_key: # put YOUR key here to enable tracking! (blank to disable)
 
