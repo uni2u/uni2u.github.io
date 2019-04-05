@@ -361,12 +361,12 @@ Upgrade 된 Connection 을 사용하여 데이터 송신/수신하는 경우 모
 
 데이터 교환은 모두 Protocol Buffer 에 의해 이루어지는 것으로 가정한다.
 
-- 0. 전제 조건  
+- [0] 전제 조건  
   - Node 마다 `PublicKey`/`Private Key` 는 이미 생성되어 있다
 
 ![전제조건](/images/ipfs_id16.png)
 
-- 1. 기본 정보의 교환 (Hello)
+- [1] 기본 정보의 교환 (Hello)
   - 1.1. Nonce 를 작성함
   - 1.2. `Local Nonce`, `Local Node PublicKey` 사용 (가능한 KeyExchange, Cipher, Hash 방식의 후보를 교환)
     - 후보는 문자열을 `,` 으로 나눈것으로 우선도가 높은것부터 늘어놓는다. ex `P-256, P-384, P-521`
@@ -384,12 +384,12 @@ Upgrade 된 Connection 을 사용하여 데이터 송신/수신하는 경우 모
 
 ![기본 정보 교환](/images/ipfs_id17.png)
 
-- 2. Node ID검증
+- [2] Node ID검증
   - 1.1 1.2 에서 받은 Remote Node PublicKey가 Node ID와 일치하는지 검증
 
 ![NodeID 검증](/images/ipfs_id18.png)
 
-- 3. 알고리즘 결정
+- [3] 알고리즘 결정
   - 3.1. Local Node, Remote Node 사이에서 결정에 차이가 나오지 않도록, 우선 순위를 정한다
     - SHA256(PublicKey+Nonce)의 큰 쪽이 우선
 
@@ -400,7 +400,7 @@ Upgrade 된 Connection 을 사용하여 데이터 송신/수신하는 경우 모
 
 ![교환 방식 비교 결정](/images/ipfs_id20.png)
 
-- 4. 키 교환
+- [4] 키 교환
   - 4.1. KeyExchange 용 `PublicKey`/`PrivateKey` 생성
     - 3.2에서 정한 KeyExchange 방식
 
@@ -420,7 +420,7 @@ Upgrade 된 Connection 을 사용하여 데이터 송신/수신하는 경우 모
 
 ![Sectet 생성](/images/ipfs_id24.png)
 
-- 5. 암호키 생성
+- [5] 암호키 생성
   - 5.1. `Secret` bytes를 반으로 나눈다.
     - 각각 Reader 와 Writer 키의 원데이터가 된다
     -  3.1에서 요구한 우선 순위에 의한 2개를 교체
