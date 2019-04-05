@@ -353,4 +353,102 @@ Upgrade 된 Connection 을 사용하여 데이터 송신/수신하는 경우 모
 
 ![Encryption](/images/ipfs_id15.png)
 
+#### 2.3.4.1 secio
+
+데이터의 암호화와 서명을 실시하는 Protocol 로서 TLS 와 유사함을 알 수 있다.
+
+##### [handshake]
+
+데이터 교환은 모두 Protocol Buffer 에 의해 이루어지는 것으로 가정한다.
+
+- 0. 전제 조건  
+  - Node 마다 `PublicKey`/`Private Key` 는 이미 생성되어 있다
+
+![전제조건](/images/ipfs_id16.png)
+
+- 1. 기본 정보의 교환 (Hello)
+  - 1.1. Nonce 를 작성함
+  - 1.2. `Local Nonce`, `Local Node PublicKey` 사용 (가능한 KeyExchange, Cipher, Hash 방식의 후보를 교환)
+    - 후보는 문자열을 `,` 으로 나눈것으로 우선도가 높은것부터 늘어놓는다. ex `P-256, P-384, P-521`
+    - 디폴트로 이용 가능한 KeyExchange 방식
+      - P-256
+      - P-384
+      - P-521
+    - 디폴트로 이용 가능한 Cipher 방식
+      - AES-256
+      - AES-128
+      - Blowfish
+    - 디폴트로 이용 가능한 Hash (MAC) 방식
+      - SHA256
+      - SHA512
+
+![기본 정보 교환](/images/ipfs_id17.png)
+
+- 2. Node ID검증
+  - 1.1 1.2 에서 받은 Remote Node PublicKey가 Node ID와 일치하는지 검증
+
+![NodeID 검증](/images/ipfs_id18.png)
+
+- 3. 알고리즘 결정
+  - 3.1. Local Node, Remote Node 사이에서 결정에 차이가 나오지 않도록, 우선 순위를 정한다
+    - SHA256(PublicKey+Nonce)의 큰 쪽이 우선
+
+![우선순위 지정](/images/ipfs_id19.png)
+
+  - 3.2. 서로 대응하고 있는 방식을 비교하고 KeyExchange/Cipher/Hash 방식을 결정
+    - 3.1에서 요구한 우선도가 높은 것이 우선된다
+
+![교환 방식 비교 결정](/images/ipfs_id20.png)
+
+- 4. 키 교환
+  - 4.1. KeyExchange 용 `PublicKey`/`PrivateKey` 생성
+    - 3.2에서 정한 KeyExchange 방식
+
+![KeyExchange](/images/ipfs_id21.png)
+
+  - 4.2. 1.2의 `Local Hello`, `Remote Hello` 와 `Local Exchange PublicKey` 를 결합하고 `Local Node PrivateKey` 에 Sign
+    - `Sign(LocalHello + RemoteHello + LocalExchangePublicKey)`
+  - 4.3. `Exchange PublicKey` 과 4.2의 `Signature` 를 서로 교환
+
+![Sign 교환](/images/ipfs_id22.png)
+
+  - 4.4. 4.3에서 받은`Remote Signature` 은 1.2에서 받은`Remote Node PublicKey` 에서 검증
+
+![Remote Node PublicKey 검증](/images/ipfs_id23.png)
+
+  - 4.5. 1.2에서 받은`Remote Exchange PublicKey` 과 `Local Exchange PrivateKey` 에서 공유된 `Secret` 를 생성
+
+![Sectet 생성](/images/ipfs_id24.png)
+
+- 5. 암호키 생성
+  - 5.1. `Secret` bytes를 반으로 나눈다.
+    - 각각 Reader 와 Writer 키의 원데이터가 된다
+    -  3.1에서 요구한 우선 순위에 의한 2개를 교체
+  - 5.2. 5.1에서 얻은 절반의 bytes를 각각 `Cipher IV`,`Cipher Key`,`HMAC Key`의 3가지 bytes로 나뉜다
+  - 5.3. 한쪽에서 `Cipher IV`, `Cipher Key`, `HMAC Key`로 `EtM (Encrypt-then-MAC ) Writer`를 구축하고 다른 한쪽에서 `EtM Reader`를 구축한다
+  - 5.4. 5.3의 Writer, Reader 와 결합하여 암호화된 Connection이 완성
+
+![암호 생성](/images/ipfs_id25.png)
+
+포인트는
+  
+- 2의 검증에서 접속하고 싶은 multiaddr 와 PublicKey가 일치함을 알 수 있으므로 제삼자 증명은 불필요
+  - 즉, 클라이언트가 multiaddr 로 접속처를 지정한다. '이 공개키를 가진 사람과 잇고 싶다' 라는의미
+- 4.4 로 서명 능력을 체크
+  - 이것으로 multiaddr 에서 제시된 공개키/비밀키를 가진 Node 라는 검증이 완료
+- 5에서 Read/Write 의 키를 떠난 이유는 불명
+  - tls 실제로도 이렇게 되어있는지는 미확인
+- 5.1에서 2가지 bytes 를 우선 순위로 바꾸는 것은 Local Writer 에 Remote Reader, Local Reader 에 Remote Writer 가 대응하게 하기 위함
+
+##### [send, receive]
+
+송신되는 데이터그램은 handshake 에서 생성된 `Cipher IV`, `Cipher Key` 로 암호화되어 MAC 을 부여해 송신된다.  
+수신한 데이터그램은 MAC 을 검증하고 `Cipher Key`, `Cipher Key` 로 복호화한다.
+
+![송수신 데이터그램](/images/ipfs_id26.png)
+
+### 1.3.5 Stream Muxer
+
+[![](https://camo.qiitausercontent.com/e58d8fc92ceae4aca361d969f5aed0a959964555/68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c69627032702f676f2d73747265616d2d6d757865722f6d61737465722f696d672f62616467652e706e67)](https://github.com/libp2p/interface-stream-muxer)
+
 Todo
