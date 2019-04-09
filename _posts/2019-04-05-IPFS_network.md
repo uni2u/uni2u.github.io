@@ -164,7 +164,7 @@ Transports 와 Connection 을 구성한 라이브러리는 아래에 정리되�
 [_Transports - libp2p.io/implementations_](https://libp2p.io/implementations/)
 
 - libp2p-tcp
-- libp2p-quic ( Stream Muxer 含む)
+- libp2p-quic (Stream Muxer 포함)
 - libp2p-websockets
 - libp2p-webrtc-star
 - libp2p-webrtc-direct
