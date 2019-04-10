@@ -350,7 +350,7 @@ mconn, err := wrapMuxedConn(econn)
 mcon.Write(bufferarray)
 ```
 
-### 2.3.4 Encryption
+### 1.3.4 Encryption
 
 통신의 기밀성, 무결성을 담보하기 위해서는 통신 내용의 암호화 및 변조 감지가 필요하다.
 
@@ -378,7 +378,7 @@ Upgrade 된 Connection 을 사용하여 데이터 송신/수신하는 경우 모
 
 ![Encryption](/images/ipfs_id15.png)
 
-#### 2.3.4.1 secio
+#### 1.3.4.1 secio
 
 데이터의 암호화와 서명을 실시하는 Protocol 로서 TLS 와 유사함을 알 수 있다.
 
@@ -476,4 +476,117 @@ Upgrade 된 Connection 을 사용하여 데이터 송신/수신하는 경우 모
 
 [![](https://camo.qiitausercontent.com/e58d8fc92ceae4aca361d969f5aed0a959964555/68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c69627032702f676f2d73747265616d2d6d757865722f6d61737465722f696d672f62616467652e706e67)](https://github.com/libp2p/interface-stream-muxer)
 
-Todo
+![Stream Multiplex Layer](/images/ipfs_id27.png)
+
+Transport Protocol 에 의존하지 않고 암호화 된 양방향 통신 가능한 Connection 이 확립되어 있지만 libp2p 는 일반적으로 그들을 직접 사용하는 것이 아니라 **Stream** 이라는 가상 (논리적) 양방향 통신 채널을 만들고 P2P Protocol 프레임은 Stream 에서 교환한다.
+
+Stream 은 하나의 Connection 에 다중화 (multiplexing) 연결을 만드는 것으로 연결 처리 및 암호화 Protocol Handshake 등의 오버 헤드를 억제한다.
+
+![Stream (multiplexing connection)](/images/ipfs_id28.png)
+
+>**[multiplexing] 이란**
+>
+>어느 하나의 통신 채널을 사용해 복수의 스트림을 송수신 하는 것이다.
+>
+>예를 들면 SSH 는 하나의 Connection 으로 복수 Session 을 다루는 기능을 가지고 있다. [tmux (terminal multiplexer)](https://github.com/tmux/tmux) 는 하나의 Screen에서 복수의 가상 Terminal을 조작한다. 또 [sslh](https://github.com/yrutschle/sslh) 는 443 Port 하나로 HTTP, SSH, OpenVPN 등 복수의 Protocol 을 Listen 및 Handle 할 수 있다.
+>
+>![Multiplexing-Wikipedia](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Frequenzmultiplex001.svg/2880px-Frequenzmultiplex001.svg.png)
+>
+>[Multiplexing - Wikipedia](https://en.wikipedia.org/wiki/Multiplexing)
+>
+>![Introduce to HTTP/2 - Google Developers](https://developers.google.com/web/fundamentals/performance/http2/images/push01.svg)
+>
+>[Introduction to HTTP/2 - Google Developers](https://developers.google.com/web/fundamentals/performance/http2/)
+
+Connection 상에서 Stream 을 다중화하기 위한 Stream Muxer 인터페이스 사양이 정의되어 있다.
+
+[_libp2p/interface-stream-muxer_](https://github.com/libp2p/interface-stream-muxer)
+
+- Connection 에 Attach
+- Outgoing
+  - 새로운 Stream Open
+- Incomming
+  - Stream마다 Listener 등록
+
+**구성**
+
+각 언어의 구현 된 모듈은 다음과 같다.
+
+[_Stream muxers - libp2p.io/implementations_](https://libp2p.io/implementations/)
+
+- libp2p-spdy
+- libp2p-multiplex
+  - mplex 구현
+- libp2p-yamux
+
+Go 의 경우 관련 interface 가 [go-stream-muxer](https://github.com/libp2p/go-stream-muxer) 모듈에 정의되어있다.
+SPDY, yamux 도 Multiplexing 대응 프로토콜 또는 구현을 통해 각 Protocol 구현 패키지 Factory 에 Connection 을 전달하는 방식으로 널리 이용되고 있다.
+
+Encryption 과 마찬가지로 Upgrader 의해 Connection 을 Upgrade 하는 형태로 적용된다.
+Upgrade 된 Connection 을 사용하여 데이터 송/수신하는 경우, Stream 식별자 포함 Frame Header 에서 Encapsulation/Decapsulation 되어 전송된다.
+
+![Stream interface](/images/ipfs_id29.png)
+
+![Stream Connection](/images/ipfs_id30.png)
+
+```
+[js-libp2p-spdy]
+
+const spdy = require('spdy-transport') // Nodejs의 SPDY 구현 모듈
+const toStream = require('pull-stream-to-stream')
+...
+
+const conn = toStream(rawConn) // Pull Stream 을 보통 Stream 으로 변환
+
+const spdyMuxer = spdy.connection.create(conn, { // Stream 을 받고 SPDY Connection 작성
+  protocol: 'spdy',
+  isServer: isListener
+})
+```
+
+```
+[go-smux-yamux]
+
+import (
+...
+  yamux "github.com/whyrusleeping/yamux" // Go 의 yamux 구현 모듈
+)
+...
+
+func (t *Transport) NewConn(nc net.Conn, isServer bool) (smux.Conn, error) {
+  var s *yamux.Session
+  var err error
+  if isServer {
+    s, err = yamux.Server(nc, t.Config()) // connection 을 받고 yamux 서버 만들기
+  } else {
+    s, err = yamux.Client(nc, t.Config()) // connection 을 받고 jamux 클라이언트 만들기
+  }
+  return (*conn)(s), err
+}
+```
+
+### 1.3.6 Protocol-Multiplexing
+
+[_Protocol-Multiplexing_](https://github.com/libp2p/specs/blob/master/7-properties.md#751-protocol-multiplexing)
+
+libp2p 는 다양한 플랫폼 상에서 동일하게 동작함을 목적으로 하고 있기 때문에 여러 Protocol 을 대응하고 있다.  
+각 Peer 가 복수의 Protocol 에 대응하기 위해 사전 합의 없이 어떠한 방법으로 Protocol 을 선택할 수 있는지 알아보자면 다음과 같다.
+
+libp2p 는 multistream + multistream-select 방식을 취한다.
+
+※ 여기서 말하는 Stream 은 양방향 통신 경로 모두를 의미한다. (Go 에서 말하는 `io.ReadWriteCloser`)
+
+#### 1.3.6.1 multistream (self-describing protocol/encoding stream)
+
+자가 기술형 프로토콜 스트림이라 할 수 있다.  
+libp2p 에서는 `multistream` 방식으로 표현한다. multistream 에서는 Protocol 을 Protocol Name + Version 으로 나타낸다.
+
+[_multistream - properties - libp2p/specs_](https://github.com/libp2p/specs/blob/master/7-properties.md#752-multistream---self-describing-protocol-stream)
+
+```
+/<protoName string>/<version string>
+```
+
+※ /ipfs/<_node id_>/<_protoName string_>/<_version string_> 과 같은 형식으로 설명되는 부분이 많이 보여 지지만, multistream 사양 자체는 Node의 주소와 연결되는 것이 아니며 구현에도 /ipfs/<_node id_> 는 붙어 있지 않다.
+
+multistream 자체는 이를 규정하고 있을 뿐이며 어떤 순서로 Handshake 하고, Buffer 를 보내고, 합의에 이르는지 순서는 multistream-select 가 담당하고 있다.
