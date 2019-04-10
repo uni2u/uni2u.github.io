@@ -641,3 +641,123 @@ Version 선택은 현재 Node 에만 구현되었지만 SemVer 를 사용한 Ver
   - 저장소 이름에 `-select` 가 없다는 것이 혼란하다는 [지적도 있다](https://github.com/multiformats/go-multistream/issues/11)
 
 ### 1.3.7 Swarm
+
+Transport, Connection, Stream 을 내포하고 Dial, Listen 처리 전체 조정을 맡고있는 것이 Swarm 이다.
+너무 정보가 없는 Role 이지만 매우 중요한 역할을 담당하고 있다.
+
+Go는 [go-libp2p-swarm](https://github.com/libp2p/go-libp2p-swarm) 이라고 하는 자체 구현이 존재한다.
+Node.js 는 비슷한 [js-libp2p-switch](https://github.com/libp2p/js-libp2p-switch) 가 있다.
+
+#### 1.3.7.1 요약
+
+Swarm Overview 는 다음 그림과 같다.
+
+![Swarm Overview](/images/ipfs_id35.png)
+
+- 복수의 Transport 관리
+- Connection 은 Peer 마다 여러개 유지
+- Filter 의 접속 제한
+- PeerStore 에서 PeerInfo 관리
+- Connection, Stream 의 Listener 에 Handler 를 Attach 할 수 있다
+- Dial Synchronization System 이 되는 기능을 갖는다
+
+#### 1.3.7.2 Multi-Transport
+
+![Swarm Multi-Transport](/images/ipfs_id36.png)
+
+Swarm 은 복수의 Transport 를 관리할 수 있다.  
+이로 인하여 다른 Peer 와 접속할 때는 상대가 이용 가능한 Transport Protocol 을 선택해 접속해 준다.
+
+예를 들어 /ip4/162.246.145.218/udp/4001/utp/ipfs/QmYJyUM... 라는 multiaddr 에서 Listen 하고있는 Peer 에 연결하는 경우에는 uTP Protocol 을 구현 한 Transport 가 필요하다.
+필요한 Transport 가 없는 경우 에러를 발생한다.
+
+#### 1.3.7.3 Multi-Connection
+
+![Swarm Multi-Connection](/images/ipfs_id37.png)
+
+Swarm 내의 데이터 구조는 Connection 은 여러개 가질 수 있게 되어있다.
+그러나 구현을 확인하면 복수로 이중화 한다는 의미가 보이지 않는다.
+
+Swarm 은 Connection 을 은닉하고 있어 직접적인 조작은 공개하지 않고 접속 처리는 Stream 을 만들 때의 아래 체크 부분에서 필요하게 되어 이루어진다.
+
+```
+[libp2p/go-libp2p-swarm/swarm.go]
+
+func (s *Swarm) NewStream(ctx context.Context, p peer.ID) (inet.Stream, error) {
+  log.Debugf("[%s] opening stream to peer [%s]", s.local, p)
+
+  // Algorithm:
+  // 1. Find the best connection, otherwise, dial.
+  // 2. Try opening a stream.
+  // 3. If the underlying connection is, in fact, closed, close the outer
+  //    connection and try again. We do this in case we have a closed
+  //    connection but don't notice it until we actually try to open a
+  //    stream.
+  //
+  // Note: We only dial once.
+  //
+  // TODO: Try all connections even if we get an error opening a stream on
+  // a non-closed connection.
+  dials := 0
+  for {
+    c := s.bestConnToPeer(p) // 살아있는 Connection을 찾는다
+    if c == nil {
+      if dials >= DialAttempts { // const DialAttempts = 1 이므로 시도 1 번
+        return nil, errors.New("max dial attempts exceeded")
+      }
+      dials++
+
+      var err error
+      c, err = s.dialPeer(ctx, p) // 여기에서 Dial
+      if err != nil {
+        return nil, err
+      }
+    }
+    s, err := c.NewStream() // Connection 이 발견되면 Stream 만들기
+    if err != nil {
+      if c.conn.IsClosed() {
+        continue
+      }
+      return nil, err
+    }
+    return s, nil
+  }
+}
+...
+
+func (s *Swarm) bestConnToPeer(p peer.ID) *Conn {
+  // Selects the best connection we have to the peer.
+  // TODO: Prefer some transports over others. Currently, we just select
+  // the newest non-closed connection with the most streams.
+  s.conns.RLock()
+  defer s.conns.RUnlock()
+
+  var best *Conn
+  bestLen := 0
+  for _, c := range s.conns.m[p] {
+    if c.conn.IsClosed() {
+      // We *will* garbage collect this soon anyways.
+      continue // 닫고있는 녀석은 가비지컬랙션 되므로 방치
+    }
+    c.streams.Lock()
+    cLen := len(c.streams.m)
+    c.streams.Unlock()
+
+    if cLen >= bestLen { // Stream 이 많다 = 살아있는 가능성 높다 는 판단
+      best = c
+      bestLen = cLen
+    }
+  }
+  return best
+}
+```
+
+이러한 내용을 보면 살아있는 Connection 하나를 최대한 재사용 하고자 하는 의도처럼 보인다.
+
+#### 2.3.7.4 Dial Synchronization System
+
+![Swarm Dial Sync System](/images/ipfs_id38.png)
+
+Swarm 은 Outbound 트래픽이 초과되지 않도록 Dial 에 대한 연구가 이루어지고 있다.
+
+##### [DialSync]
