@@ -243,7 +243,7 @@ lanaddr, _ := ma.NewMultiaddr("/ip4/192.168.0.17/tcp/4050")
 f.AddrBlocked(lanaddr) // = false  
 ```
 
-**구성**
+**구현**
 - Node
   - Transport Class 는 공통으로 `filter` 메소드를 제공
 - Go
@@ -362,7 +362,7 @@ PeerID 생성시에 공개 키를 생성하고 있기 때문에 TLS Like 암호�
 
 ![TLS 암호화](/images/ipfs_id14.png)
 
-**구성**
+**구현**
 
 Crypto channels 라이브러리는 아래에 정리되어 있다.
 
@@ -508,7 +508,7 @@ Connection 상에서 Stream 을 다중화하기 위한 Stream Muxer 인터페이
 - Incomming
   - Stream마다 Listener 등록
 
-**구성**
+**구현**
 
 각 언어의 구현 된 모듈은 다음과 같다.
 
