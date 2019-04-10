@@ -782,3 +782,139 @@ until := (5 + 1 * (retryCount + retryCount)) * time.Second
 구현은 [여기](https://github.com/libp2p/go-libp2p-swarm/blob/master/swarm_dial.go) 를 확인한다.
 
 #### 1.3.7.5 Multi-Encryption Protocol handled with multistream
+
+Swarm 역할로서 Encryption Protocol 의 Instance 는 **외부에서 Injection 되므로 범위 밖**이지만 libp2p 의 이념에서 Encryption 은 Peer 끼리 사용할 수 있는 것을 선택할 수 있어야 한다. (multistream을 이용하는 것이 전제된 것으로 예상)
+
+실제로, [go-libp2p](https://github.com/libp2p/go-libp2p) 는 Encryption에 [go-conn-security-multistream](https://github.com/libp2p/go-conn-security-multistream) 을 이용하고있다.
+
+go-conn-security-multistream 은,
+
+- Encryption Protocol 을 미리 복수 등록
+  - 이것이 multistream의 대응 Protocol
+- Upgrader 에 의해 Connection 이 Upgrade 될 때, multistream-select 에 따라 Encryption Protocol Negotiation
+  - Negotiation 이 잘 되면 그 Encryption Protocol 에서 Connection 을 랩
+
+![Swarm Stream Muxer Protocol](/images/ipfs_id40.png)
+
+#### 1.3.7.6 Multi-StreamMuxer Protocol handled with multistream
+
+Encryption 과 마찬가지로 Stream Muxer 의 Instance 도 **외부 Injection 되므로 범위 밖**이지만 libp2p 의 이념에서 Stream Muxer Protocol 도 선택할 수 있어야 한다. (multistream을 이용하는 것이 전제된 것으로 예상)
+
+[go-libp2p](https://github.com/libp2p/go-libp2p) 는 Stream Muxer 로 [go-smux-multistream](https://qiita.com/kikuchi_kentaro/items/github.com/whyrusleeping/go-smux-multistream) 을 이용하고 있으며 Node.js 는 js-libp2p-switch 에서 Muxer 에 이용되고 있다.
+
+go-smux-multistream 은
+
+- Stream Muxer Protocol 을 미리 복수 등록
+  - 이것이 대응 Protocol
+- Upgrader 에 의해 Connection 이 Upgrade 될 때, multistream-select 에 따라 Stream Muxer Protocol 의 Negotiation
+  - Negotiation 이 잘 되면 그 Stream Muxer Protocol 에서 Connection 을 랩
+
+![Swarm Stream Muxer Protocol](/images/ipfs_id41.png)
+
+#### 1.3.7.7 Multi-Stream Protocol handled with multistream
+
+Swarm 범위 밖이지만 이것도 libp2p 의 이념에서 multistream 을 이용하는 것을 예상할 수 있다.
+
+실제로 [go-libp2p/p2p/host/basic/basic_host.go](https://github.com/libp2p/go-libp2p/blob/master/p2p/host/basic/basic_host.go) 에서 다음과 같이 사용하고 있다.
+
+```
+[Dial 측]
+
+func (h *BasicHost) NewStream(ctx context.Context, p peer.ID, pids ...protocol.ID) (inet.Stream, error) {
+  ...
+
+  var protoStrs []string
+  for _, pid := range pids {
+    protoStrs = append(protoStrs, string(pid)) // 연결하고 싶은 Protocol 을 목록으로
+  }
+
+  s, err := h.Network().NewStream(ctx, p) // 새로운 Stream 생성
+  if err != nil {
+    return nil, err
+  }
+
+  selected, err := msmux.SelectOneOf(protoStrs, s) // 그 Stream 에 multistream negotiation
+  if err != nil {
+    s.Reset()
+    return nil, err
+  }
+  selpid := protocol.ID(selected)
+  s.SetProtocol(selpid)
+  h.Peerstore().AddProtocols(p, selected) // 한 번 연결된 Protocol 은 저장
+
+  return s, nil
+}
+```
+```
+[Listen 측]
+
+// Host 인스턴스 생성시
+func NewHost(ctx context.Context, net inet.Network, opts *HostOpts) (*BasicHost, error) {
+  h := &BasicHost{
+    network:      net, // Swarm 인스턴스
+    mux:          msmux.NewMultistreamMuxer(), // go-multistream 인스턴스
+    negtimeout:   DefaultNegotiationTimeout,
+    AddrsFactory: DefaultAddrsFactory,
+    maResolver:   madns.DefaultResolver,
+  }
+  ...
+
+  net.SetStreamHandler(h.newStreamHandler) // Swarm 에서 Stream 확립했을 때 불리는 handler 등록
+  return h, nil
+}
+
+// 호출 handler
+func (h *BasicHost) newStreamHandler(s inet.Stream) {
+  ...
+
+  lzc, protoID, handle, err := h.Mux().NegotiateLazy(s) // 요청을 받고 Negotiation
+  took := time.Now().Sub(before)
+  ...
+
+  s.SetProtocol(protocol.ID(protoID))
+  log.Debugf("protocol negotiation took %s", took)
+
+  go handle(protoID, s) // 사용자가 등록한 handler 호출
+}
+
+// 사용자가 handler 등록
+func (h *BasicHost) SetStreamHandler(pid protocol.ID, handler inet.StreamHandler) {
+  h.Mux().AddHandler(string(pid), func(p string, rwc io.ReadWriteCloser) error {
+    is := rwc.(inet.Stream)
+    is.SetProtocol(protocol.ID(p))
+    handler(is)
+    return nil
+  })
+}
+```
+```
+[사용하는 경우]
+
+// Register protocol
+host.SetStreamHandler("/echo/1.2", handleStream)
+
+// OpenStream for protocol
+s, err := host.NewStream(context.Background(), info.ID, "/echo/1.2")
+```
+
+![Swarm Multi-Stream Protocol handler](/images/ipfs_id42.png)
+
+#### 1.3.7.8 Swarm 정리
+
+- Transport Layer
+  - Protocol 선택은 Swarm 이 Connection 이 설정 될 때 multiaddr 을 보면서 판단
+- Encryption Layer
+  - Protocol 선택은 이용 측에 의존
+    - 직접 사용하는 경우는 선택할 필요 없음
+    - `conn-security-multistream` 을 사용한 경우 Transport Connection 설치시 multistream Negotiation 에서 선택
+- Stream Multiplex Layer
+  - Protocol 선택은 이용 측에 의존
+    - 직접 사용하는 경우는 선택할 필요 없음
+    - `smux-multistream` 의 경우 Transport Connection 설치시 multistream Negotiation 에서 선택
+- Application Layer
+  - Protocol 선택은 이용 측에 의존
+    - `multistream` 를 이용한 경우 Stream 생성시 multistream Negotiation 에서 선택
+
+각층마다 Protocol 을 Multiple 로 하고 Peer끼리 합의를 하면서 Protocol 을 결정하는 방향성을 가지고 있는것을 알 수 있다.
+
+### 1.3.8 Host ( Node )
