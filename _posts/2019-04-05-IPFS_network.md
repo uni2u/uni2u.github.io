@@ -120,8 +120,33 @@ Go의 경우 [_go-multiaddr_](https://github.com/multiformats/go-multiaddr) 를 
 
 [_3.2 Multi-multiplexing - github.com/libp2p/specs_](https://github.com/libp2p/specs/blob/master/3-requirements.md#32-multi-multiplexing)
 
-libp2p 는 Multi-multiplexing (다중-다중화) 개념이 있다.
-Multi-multiplexing 관련 설명 부분이 상기 링크뿐인 관계로 명확하게 이해가 되지 않는다.
+libp2p 는 Multi-multiplexing (다중-멀티플랙싱) 개념이 있다.
+IPFS 에서 이야기 하는 다중-멀티플렉싱의 개념을 설명하는 자료는 링크외에 찾지 못하여 정확한 분석이 어렵다.
+대략적인 느낌은 "다양한 유즈케이스에서 사용하는 여러 네트워킹 중 가능한 작은 수 (적합한 네트워크) 를 선택할 수 있도록 유연한 설정을 제공" 한다는 것으로 아래와 같다:
+
+- 여러 listen 네트워크 인터페이스를 다중화
+- 여러 전송 (Transport) 프로토콜을 다중화
+- Peer 당 여러 연결 (Connection) 을 다중화
+- 여러 클라이언트 프로토콜을 다중화
+- 연결 당, 프로토콜 당 여러 스트림을 다중화 (SPDY, HTTP2, QUIC, SSH)
+- flow control (backpressure, fairness)
+- 서로 다른 임시 키로 각 연결을 암호화
+
+예를 들어, 다음과 같은 단일 IPFS 노드를 상상:
+
+- 특정 TCP/IP 주소에서 listen
+- 서로 다른 TCP/IP 주소에서 listen
+- SCTP/UDP/IP 주소를 listen
+- UDT/UDP/IP 주소를 listen
+- 다른 노드 X 에 대한 여러 (multiple) 연결
+- 다른 노드 Y 에 대한 여러 연결
+- 연결 당 여러 스트림이 open
+- HTTP2 를 통해 스트림을 노드 X 에 다중화 (multiplexes)
+- SSH 를 통해 스트림을 노드 Y 에 다중화
+- `libp2p`의 맨 위에 마운트 된 하나의 프로토콜은 하나의 피어 당 하나의 스트림을 사용
+- `libp2p`의 맨 위에 마운트 된 하나의 프로토콜은 피어 당 여러 (multiple) 스트림 사용
+
+이 정도의 유연성을 제공하지 않으면 다양한 플랫폼, 유즈케이스 또는 네트워크 설정에서 `libp2p` 를 사용할 수 없다. 필요로하는 것을 정확하게 사용할 수 있도록 충분히 유연하다. 사용자 또는 응용 프로그램 제약 조건의 복잡함이 옵션으로 `libp2p` 를 배제하지 않도록 할 수 있다.
 
 ### 1.3.1 Transports
 
