@@ -764,7 +764,7 @@ Swarm 은 Outbound 트래픽이 초과되지 않도록 Dial 에 대한 연구가
 
 Peer 에 대한 Dial 요구가 동시에 여러 온 경우 이전 Dial 처리가 끝날 때까지 기다린다. (단위는 Peer 마다)
 
-![Swarm Dial Sync](/images/ipfs_id38.png)
+![Swarm Dial Sync](/images/ipfs_id39.png)
 
 구현은 [여기](https://github.com/libp2p/go-libp2p-swarm/blob/master/dial_sync.go) 를 확인한다.
 
