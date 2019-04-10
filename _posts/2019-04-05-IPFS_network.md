@@ -754,10 +754,31 @@ func (s *Swarm) bestConnToPeer(p peer.ID) *Conn {
 
 이러한 내용을 보면 살아있는 Connection 하나를 최대한 재사용 하고자 하는 의도처럼 보인다.
 
-#### 2.3.7.4 Dial Synchronization System
+#### 1.3.7.4 Dial Synchronization System
 
 ![Swarm Dial Sync System](/images/ipfs_id38.png)
 
 Swarm 은 Outbound 트래픽이 초과되지 않도록 Dial 에 대한 연구가 이루어지고 있다.
 
 ##### [DialSync]
+
+Peer 에 대한 Dial 요구가 동시에 여러 온 경우 이전 Dial 처리가 끝날 때까지 기다린다. (단위는 Peer 마다)
+
+![Swarm Dial Sync](/images/ipfs_id38.png)
+
+구현은 [여기](https://github.com/libp2p/go-libp2p-swarm/blob/master/dial_sync.go) 를 확인한다.
+
+##### [Backoff]
+
+이미 연결할 수 없게 된 Peer 대해 계속 접속 요청을 해도 소용없기 때문에 일단 연결에 실패하면 Backoff 목록에 추가되어 다음 식에 나타난 시간이 경과하지 않으면 재시도 할 수 없게된다.
+
+```
+// BackoffBase + BakoffCoef * PriorBackoffs^2
+until := (5 + 1 * (retryCount + retryCount)) * time.Second
+```
+
+연결에 성공하면 Backoff 목록에서 제외된다.
+
+구현은 [여기](https://github.com/libp2p/go-libp2p-swarm/blob/master/swarm_dial.go) 를 확인한다.
+
+#### 1.3.7.5 Multi-Encryption Protocol handled with multistream
