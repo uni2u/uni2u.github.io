@@ -915,6 +915,19 @@ s, err := host.NewStream(context.Background(), info.ID, "/echo/1.2")
   - Protocol 선택은 이용 측에 의존
     - `multistream` 를 이용한 경우 Stream 생성시 multistream Negotiation 에서 선택
 
-각층마다 Protocol 을 Multiple 로 하고 Peer끼리 합의를 하면서 Protocol 을 결정하는 방향성을 가지고 있는것을 알 수 있다.
+각층마다 Protocol 을 Multiple 로 하고 Peer 끼리 합의를 하면서 Protocol 을 결정하는 방향성을 가지고 있는것을 알 수 있다.
 
 ### 1.3.8 Host ( Node )
+
+Swarm 을 내포하고 Network 이외의 Modules 도 통합해 관리하는 역할로 말하자면 Node(Peer) 자체를 나타내는 모델이다.
+특별한 사양이 정해져 있는 것은 아니다.
+
+#### 구현
+
+- Node
+  - [js-libp2p](https://github.com/libp2p/js-libp2p)
+- Go
+  - [basic host](https://github.com/libp2p/go-libp2p/tree/master/p2p/host/basic)
+  - [blank host](https://github.com/libp2p/go-libp2p-blankhost)
+
+Go 의 경우 [go-libp2p-host](https://github.com/libp2p/go-libp2p-host) 에 Interface 가 정의되어 있다.
