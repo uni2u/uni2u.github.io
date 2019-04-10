@@ -590,3 +590,54 @@ libp2p 에서는 `multistream` 방식으로 표현한다. multistream 에서는 
 ※ /ipfs/<_node id_>/<_protoName string_>/<_version string_> 과 같은 형식으로 설명되는 부분이 많이 보여 지지만, multistream 사양 자체는 Node의 주소와 연결되는 것이 아니며 구현에도 /ipfs/<_node id_> 는 붙어 있지 않다.
 
 multistream 자체는 이를 규정하고 있을 뿐이며 어떤 순서로 Handshake 하고, Buffer 를 보내고, 합의에 이르는지 순서는 multistream-select 가 담당하고 있다.
+
+#### 1.3.6.2 multistream-select
+
+multistream 형식의 데이터 형식과 합의 과정을 규정하고있는 것이 multistream-select 이다.
+
+[_multiformats/multistream-select_](https://github.com/multiformats/multistream-select)
+
+**length-prefixed-message**
+
+그 전에 length-prefixed-message 에 대해 알아보자.
+
+- multistream-select 의 모든 Message Buffer 는 length-prefixed-message 라 불리는 형식으로 보내진다
+  - 송신하는 Buffer 의 선두에 Buffer 사이즈를 Uvarint 로 부여한다
+- multistream-select 의 모든 Message Buffer 는 마지막에 `\n` 을 부여한다
+  - `length-prefixed-message`  사이즈는 이것을 포함한 사이즈가 된다
+
+![length-prefixed-message size](/images/ipfs_id31.png)
+
+**handshake**
+
+우선 multistream 버전을 확인 준다.
+Dial 측에서 자신의 Protocol, Version 을 보내고 상대방 Protocol, Version 을 반환한다.
+그 과정에서 Dial 측, Listen 측 어느쪽이든 검증한다. (실제 Listen 측 검증만으로 끝남)
+
+![handshake 검증](/images/ipfs_id32.png)
+
+**ls**
+
+Listener 측은 자신이 지원하는 Protocol 이름 목록을 반환한다.
+지원하는 Protocol 은 Peer 생성시에 사전에 등록한다.
+
+![ls](/images/ipfs_id33.png)
+
+**select**
+
+Dialer 측은 자신이 접속하고자 하는 Protocol 이름을 보내고 Listener 측이 OK 이면 Protocol 이름을 Ack 로 돌려 준다.
+
+![select](/images/ipfs_id34.png)
+
+Version 선택은 현재 Node 에만 구현되었지만 SemVer 를 사용한 Version 범위 지정도 가능하다.
+[_Semantic Versioning 2.0.0_](https://semver.org/)
+
+**구현**
+
+- Node
+  - [multiformats/js-multistream-select](https://github.com/multiformats/js-multistream-select)
+- Go
+  - [multiformats/go-multistream](https://github.com/multiformats/go-multistream)
+  - 저장소 이름에 `-select` 가 없다는 것이 혼란하다는 [지적도 있다](https://github.com/multiformats/go-multistream/issues/11)
+
+### 1.3.7 Swarm
