@@ -66,7 +66,7 @@ _업그레이드 가능성_: CID 의 인코딩 된 버전을 업그레이드 할
 
 예를들어
 
-```go
+```
 # TODO example
 # example CID
 # corresponding human readable CID
@@ -87,7 +87,7 @@ CIDv0 은 이전 버전과 호환되는 버전입니다.
 
 참조: https://github.com/ipld/cid#how-does-it-work-protocol-description
 
-```go
+```
 <cidv1> ::= <multibase-prefix><cid-version><multicodec-packed-content-type><multihash-content-address>
 ```
 

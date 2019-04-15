@@ -21,7 +21,7 @@ merkle-link 는 다음 IPLD 객체 모델로 표현됩니다: "link value" 포�
 
 링크는 json 에서 "link object" 로 표현 될 수 있습니다.
 
-```go
+```
 { 
    "/" : "/ipfs/QmUmg7BZC1YP1ca66rRtWKxpXp77WgVHrnv263JtDuvs2k"
 }
@@ -31,7 +31,7 @@ merkle-link 는 다음 IPLD 객체 모델로 표현됩니다: "link value" 포�
 
 foo/baz 에 링크가 있는 객체: 
 
-```go
+```
 {
   "foo": {
        "bar": "/ipfs/QmUmg7BZC1YP1ca66rRtWKxp77WgVHrnv263JtDuvs2k", // 링크가 아닙니다.
@@ -44,7 +44,7 @@ foo/baz 에 링크가 있는 객체:
 
 다음 구조에서는 files/cat.jpg 에 또 다른 가상 "link object" 가 있으며 실제 링크는 files/cat.jpg/link 에 있습니다.
 
-```go
+```
 {
   "files": {
     "cat.jpg": { 

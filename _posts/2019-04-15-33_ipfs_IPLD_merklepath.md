@@ -39,8 +39,8 @@ merkle-path 는 유닉스 스타일의 경로로 경로를 점진적으로 내�
 
 예를 들어 다음 데이터 집합이 있다고 가정합니다.
 
-```go
-> ipfs object cat --fmt=yaml QmUmg7BZC1YP1ca66rRtWKxpXp77WgVHrnv263JtDuvs2k
+```
+$ ipfs object cat --fmt=yaml QmUmg7BZC1YP1ca66rRtWKxpXp77WgVHrnv263JtDuvs2k
 ---
 a:
   b:
@@ -49,14 +49,16 @@ a:
     c: "d"
     foo:
       /: QmQmkZPNPoRkPd7wj2xUJe5v5DsY6MX33MFaGhZKB2pRSE
-> ipfs object cat --fmt=yaml QmV76pUdAAukxEHt9Wp2xwyTpiCmzJCvjnMxyQBreaUeKT
+
+$ ipfs object cat --fmt=yaml QmV76pUdAAukxEHt9Wp2xwyTpiCmzJCvjnMxyQBreaUeKT
 ---
 c: "e"
 d:
   e: "f"
 foo:
   name: "second foo"
-> ipfs object cat --fmt=yaml QmQmkZPNPoRkPd7wj2xUJe5v5DsY6MX33MFaGhZKB2pRSE
+
+$ ipfs object cat --fmt=yaml QmQmkZPNPoRkPd7wj2xUJe5v5DsY6MX33MFaGhZKB2pRSE
 ---
 name: "third foo"
 ```

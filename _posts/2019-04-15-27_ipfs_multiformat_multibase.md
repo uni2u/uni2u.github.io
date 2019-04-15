@@ -16,7 +16,7 @@ multibase 는 데이터를 다른 형식으로 인코딩하는 데 편리한 인
 
 지원되는 인코딩 형식은 다음과 같습니다.
 
-```go
+```
 Multibase Table v1.0.0-RC (semver)
 
 encoding      codes   name
@@ -48,11 +48,11 @@ base64urlpad  U       rfc4648 - with padding
 
 예:
 
-```go
-4D756C74696261736520697320617765736F6D6521205C6F2F # base16 (hex)
-JV2WY5DJMJQXGZJANFZSAYLXMVZW63LFEEQFY3ZP           # base32
-YAjKoNbau5KiqmHPmSxYCvn66dA1vLmwbt                 # base58
-TXVsdGliYXNlIGlzIGF3ZXNvbWUhIFxvLw==               # base64
+```
+4D756C74696261736520697320617765736F6D6521205C6F2F  # base16 (hex)
+JV2WY5DJMJQXGZJANFZSAYLXMVZW63LFEEQFY3ZP            # base32
+YAjKoNbau5KiqmHPmSxYCvn66dA1vLmwbt                  # base58
+TXVsdGliYXNlIGlzIGF3ZXNvbWUhIFxvLw==                # base64
 F4D756C74696261736520697320617765736F6D6521205C6F2F # base16 F
 BJV2WY5DJMJQXGZJANFZSAYLXMVZW63LFEEQFY3ZP           # base32 B
 zYAjKoNbau5KiqmHPmSxYCvn66dA1vLmwbt                 # base58 z
@@ -71,7 +71,7 @@ multibase 설치는 다음을 사용합니다.
 
 multiaddr 패키지는 패키지 gx 에 의존하기 때문에 multiaddr 을 사용하려면 다음이 필요합니다.
 
-```go
+```
 go get -u github.com/whyrusleeping/gx
 go get -u github.com/whyrusleeping/gx-go
 cd <your-project-repository>
