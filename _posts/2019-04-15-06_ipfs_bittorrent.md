@@ -113,9 +113,9 @@ Files 의 각 공유 파일의 키워드는 다음 표에 표시된 사전입니
 |incomplete|공유 파일을 현재 다운로드하지 않은 피어 수를 나타내는 정수|
 |peers|각 피어의 IP 와 포트 번호를 반환하며, 값은 문자열입니다. 첫 번째는 첫 번째 피어의 IP 주소, 그 다음 포트 번호, 두 번째 피어의 IP 주소, 포트 번호 등입니다.|
 
-다음은 Tracker 서버에 전송 된 HTTP GET 요청의 예입니다: http://tk.greedland.net/announce?info_hash=01234567890123456789&peer_id=01234567890123456789&port=3210&compact=1&uploaded=0&downloaded=0&left=8000000&event=started 
+다음은 Tracker 서버에 전송 된 HTTP GET 요청의 예입니다: `http://tk.greedland.net/announce?info_hash=01234567890123456789&peer_id=01234567890123456789&port=3210&compact=1&uploaded=0&downloaded=0&left=8000000&event=started`
 
-다음은 추적기 서버 응답의 예입니다: d8:completei100e10:incompletei200e8:intervali1800e5:peers300:......e
+다음은 추적기 서버 응답의 예입니다: `d8:completei100e10:incompletei200e8:intervali1800e5:peers300:......e`
 여기서 "..." 은 50 개의 피어의  IP 주소 및 포트 번호가 포함 된 길이 300 의 문자열 입니다. IP 주소는 4 바이트를 차지하며 포트 번호는 2 바이트를 차지합니다. 즉, 한 피어가 6 바이트를 차지합니다.
 
 ## 피어 간의 통신 프로토콜
