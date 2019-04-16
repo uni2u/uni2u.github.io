@@ -30,7 +30,7 @@ CID 는 콘텐츠 주소 지정을위한 자가 기술 식별자 입니다. 콘�
 
 CIDv1 은 네 부분으로 구성됩니다.
 
-```go
+```
 <cidv1> ::= <mb><version><mcp><mh>
 # or, expanded:
 <cidv1> ::= <multibase-prefix><cid-version><multicodec-packed-content-type><multihash-content-address>
