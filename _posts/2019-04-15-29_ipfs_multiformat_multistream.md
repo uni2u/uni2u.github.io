@@ -14,7 +14,7 @@ meta: "Springfield"
 
 multistream 은 multicodec 을 사용하여 자가 기술 함수를 구현합니다. 다음은 자바 스크립트를 기반으로 한 예제입니다. 첫째, 내부에 json 객체인 새로운 버퍼 객체를 작성한 다음 protobuf 접두어를 지정하여 multistream 을 구성하고 네트워크를 통해 전송할 수 있도록 합니다. 구문 분석에서 먼저 코덱 접두어를 취한 다음 접두사를 제거하여 특정 데이터 컨텐츠를 가져올 수 있습니다.
 
-```go
+```json
 // encode some json
 const buf = new Buffer(JSON.stringify({ hello: 'world' }))
 
