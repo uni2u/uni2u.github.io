@@ -106,26 +106,29 @@ StatusCode Definition:
 
 ### Protocol diagram:
 
-```mermaid
-sequenceDiagram
-Requester-->>Repo: Delete command
-activate Requester
-activate Repo
-deactivate Requester
-deactivate Repo
-
-Requester-->>Repo: Status interest
-activate Requester
-activate Repo
-deactivate Requester
-Repo-->>Requester: Status response
-activate Requester
-deactivate Requester
-deactivate Repo
-
-Repo-->>Requester: Confirm Deletion/Reject command (with status code)
-activate Requester
-activate Repo
-deactivate Requester
-deactivate Repo
+```
+Requester                     Repo 
+    |                           |                                 
+    |                           |                                 
+  +---+  Delete command       +---+                               
+  |   | --------------------> |   |                               
+  +---+                       +---+                               
+    |                           |                                 
+    |                           |                                 
+    |                           |                                 
+  +---+   Status interest     +---+                               
+  |   | --------------------> |   |                               
+  +---+                       |   |                               
+    |                         |   |                               
+  +---+    Status response    |   |                               
+  |   | <==================== |   |                               
+  +---+                       +---+                               
+    |                           |                                 
+    |                           |                                 
+    |                           |                                 
+  +---+   Confirm Deletion    +---+                               
+  |   | <==================== |   |                               
+  +---+   Reject command      +---+                               
+    |     (with status code)    |    
+    |                           |
 ```

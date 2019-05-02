@@ -12,7 +12,7 @@ meta: "Springfield"
 
 # Repo Command
 
-repo 의 insert, delete 및 기타 작업의 Command 는 [_Signed Interests_]() 형식으로 인코딩됩니다.
+repo 의 insert, delete 및 기타 작업의 Command 는 [_Signed Interests_](https://redmine.named-data.net/projects/ndn-cxx/wiki/SignedInterest) 형식으로 인코딩됩니다.
 
 ```
 /<repo-prefix>/<command-verb>/................./.........................................

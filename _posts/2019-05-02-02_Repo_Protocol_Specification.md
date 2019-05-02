@@ -40,17 +40,31 @@ _standard interest_ 는 repo 에서 콘텐츠를 가지고 오는데 사용됩�
 
 일치하는 데이터 객체가 있는 경우:
 
-```mermaid
-sequenceDiagram
-Requester-->>Repo: interest
-Repo-->>Requester: Data Object
+```
+Requester                     Repo
+    |                           |
+    |                           |
+    |         Interest          |
+ t1 |-------------------------->|
+    |                           |
+    |        Data Object        |
+ t2 |<==========================|
+    |                           |
+    |                           |
+    |                           |
 ```
 
 일치하는 데이터 객체가 없는 경우:
 
-```mermaid
-sequenceDiagram
-Requester-->>Repo: interest
+```
+Requester                     Repo
+    |                           |
+    |                           |
+    |         Interest          |
+ t1 |-------------------------->|
+    |                           |
+    |                           |
+    |                           |
 ```
 
 ### About Freshness

@@ -12,7 +12,7 @@ meta: "Springfield"
 
 # Basic Repo Insertion Protocol
 
-기본 Repo insert 프로토콜은 [Repo Command]() 를 사용합니다.
+기본 Repo insert 프로토콜은 [Repo Command](03_Repo_Command.html) 를 사용합니다.
 
 Repo insert command 는 Repo 가 내용을 검색 (retrieve) 하고 저장 (store) 하도록 요청합니다. 이 command interest 는 _signed interest_ 이며 repo 에 의해 정의된 액세스 제어 정책으로 유효성 (validate) 이 검사됩니다. _Interest_ 유효성이 확인되고 데이터의 name 이 repo 에 존재하지 않는 경우 저장소는 OK status 가 포함된 데이터 객체로 응답하고 insert 데이터를 가져올 _interest_ 를 보내기 시작합니다.
 
@@ -124,41 +124,50 @@ EndBlockId Missing Timeout 타이머가 시작되면 Repo 는 17 ~ 26 단계에�
 
 ### Protocol diagram:
 
-```mermaid
-sequenceDiagram
-Requester-->>Repo: Insert command
-activate Requester
-deactivate Requester
-activate Repo
-Repo-->>Requester: Confirm start/Reject command (with status code)
-activate Requester
-deactivate Requester
-deactivate Repo
-
-Repo-->>Data producer: Interest for Data
-activate Repo
-deactivate Repo
-activate Data producer
-Data producer-->>Repo: Data segment
-activate Repo
-deactivate Data producer
-deactivate Repo
-
-Repo-->>Data producer: Interest for Data
-activate Repo
-deactivate Repo
-activate Data producer
-Data producer-->>Repo: Data segment
-activate Repo
-deactivate Data producer
-deactivate Repo
-
-Requester-->>Repo: Status interest
-activate Requester
-deactivate Requester
-activate Repo
-Repo-->>Requester: Status response
-activate Requester
-deactivate Requester
-deactivate Repo
+```
+Requester                     Repo                          Data producer
+    |                           |                                 |
+    |                           |                                 |
+  +---+  Insert command       +---+                               |
+  |   | --------------------> |   |                               |
+  +---+                       |   |                               |
+    |                         |   |                               |
+  +---+   Confirm start       |   |                               |
+  |   | <==================== |   |                               |
+  +---+   Reject command      +---+                               |
+    |     (with status code)    |                                 |
+    |                         +---+     Interest for Data       +---+
+    |                         |   | --------------------------> |   |
+    |                         +---+                             |   |
+    |                           |                               |   |
+    |                         +---+       Data segment          |   |
+    |                         |   | <========================== |   |
+    |                         +---+                             +---+
+    |                           |                                 |
+    |                           ~                                 ~
+    |                           ~                                 ~
+    |                           |                                 |
+    |                         +---+     Interest for Data       +---+
+    |                         |   | --------------------------> |   |
+    |                         +---+                             |   |
+    |                           |                               |   |
+    |                         +---+       Data segment          |   |
+    |                         |   | <========================== |   |
+    |                         +---+                             +---+
+    |                           |                                 |
+    |                           |                                 |
+    |                           ~                                 ~
+    |                           ~                                 ~
+    |                           |                                 |
+    |                           |                                 |
+    |                           |                                 |
+  +---+   Status interest     +---+                               |
+  |   | --------------------> |   |                               |
+  +---+                       |   |                               |
+    |                         |   |                               |
+  +---+    Status response    |   |                               |
+  |   | <==================== |   |                               |
+  +---+                       +---+                               |
+    |                           |                                 |
+    |                           |                                 |
 ```
