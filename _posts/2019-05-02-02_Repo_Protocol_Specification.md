@@ -22,13 +22,13 @@ repo protocol 은 데이터 패킷 검색 및 관리의 두 부분으로 분류�
 
 ## Repo Management Protocols
 
-아래 내용은 **[repo-ng](2019-05-02-01_repo_ng.md)** 포스팅의 Repo 관리 프로토콜의 내용입니다. 
+아래 내용은 **[repo-ng](01_repo_ng.html)** 포스팅의 Repo 관리 프로토콜의 내용입니다. 
 
-- **[Repo Command](2019-05-02-03_Repo_Command.md)** 는 repo 에 데이터를 insert 하거나 remove 할 수 있는 요청 및 응답에 대한 포멧, 이러한 command 를 서명하고 인증하는 방법을 정의합니다.
-- **[Basic Repo Insertion Protocol](2019-05-02-04_Basic_Repo_Insertion_Protocol.md)** 은 데이터 패킷의 insert 형식을 정의합니다. repo-ng 는 기본 프로토콜 외에도 몇가지 다른 insert 프로토콜을 구현할 수 있습니다.
-  - [Watched Prefix Insertion Protocol](2019-05-02-05_Watched_Prefix_Insertion_Protocol.md) : 지속적으로 생성된 데이터를 insert 하는 프로토콜을 정의합니다.
-  - [Tcp Bulk Insert Repo Insertion Protocol](2019-05-02-06_Tcp_Bulk_Insert_Repo_Insertion_Protocol.md) : 대량의 데이터 패킷 (예: 동일 호스트에서 생성된) 을 insert 하는 간단한 TCP 기반 프로토콜을 정의합니다.
-- **[Repo Deletion Protocol](2019-05-02-07_Repo_Deletion_Protocol.md)** 은 특정 prefix 아래에서 데이터 패킷에 대한 delete 포멧을 정의합니다.
+- **[Repo Command](03_Repo_Command.html)** 는 repo 에 데이터를 insert 하거나 remove 할 수 있는 요청 및 응답에 대한 포멧, 이러한 command 를 서명하고 인증하는 방법을 정의합니다.
+- **[Basic Repo Insertion Protocol](04_Basic_Repo_Insertion_Protocol.html)** 은 데이터 패킷의 insert 형식을 정의합니다. repo-ng 는 기본 프로토콜 외에도 몇가지 다른 insert 프로토콜을 구현할 수 있습니다.
+  - [Watched Prefix Insertion Protocol](05_Watched_Prefix_Insertion_Protocol.html) : 지속적으로 생성된 데이터를 insert 하는 프로토콜을 정의합니다.
+  - [Tcp Bulk Insert Repo Insertion Protocol](06_Tcp_Bulk_Insert_Repo_Insertion_Protocol.html) : 대량의 데이터 패킷 (예: 동일 호스트에서 생성된) 을 insert 하는 간단한 TCP 기반 프로토콜을 정의합니다.
+- **[Repo Deletion Protocol](07_Repo_Deletion_Protocol.html)** 은 특정 prefix 아래에서 데이터 패킷에 대한 delete 포멧을 정의합니다.
 
 ## Data packet retrieval from repo
 

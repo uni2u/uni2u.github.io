@@ -12,7 +12,7 @@ meta: "Springfield"
 
 # Repo Deletion Protocol
 
-Repo deletion protocol 은 [Repo Command]() 를 사용합니다.
+Repo deletion protocol 은 [Repo Command](03_Repo_Command.html) 를 사용합니다.
 특정 prefix 내의 단일 콘텐츠 객체 또는 콘텐츠 객체 삭제는 모두 repo 사양 (specification) 에서 지원됩니다. Selector 는 여러 콘텐츠 객체를 선택하는데 사용됩니다. 이러한 _selector_ 는 기존의 _interest_ 패킷 [selectors](http://named-data.net/doc/ndn-tlv/interest.html#selectors) 와 다릅니다. 기존 _interest selector_ 는 하나의 repo 데이터 패킷을 선택합니다. _delete command Selectors_ 는 이 _selector_ 에 적용되는 모든 데이터 패킷을 반환합니다. 세그먼트 데이터의 삭제도 지원됩니다.
 
 ## Basic operations

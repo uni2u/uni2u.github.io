@@ -20,7 +20,7 @@ Watched Prefix는 Repo insert 를 위한 새로운 프로토콜입니다. 이 �
 
 Command verb:  **watch start**
 
-이름 의미는 [Repo Command](2019-05-02-03_Repo_Command.md) 포멧을 따릅니다.
+name 은 [Repo Command](03_Repo_Command.html) 포멧을 따릅니다.
 예를 들어, `<repo prefix>` 를 _/ucla/cs/repo_ 로 지정하면 다음과 같습니다:
 
 ```
@@ -47,7 +47,7 @@ parameter 에 대한 세부설명:
 
 Command verb:  **watch check**
 
-watched prefix 진행 도중 requester 는 진행 상태를 확인하기 위해 watch status check command 를 보낼 수 있습니다. watch check command 는 [Repo Command](2019-05-02-03_Repo_Command.md) 입니다. watch check command 의 의미는 다음과 같습니다:
+watched prefix 진행 도중 requester 는 진행 상태를 확인하기 위해 watch status check command 를 보낼 수 있습니다. watch check command 는 [Repo Command](03_Repo_Command.html) 입니다. watch check command 의 의미는 다음과 같습니다:
 
 ```
 /ucla/cs/repo/watch/check/<RepoCommandParameter>/<timestamp>/<random-value>/<SignatureInfo>/<SignatureValue>
@@ -65,7 +65,7 @@ parameter 에 대한 자세한 설명:
 
 Command verb:  **watch stop**
 
-watched prefix 진행중에 requester 는 watch stop prefix insert 를 중지하기 위해 watch stop command 를 보낼 수 있습니다. stop command 은 [Repo Command](2019-05-02-03_Repo_Command.md) 입니다.
+watched prefix 진행중에 requester 는 watch stop prefix insert 를 중지하기 위해 watch stop command 를 보낼 수 있습니다. stop command 은 [Repo Command](03_Repo_Command.html) 입니다.
 
 ```
 /ucla/cs/repo/watch/stop/<RepoCommandParameter>/<timestamp>/<random-value>/<SignatureInfo>/<SignatureValue>
