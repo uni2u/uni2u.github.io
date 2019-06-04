@@ -7,7 +7,7 @@
 
 // Our variables
 //$base-font-family: 'Lato', 'Open Sans', Helvetica, Arial, sans-serif !important;
-$base-font-family: 'Ubuntu Mono', 'Open Sans', Helvetica, Arial, sans-serif !important;
+$base-font-family: 'Lato', 'Open Sans', 'Ubuntu Mono', Helvetica, Arial, sans-serif !important;
 $base-font-size:   16px;
 $small-font-size:  $base-font-size * 0.875;
 $base-line-height: 1.6em;
@@ -61,5 +61,5 @@ $on-laptop:        800px;
 
 @import url('http://fonts.googleapis.com/css?family=Open+Sans');
 @import url('http://fonts.googleapis.com/css?family=Lato');
-@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
