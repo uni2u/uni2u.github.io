@@ -15,9 +15,9 @@ meta: "Springfield"
 Repo deletion protocol 은 [Repo Command](03_Repo_Command.html) 를 사용합니다.
 특정 prefix 내의 단일 콘텐츠 객체 또는 콘텐츠 객체 삭제는 모두 repo 사양 (specification) 에서 지원됩니다. Selector 는 여러 콘텐츠 객체를 선택하는데 사용됩니다. 이러한 _selector_ 는 기존의 _interest_ 패킷 [selectors](http://named-data.net/doc/ndn-tlv/interest.html#selectors) 와 다릅니다. 기존 _interest selector_ 는 하나의 repo 데이터 패킷을 선택합니다. _delete command Selectors_ 는 이 _selector_ 에 적용되는 모든 데이터 패킷을 반환합니다. 세그먼트 데이터의 삭제도 지원됩니다.
 
-## Basic operations
+## 1. Basic operations
 
-### :: Deletion command interest semantics
+### 1.1 Deletion command interest semantics
 
 Command verb:  **delete**
 
@@ -27,9 +27,9 @@ _Deletion command interest_ 는 repo command 포멧을 따릅니다. 예:
 /ucla/cs/repo/delete/<RepoCommandParameter>/<timestamp>/<random-value>/<SignatureInfo>/<SignatureValue>
 ```
 
-## Formats
+## 2. Formats
 
-### :: Deletion Command RepoCommandParameter
+### 2.1 Deletion Command RepoCommandParameter
 
 _deletion command_ 의 포멧 RepoCommandParameter 는 Repo Command 를 따릅니다. Name, Selector, StartBlockId, EndBlockId, ProcessId 는 RepoCommandParameter 를 생성하는 데 사용됩니다.
 
@@ -41,11 +41,11 @@ StartBlockId 및 EndBlockId 는 세그먼트 데이터를 삭제하는데 사용
 
 ProcessId 는 클라이언트가 삭제 프로세스를 나타내기 위해 생성한 난수입니다. Repo 는 ProcessId 를 삭제 프로세스와 일치시킵니다.
 
-### :: Deletion Command Selectors
+### 2.2 Deletion Command Selectors
 
 _Deletion command selector_ 는 [repo command selectors](http://redmine.named-data.net/projects/repo-ng/wiki/Repo_Protocol_Specification#Repo-Command-Selectors) 다음에 옵니다.
 
-### :: Deletion status check
+### 2.3 Deletion status check
 
 deletion progress 동안 requester 는 _deletion status check command_ 를 전송하여 deletion progress 상태를 확인할 수 있습니다. _status check command_ 는 _signed interest_ 입니다. _deletion status check command_ 는 repo command 형식을 따릅니다. `<command verb>` 는 check 를 삭제하는 것과 같습니다. 예:
 
@@ -53,15 +53,15 @@ deletion progress 동안 requester 는 _deletion status check command_ 를 전�
 /ucla/cs/repo/delete/<RepoCommandParameter>/<timestamp>/<random-value>/<SignatureInfo>/<SignatureValue>
 ```
 
-### :: Deletion status check RepoCommandParameter
+### 2.4 Deletion status check RepoCommandParameter
 
 Name 및 ProcessId 는 특정 삭제 프로세스를 나타내는데 사용됩니다. Repo 는 Name 과 ProcessId 를 사용하여 특정 삭제 프로세스를 일치시킵니다. 일치하면 repo 가 삭제 진행 상황에 응답합니다. Name 또는 ProcessId 중 하나만 일치하면 실패합니다.
 
-### :: Deletion Check Command Selectors
+### 2.5 Deletion Check Command Selectors
 
 Selectors 는 지원되지 않습니다. Repo 는 deletion status check command 를 처리 할 때 selectors 를 무시합니다.
 
-### :: Deletion status response
+### 2.6 Deletion status response
 
 _Deletion status_ 응답은 _repo deletion command_ 및 _repo deletion check command_ 의 응답으로 사용됩니다.
 
@@ -80,7 +80,7 @@ StatusCode Definition:
 |403|Malformed Command|
 |404|삭제 작업 이상|
 
-## Protocol process
+## 3. Protocol process
 
 1. command authorize 시작; 승인이 실패하지 않으면 3 단계로 이동
 2. authorization failure 응답을 보내고 단계를 중단하고 삭제 프로세스 종료 (StatusCode : 401) 
@@ -104,7 +104,7 @@ StatusCode Definition:
 4. 응답 코드 404 (상태 코드: 404)
 5. 삭제 상태 확인 (상태 코드 : 300)
 
-### :: Protocol diagram:
+### 3.1 Protocol diagram:
 
 ```
 Requester                     Repo 

@@ -20,9 +20,9 @@ Repo insert command 는 Repo 가 내용을 검색 (retrieve) 하고 저장 (stor
 
 Forwarding hint 는 대규모 NDN 네트워크에서 mobility 지원을 위한 내용입니다. Repo 는 insert 프로토콜에서 Forwarding hint 메소드를 지원합니다. 정기적인 _interest_ 가 라우팅 불가 (unroutable) 면 사용자는 목적지 범위 (destination region) 가 포함된 링크 객체를 사용하여 _interest_ 를 보냅니다. _interest_ 가 사용자 범위 (region) 에지 (edge) 에 도달하면 라우터는 위임 정보를 선택합니다. 중계 라우터 (Intermediate router) 는 이 위임을 통해 _interest_ 를 전달합니다. _interest_ 가 생산자 (producer) 범위 (region) 에지 (edge) 에 도달하면 라우터는 원래 name 으로 _interest_ 를 전달합니다.
 
-## Basic operations
+## 1. Basic operations
 
-### :: Insert data
+### 1.1 Insert data
 
 Command verb: **insert**
 
@@ -33,7 +33,7 @@ name semantics 는 `insert` 라는 repo command 포멧을 따릅니다.
 /ucla/cs/repo/insert/<RepoCommandParameter>/<timestamp>/<random-value>/<SignatureInfo>/<SignatureValue>
 ```
 
-### :: Insertion status check
+### 1.2 Insertion status check
 
 Command verb: **insert check**
 
@@ -45,9 +45,9 @@ insert check 와 같습니다. 예:
 /ucla/cs/repo/insert check/<RepoCommandParameter>/<timestamp>/<random-value>/<SignatureInfo>/<SignatureValue>
 ```
 
-## Formats
+## 2. Formats
 
-### :: RepoCommandParameter
+### 2.1 RepoCommandParameter
 
 insert 및 insert check command 의 RepoCommandParameter 는 Repo Command 페이지에 있습니다. Name, StartBlockId, EndBlockId 는 insert 에 사용됩니다. Name과 ProcessId 는 insert check command 에 사용됩니다.
 
@@ -55,7 +55,7 @@ insert command 에서 Name 은 repo 가 가져올 (fetch) 데이터의 name 또�
 
 insert check command 에서 Name 은 가져올 (fetch) Repo 에 대한 데이터의 name 또는 prefix 를 나타냅니다. ProcessId 는 지정된 프로세스를 나타내기 위해 RepoCommandResponse 에 의해 설정됩니다.
 
-### :: Insertion status response
+### 2.2 Insertion status response
 
 이 insert status 데이터 오브젝트는 insert command 와 insert check command 모두의 응답 데이터 오브젝트 일 수 있습니다. repo command response 포멧을 따릅니다.
 
@@ -77,11 +77,11 @@ StatusCode 정의:
 |404|insert 작업이 진행 중입니다|
 |405|EndBlockId Missing Timeout|
 
-### :: EndBlockId Missing Timeout
+### 2.3 EndBlockId Missing Timeout
 
 StartBlockId 가 있지만 EndBlockId 가 없고 반환 데이터 패킷에 FinalBlockId 가 없으면 Repo 는 데이터를 계속 가져옵 (fetch) 니다. 이 경우를 막기 위해 EndBlockId missing timeout 이 설정됩니다. Repo 는 StartBlockId 가 있지만 EndBlockId 가없는 경우 타이머를 시작합니다. Timeout 이 발생하면 Repo 는 데이터를 가져 (fetch) 와서 insert 프로세스를 저장 (store) 하고 종료합니다. insert 프로세스 중에 insert check command 가 도착하면 타이머 시간은 0 으로 설정됩니다. FinalBlockId 가 포함 된 데이터 패킷이 도착하면 timeout 이해제됩니다.
 
-## Protocol Process
+## 3. Protocol Process
 
 1. command 의 authorize 시작; 승인 실패가 나지 않으면 3 번으로 이동
 2. 승인 실패인 경우 authorization failure 를 나타내는 응답을 보내고 요청을 중단하고 insert process (StatusCode: 401) 적용
@@ -112,7 +112,7 @@ StartBlockId 가 있지만 EndBlockId 가 없고 반환 데이터 패킷에 Fina
 
 EndBlockId Missing Timeout 타이머가 시작되면 Repo 는 17 ~ 26 단계에서 타이머를 모니터링합니다. Timeout 이 발생하면 즉시 insert command process 를 중단합니다.
 
-### :: Repo insert check command progress
+### 3.1 Repo insert check command progress
 
 구현은 insert 진행 상황에 대한 상태 알림 (notification) 을 게시 (publish) 할 수 있습니다. status check 프로세스는 다음과 같습니다.
 
@@ -122,7 +122,7 @@ EndBlockId Missing Timeout 타이머가 시작되면 Repo 는 17 ~ 26 단계에�
 4. status code 가 있는 response status; 검사 (check) 프로세스 종료 (StatusCode: 404)
 5. insert 상태 확인; insert 진행 상태 반환; EndBlockId Missing Timeout 타이머가 실행중인 경우 타이머를 0 으로 설정; 검사 (check) 프로세스 중단 (StatusCode : 300)
 
-### :: Protocol diagram:
+### 3.2 Protocol diagram:
 
 ```
 Requester                     Repo                          Data producer

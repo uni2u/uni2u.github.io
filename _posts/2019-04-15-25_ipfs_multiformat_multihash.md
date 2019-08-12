@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title: "IPFS - multihash"
 categories:
@@ -16,7 +16,7 @@ meta: "Springfield"
 
 이 문제에 대한 해결책으로 Protocol Lab 은 multihash 모델을 개발했습니다.
 
-## multihash 형식
+## 1. multihash 형식
 
 멀티 해시는 TLV (Type-Length-Value) 형식으로 기술됩니다.
 
@@ -60,7 +60,7 @@ Multihash : 132052eb4dd19f1ec522859e12d89706156570f8fbab1824870bc6f8c7d235eef5f4
 - 초록: 52eb4dd19f1ec522859e12d89706156570f8fbab1824870bc6f8c7d235eef5f4
 ```
 
-## multihash 설치 및 소스 코드
+## 2. multihash 설치 및 소스 코드
 
 Golang 을 사용하여 multihash 를 사용합니다.
 

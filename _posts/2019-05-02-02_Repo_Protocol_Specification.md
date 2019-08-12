@@ -20,7 +20,7 @@ Repo 의미는 NDN 의 name 끝에 서명된 객체 (signed components) [_Signed
 
 repo protocol 은 데이터 패킷 검색 및 관리의 두 부분으로 분류할 수 있습니다. Repo-ng 는 다양항 방식으로 데이터를 insert 하고 delete 하는 일련의 repo 관리 프로토콜 (management protocol) 을 구현하고 있습니다.
 
-## Repo Management Protocols
+## 1. Repo Management Protocols
 
 아래 내용은 **[repo-ng](01_repo_ng.html)** 포스팅의 Repo 관리 프로토콜의 내용입니다. 
 
@@ -30,7 +30,7 @@ repo protocol 은 데이터 패킷 검색 및 관리의 두 부분으로 분류�
   - [Tcp Bulk Insert Repo Insertion Protocol](06_Tcp_Bulk_Insert_Repo_Insertion_Protocol.html) : 대량의 데이터 패킷 (예: 동일 호스트에서 생성된) 을 insert 하는 간단한 TCP 기반 프로토콜을 정의합니다.
 - **[Repo Deletion Protocol](07_Repo_Deletion_Protocol.html)** 은 특정 prefix 아래에서 데이터 패킷에 대한 delete 포멧을 정의합니다.
 
-## Data packet retrieval from repo
+## 2. Data packet retrieval from repo
 
 Repo 는 보유하고있는 데이터 객체의 prefix 를 NDN forwarding daemon 에 등록하고 Repo 는 해당 prefix 로 응답합니다.
 
@@ -67,6 +67,6 @@ Requester                     Repo
     |                           |
 ```
 
-### :: About Freshness
+### 2.1 About Freshness
 
 repo 로 freshness (신선도?) 를 처리하는 솔루션은 명확하게 정의되지 않았으므로 생산자 (producer) 는 repo 에 콘텐츠를 담을 때 freshness 를 관리 (쓸모없는 콘텐츠 삭제) 하여야 합니다. MustBeFresh selector 는 repo 에서 콘텐츠를 가지고 오거나 (fetching), repo command 를 처리할 때 무시 (ignored) 됩니다.

@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title: "IPFS - multibase"
 categories:
@@ -39,7 +39,7 @@ base64url     u       rfc4648 - no padding
 base64urlpad  U       rfc4648 - with padding
 ```
 
-## multibase 형식
+## 1. multibase 형식
 
 `<varint-base-encoding-code><base-encoded-data>`
 
@@ -61,7 +61,7 @@ MTXVsdGliYXNlIGlzIGF3ZXNvbWUhIFxvLw==               # base64 M
 
 시작되는 알파벳은 다음과 같습니다: F, B, z, M
 
-## multibase 설치
+## 2. multibase 설치
 
 Golang 을 사용하여 multibase 를 사용합니다.
 
@@ -81,7 +81,7 @@ gx install --global
 gx-go --rewrite
 ```
 
-## multibase 설치 및 사용
+## 3. multibase 설치 및 사용
 
 원본 경로: src\github.com\multiformats\go-multibase\multibase.go
 
@@ -111,7 +111,7 @@ var Encodings = map[string]Encoding{
 ```
 
  코드:
- 
+
 ```go
 // Encode encodes a given byte slice with the selected encoding and returns a
 // multibase string (<encoding><base-encoded-string>). It will return

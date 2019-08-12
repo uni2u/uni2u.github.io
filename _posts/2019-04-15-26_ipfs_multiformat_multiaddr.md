@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title: "IPFS - multiaddr"
 categories:
@@ -58,7 +58,7 @@ multiaddr 형식:
 
 multiaddr 을 사용하면 더 명확 해지며 형식이 더 읽기 쉽습니다.
 
-## multiaddr 형식
+## 1. multiaddr 형식
 
 Multiaddr은 재귀 TLV (Type+Length+Value) 형식으로 인코딩되며 두 형식이 있습니다.
 
@@ -81,7 +81,7 @@ Multiaddr은 재귀 TLV (Type+Length+Value) 형식으로 인코딩되며 두 형
 - 길이는 바이트 단위의 주소 값 길이를 계산하는 데 사용되는 부호없는 변수 정수입니다.
 - 값 (addr-value) 은 네트워크 주소 길이 값입니다.
 
-## multiaddr 설치 및 사용
+## 2. multiaddr 설치 및 사용
 
 Golang 을 사용하여 multiaddr 을 사용합니다.
 multiaddr 설치는 다음을 통하여 설치합니다.

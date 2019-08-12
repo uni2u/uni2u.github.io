@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title: "IPFS - merkle-path"
 categories:
@@ -12,13 +12,13 @@ meta: "Springfield"
 
 # IPFS IPLD - merkle-path
 
-## merkle-path 란 무엇입니까?
+## 1. merkle-path 란 무엇입니까?
 
 merkle-path 는 유닉스 스타일 경로 (예: /a/b/c/d) 를 사용하여 merkle-link 를 통해 모든 객체를 가져옵니다.
 
 공통 파일 시스템은 IPFS 위에 객체 모델로 설계되어 데이터 객체 작업 및 쿼리를 구현하는 특정 알고리즘을 설계 할 수 있습니다.
 
-## merkle-path 의 작동 원리는 무엇입니까?
+## 2. merkle-path 의 작동 원리는 무엇입니까?
 
 merkle-path 는 유닉스 스타일의 경로로 경로를 점진적으로 내용을 파싱합니다. 내용을 파싱하는 것은 merkle-link 의 내용을 가져 와서 더 파싱하는 것을 의미합니다.
 

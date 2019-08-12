@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title: "IPFS - Version Control"
 categories:
@@ -14,7 +14,7 @@ meta: "Springfield"
 
 IPFS 의 파일 버전 제어 시스템은 Git 을 기반으로합니다. 먼저 Git 을 분석해 봅시다.
 
-## 버전 제어 시스템 (Git)
+## 1. 버전 제어 시스템 (Git)
 
 git 학습의 개념:
 
@@ -38,7 +38,7 @@ Git 은 변경된 내용으로만 데이터를 다시 저장하며 변경되지 
 
 파일에는 총 3 개가 포함되며 그 중 my_dir 아래의 my_file.txt 는 hello.txt 와 동일하므로 하나의 사본만 저장됩니다. 다음으로 my_dir 폴더에서 my_file.txt 파일을 수정했습니다. 내용이 변경되어 커밋이 이루어지면 새로운 버전의 내용인 새로운 루트 해시가 생성됩니다.
 
-## IPFS 버전 제어 시스템
+## 2. IPFS 버전 제어 시스템
 
 IPFS 버전 제어는 git 과 거의 같습니다. 아래 그림은 저장소의 내용입니다.
 

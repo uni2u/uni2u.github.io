@@ -12,15 +12,15 @@ meta: "Springfield"
 
 # Database Design
 
-## Lists of Tables
+## 1. Lists of Tables
 
 - NDN_REPO
 
-## Specifics of Tables
+## 2. Specifics of Tables
 
-### :: NDN_REPO
+### 2.1 NDN_REPO
 
-#### :::: Columns
+#### 2.1.1 Columns
 
 - name: TLV 데이터 패킷의 블록 이름 (BLOB PRIMARY KEY)
 - data: 전체 TLV 포멧의 데이터 패킷 (BLOB)
@@ -30,6 +30,6 @@ meta: "Springfield"
 - nChildren: name 의 direct children 수 (INTEGER)
   - 예) raw name: /a/b, /a/b/c, /a/b/d, /a/b/c/d (/a/b 의 children: 2, /a/b/c 의 children: 1, /a/b/d 및 /a/b/c/d 의 children: 0)
 
-#### :::: Note
+#### 2.1.2 Note
 
 name 및 pname 을 사용하여 테이블은 prefix tree 를 작성합니다.

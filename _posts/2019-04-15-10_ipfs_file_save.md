@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title: "IPFS - file save"
 categories:
@@ -14,7 +14,7 @@ meta: "Springfield"
 
 IPFS 파일의 저장 및 읽기는 BitTorrent 업로드 및 다운로드의 원칙과 유사합니다. IPFS에서 채택한 인덱스 구조는 DHT (Distributed Hash Table) 이며 데이터 구조는 MerkleDAG (Merkle Directed Acyclic Graph) 입니다.
 
-## IPFS 단일 파일 저장소
+## 1. IPFS 단일 파일 저장소
 
 파일 시스템을 연구 한 사람들은 인덱스와 섹터라는 두 가지 개념을 알고 있습니다. 예를 들어 NTFS 섹터는 보통 4K 이고 실제 파일 데이터는 섹터에 저장됩니다. 이러한 섹터를 찾는 방법은 인덱스를 만드는 것입니다. IPFS 는 파일 시스템이기도하지만 IPFS 에는 저장 용량 제한이 없으며 공간 복구 기능도 없다는 점이 다릅니다. IPFS 가 파일을 저장하면 다음 단계를 수행합니다:
 
@@ -33,7 +33,7 @@ IPFS 파일의 저장 및 읽기는 BitTorrent 업로드 및 다운로드의 원
 
 해시는 모든 인덱스에 저장되기 때문에 MerkleDAG 에는 다음과 같은 기능이 있습니다 (whitepaper 내용): 1) Content based Addressing: 모든 내용은 링크를 포함하여 여러 해시 체크섬으로 고유하게 식별됩니다. 2) 위조 할 수 없음: 모든 내용이 체크섬으로 확인됩니다. 데이터가 훼손되거나 손상되면 IPFS 가 탐지합니다. 3) 중복 제거: 콘텐츠를 복제하고 한 번만 저장합니다.
 
-## IPFS 디렉토리 파일 저장
+## 2. IPFS 디렉토리 파일 저장
 
 IPFS 는 디렉토리 구조를 지원하며 저장은 다음과 같습니다:
 

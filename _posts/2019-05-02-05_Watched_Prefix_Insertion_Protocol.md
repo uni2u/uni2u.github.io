@@ -14,9 +14,9 @@ meta: "Springfield"
 
 Watched Prefix는 Repo insert 를 위한 새로운 프로토콜입니다. 이 프로토콜을 사용하여 repo 는 동일한 prefix 로 데이터를 요청하도록 _interest_ 를 계속 전송합니다. 데이터 패킷이 수신되면 repo 는 수신된 데이터를 제외하고 새 데이터를 요청하도록 selector (대부분의 경우 exclude selector) 를 업데이트합니다. Repo 는 전송된 _interest_ 의 총량이 특정 숫자 또는 timeout 에 도달하지 못하도록하는 _interest_ 가 표시 될 때까지 prefix 시청을 중단합니다.
 
-## Basic operations
+## 1. Basic operations
 
-### :: Start watched prefix insertion
+### 1.1 Start watched prefix insertion
 
 Command verb:  **watch start**
 
@@ -43,7 +43,7 @@ parameter 에 대한 세부설명:
 - **`WatchTimeout`**: 프로세스의 지속 시간; Repo 는 시간이 끝날 때까지 prefix 를 계속 watching; WatchTimeout 은 0 으로 설정되며 프로세스는 영원히 계속 실행
 - **`Selectors`**: 수신된 데이터를 제외하고 새 데이터를 요청하는 데 사용
 
-### :: Watch status check
+### 1.2 Watch status check
 
 Command verb:  **watch check**
 
@@ -61,7 +61,7 @@ parameter 에 대한 자세한 설명:
 
 - **`Name`** 은 watched prefix 입니다.
 
-### :: Stop watched prefix insertion
+### 1.3 Stop watched prefix insertion
 
 Command verb:  **watch stop**
 
@@ -79,7 +79,7 @@ parameter 에 대한 자세한 설명:
 
 - **Name**: watched prefix
 
-## RepoCommandResponse
+## 2. RepoCommandResponse
 
 이 watch status 데이터 객체는 watch 명령과 watchCheck 명령의 응답 데이터 객체가 될 수 있습니다. repo command 응답 포멧을 따릅니다.
 
@@ -98,9 +98,9 @@ StatusCode 정의:
 |403|Malformed Command|
 |404|프로세스가 진행되고 있지 않음|
 
-## Protocol Process
+## 3. Protocol Process
 
-### :: Repo watch start command process:
+### 3.1 Repo watch start command process:
 
 1. command 유효성 검사 (validate) 시작; 유효성이 확인되면 3 단계로 이동, 그렇지 않으면 2 단계로 이동
 2. validation failure response; 이 단계를 중단하면 프로세스가 종료. (StatusCode: 401)
@@ -121,7 +121,7 @@ StatusCode 정의:
 17. 9-11 단계를 반복하고 12 단계를 건너뜀
 18. interest 를 보내고 전송된 interest 수에 1 을 더한 다음 7 단계로 이동
 
-### :: Repo watch check command process:
+### 3.2 Repo watch check command process:
 
 1. check command validate 시작; 유효성이 확인되면 3 단계로 이동하고, 그렇지 않으면 2 단계로 이동
 2. validation failure 를 나타내는 응답을 보내고 이 단계를 중단하면 프로세스 종료 (StatusCode: 401)
@@ -129,7 +129,7 @@ StatusCode 정의:
 4. 해당 프로세스가 존재하는지 확인; 그렇다면 5 단계로 이동, 그렇지 않은 경우 부정 응답을 보냄 (StatusCode: 404)
 5. processId 를 사용하여 응답을 찾고 응답을 되돌려 보냄
 
-### :: Repo watch stop command process:
+### 3.3 Repo watch stop command process:
 
 1. stop command validate 시작; 유효성이 확인되면 3 단계로 이동, 그렇지 않으면 2 단계로 이동
 2. validation failure 를 나타내는 응답을 보내고 이 단계를 중단하면 프로세스 종료 (StatusCode: 401)

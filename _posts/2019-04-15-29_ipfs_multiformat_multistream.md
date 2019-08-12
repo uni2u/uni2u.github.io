@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title: "IPFS - multistream"
 categories:
@@ -42,7 +42,7 @@ hex:   062f6a736f6e2f7b2268656c6c6f223a22776f726c64227d
 ascii: /json\n"{\"hello\":\"world\"}"
 ```
 
-## 멀티 스트림 소스 코드 분석
+## 1. 멀티 스트림 소스 코드 분석
 
 소스 경로: src\github.com\multiformats\go-multistream\multistream.go
 
