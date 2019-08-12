@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title: "IPFS - routing"
 categories:
@@ -30,7 +30,7 @@ k-버킷의 노드는 ping 지연 시간에 의해 3 개의 계층으로 더 나
 
 IPFS 의 DSHT 구조는 저장된 데이터의 크기에 따라 차별화 됩니다. 작은 값 (1KB 이하) 은 DHT 에 직접 저장되며 큰 값의 경우 DHT 는 인덱스만 저장합니다. 이 인덱스는 피어 노드의 NodeId 이며 피어 노드는 유형값에 대한 특정 서비스를 제공 할 수 있습니다. DSHT 의 인터페이스는 다음의 libp2p 모듈에 있습니다:
 
-``` cpp
+``` c++
 type IPFSRouting interface {
   FindPeer (node NodeId)
   // gets a particular peer’s network address 

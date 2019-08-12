@@ -17,7 +17,7 @@ ipfs 네트워크에서 업로드한 파일 하나하나가 하나의 object 이
 object 명령은 ipfs 에서 DAG 객체와 상호 작용하는 데 사용됩니다.
 기본 형식은 다음과 같습니다:
 
-```
+```tex
 ipfs object <명령어> hash
 ```
 
@@ -52,7 +52,7 @@ ipfs object <명령어> hash
 
     - `rm-link <root><link>`: object 에서 링크 제거
     - `set-data <root><data>`: object 데이터 세그먼트 설정
- 
+
 - `put`: 입력 정보를 DAG object 로 저장하고 hash 출력
 
 - `stat`: object 의 상태 제공

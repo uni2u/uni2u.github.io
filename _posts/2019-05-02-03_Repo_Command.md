@@ -14,7 +14,7 @@ meta: "Springfield"
 
 repo 의 insert, delete 및 기타 작업의 Command 는 [_Signed Interests_](https://redmine.named-data.net/projects/ndn-cxx/wiki/SignedInterest) 형식으로 인코딩됩니다.
 
-```
+```tex
 /<repo-prefix>/<command-verb>/................./.........................................
                               \______  _______/ \__________________  ___________________/
                                      \/                            \/
@@ -38,13 +38,13 @@ name 의미 (semantics) 는 다음과 같은 컴포넌트로 정의됩니다:
 
 repo 의 prefix 인 _/ucla/cs/repo/_ 는 다음과 같이 정의됩니다:
 
-```
+```tex
 /ucla/cs/repo/<command verb>/<RepoCommandParameter>/<timestamp>/<random-value>/<SignatureInfo>/<SignatureValue>
 ```
 
 ## 1. RepoCommandParameter
 
-```
+```tex
 RepoCommandParameter ::= REPOCOMMANDPARAMETER-TYPE TLV-LENGTH
                            Name?
                            StartBlockId?
@@ -97,7 +97,7 @@ ForwardingHint 요소는 Link Object 섹션에 정의된 name 위임 (delegation
 
 Repo command 의 응답 (response) 은 _Repo command interest_ 에 대한 응답 데이터 패킷입니다. 응답에는 명령 프로세스 및 기타 정보의 상태를 나타내는 상태 코드가 포함됩니다. RepoCommandResponse 라는 TLV 인코딩 블록은 데이터 패킷의 내용으로 인코딩됩니다.
 
-```
+```tex
 RepoCommandResponse   ::= INSERTSTATUS-TYPE TLV-LENGTH
                            ProcessId?
                            StatusCode

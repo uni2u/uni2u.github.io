@@ -13,7 +13,7 @@ meta: "Springfield"
 
 # IPFS files
 
-```
+```tex
 ipfs files <명령어>
 ```
 
@@ -49,7 +49,7 @@ ipfs files <명령어>
   - e bool: 파일이 존재하지 않으면 생성
   - t bool: 파일을 작성하기 전에 원본 내용을 지우고 처음부터 작성
 
-```
+```tex
 $ ipfs files ls
 h
 hide

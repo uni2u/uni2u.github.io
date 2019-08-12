@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title: "IPFS - file download"
 categories:
@@ -20,7 +20,7 @@ IPFS 는 파일을 로컬 노드로 다운로드 합니다. 이때 사용하는 
 
 `get` 명령을 사용하여 해시가 가르키는 데이터를 얻을 수 있습니다. `cat` 옵션을 통하여 해시의 데이터를 볼 수 있습니다.
 
-```
+```protobuf
 $ ipfs get QmbrevseVQKf1vsYMsxCscRf6D7S2dftYpHwxkYf94pc7T
 Saving file(s) to QmbrevseVQKf1vsYMsxCscRf6D7S2dftYpHwxkYf94pc7T
  17 B / 17 B [====================================] 100.00% 0s
@@ -31,7 +31,7 @@ IZ*ONE violeta
 
 `ipfs pin` 명령어는 다음과 같이 사용된다.
 
-```
+```protobuf
 $ ipfs pin add QmbrevseVQKf1vsYMsxCscRf6D7S2dftYpHwxkYf94pc7T
 pinned QmbrevseVQKf1vsYMsxCscRf6D7S2dftYpHwxkYf94pc7T recursively
 ```

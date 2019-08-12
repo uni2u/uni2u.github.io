@@ -30,7 +30,7 @@ meta: "Springfield"
 
 sha2-sha256 해시 함수를 사용하여 "hello" 문자열을 해시하고 16 진수 문자열로 출력 하는 경우 다음과 같습니다.
 
-```
+```go
 var a = "hello"
 
 b := sha256.Sum256([]byte(a))
@@ -41,7 +41,7 @@ fmt.Printf("%x",b)
 
 그런 다음 multihash 처리 후 다음을 얻습니다.
 
-```
+```tex
 Multihash： 12202cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
 
 # 의미는 다음과 같습니다.
@@ -52,7 +52,7 @@ Multihash： 12202cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b982
 
 해시 함수가 sha2-512 인 경우:
 
-```
+```tex
 Multihash : 132052eb4dd19f1ec522859e12d89706156570f8fbab1824870bc6f8c7d235eef5f4
 
 - 해시 함수: sha2-512 (16 진수 코드: 0x13)
@@ -98,7 +98,7 @@ func main() {
 
 설치 확인 테스트는 아래와 같이 수행합니다.
 
-```
+```go
 $ go run multihash.go
 hex:11140beec7b5ea3f0fdbc95dodd47f3c5bc275da8a33
 obj:sha1 0x11 20 0beec7b5ea3f0fdbc95d0dd47f3c5bc275da8a33

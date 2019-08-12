@@ -103,7 +103,7 @@ IPFS 에서 _commit_ 객체는 버전 히스토리에 있는 객체의 스냅샷
   ]
 }
 ```
-```
+```json
 $ ipfs file-cat <ccc111-hash> --json
 {
   "data": {
@@ -165,7 +165,7 @@ Rabin Fingerprints 알고리즘을 사용하여 적절한 블록 경계를 정�
 
 예) 위의 ttt111 에 대한 flat tree 는 다음과 같습니다:
 
-```
+```json
 {
   "data":["tree","blob","tree","list","blob","blob"],
   "links":[

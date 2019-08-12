@@ -22,7 +22,7 @@ meta: "Springfield"
 
 ## 2. Module Relation Graph
 
-```
+```tex
 --------------------------------
 |                              |
 |         Repo Server          |

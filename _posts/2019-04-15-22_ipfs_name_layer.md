@@ -35,7 +35,7 @@ SFS 자체 인증 네이밍 시스템은 IPFS 에 암호화 된 배포의 전역
 
 네임 스페이스에서 게시 된 데이터 객체 경로 이름은 하위 이름으로 처리 될 수 있습니다:
 
-```
+```tex
 /ipns/XLF2ipQ4jD3UdeX5xp1KBgeHRhemUtaA8Vm/
 /ipns/XLF2ipQ4jD3UdeX5xp1KBgeHRhemUtaA8Vm/docs
 /ipns/XLF2ipQ4jD3UdeX5xp1KBgeHRhemUtaA8Vm/docs/ipfs
@@ -49,7 +49,7 @@ IPNS 는 노드의 NodeID 를 잠금 해시 값으로 사용하며 사용자는 
 
 SFS (Self-Validating File System)의 디자인 개념에 따라 사용자는 다른 사용자 노드의 개체를 자신의 네임 스페이스에 직접 연결할 수 있으므로보다 신뢰할 수있는 네트워크를 만들 수 있습니다.
 
-```
+```tex
 # Alice 가 Bob 과 링크
 ipfs link //friends/bob/
 
@@ -67,7 +67,7 @@ ipfs link //friends/alice /
 
 기존 DNS 시스템에 TXT 레코드를 추가하면 도메인 이름을 통해 IPFS 네트워크의 파일 객체에 액세스 할 수 있습니다.
 
-```
+```tex
 # DNS TXT 레코드
 ipfs.benet.ai. TXT "ipfs=XLF2ip4jD3U..."
 # 상징 링크로 표현
@@ -82,7 +82,7 @@ ln -s /ipns/XLF2ip4jD3U... /ipns/fs.benet.ai
 
 또한 IPFS 는 짧은 주소 지정 서비스를 제공합니다. 이 서비스는 지금 볼 수있는 DNS 및 WebURL 링크와 유사합니다.
 
-```
+```tex
 # 사용자는 아래에서 link 를 얻을 수 있음
 /ipns/shorten.er/foobar
 

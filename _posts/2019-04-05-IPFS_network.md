@@ -55,25 +55,25 @@ IPFS 는 장착된 모듈을 활용하여 내부에서 이용하는 P2P Network 
 [_3.1 Transport agnostic - github.com/libp2p/specs_](https://github.com/libp2p/specs/blob/master/3-requirements.md#31-transport-agnostic)
 
 P2P 시스템은 Internet 위에 Overlay Network 를 구축한다.  
-  
+
 libp2p 는 TCP(UDP)/IP에는 의존하지 않고 Ethernet, Bluetooth 등 다양한 Transport Protocol 에도 마찬가지로 P2P 시스템을 구축하는 것을 목표로 하고있다.
 
 ### 1.2.1 multiaddr (self-describing addressing)
 
 자기 기술형 애드레싱 (Adressing)  이라고 할 수 있다.
 Address 를 표현하는 문자열에 자신이 이용하고 있는 Protocol 을 포함하는 형식으로 multihash 와 같은 방식을 사용한다.  
-  
+
 libp2p 에서는 **multiaddr** 방식이라고 설명하고 있다.
 
 [_multiformats/multiaddr_](https://github.com/multiformats/multiaddr)
 
-```
+```tex
 /<protoName string>/<value string> + <protoName string>/<value string> + ...
 ```
 
 IPFS 의 Node Address 의 경우 다음과 같이 `<multiaddr>+/ipfs/<Node ID>` 포맷으로 나타낸다.
 
-```
+```tex
 /ip4/127.0.0.1/tcp/9000/ipfs/QmYJyUMAcXEw1b5bFfbBbzYu5wyyjLMRHXGUkCXpag74Fu
 # Address :
 #   IP          : 127.0.0.1
@@ -83,7 +83,7 @@ IPFS 의 Node Address 의 경우 다음과 같이 `<multiaddr>+/ipfs/<Node ID>` 
 
 multihash 의 특징으로서 ~ over ~ 를 다층적으로 표현할 수 있다.
 
-```
+```tex
 # IPFS over TCP over IPv6 (typical TCP)
 /ip6/fe80::8823:6dff:fee7:f172/tcp/4001/ipfs/QmYJyUMAcXEw1b5bFfbBbzYu5wyyjLMRHXGUkCXpag74Fu
 
@@ -106,13 +106,13 @@ multihash 의 특징으로서 ~ over ~ 를 다층적으로 표현할 수 있다.
 ![multiaddr 을 활용한 Overlay Networking](/images/ipfs_id04.png)
 
 Layer 마다 Protocol 또는 프록시 구성이 명시적으로 표현되어 있는 것을 알 수 있다.
-  
+
 모든 네트워킹 프로토콜이 libp2p 에 의해 구현된 것은 아니다.
 
 multiaddr 자체는 문자열이지만 사용하기 쉽게 하기 위해서는 Parser/Validator 가 필요하다.
-  
+
 Node.js 의 경우 [_js-multiaddr_](https://github.com/multiformats/js-multiaddr) 를 이용해 Parse 한다. Validation는 [_js-mafmt_](https://github.com/multiformats/js-mafmt) 가 담당한다.
-  
+
 Go의 경우 [_go-multiaddr_](https://github.com/multiformats/go-multiaddr) 를 이용해 Parse 한다.
 그 외 multiaddr Instance 를 조작하여 캡슐화/해제 및 터널링을 표현하는 새로운 Instance 를 생성하는 등 편리기능도 가진다.
 
@@ -230,7 +230,7 @@ Transport 에 관한 interface 는 [go-libp2p-transport](https://github.com/libp
 접속하고 싶지 않은 Node 가 있는 경우 Filter 를 설정할 수 있다.  
 Filter 대상은 multiaddr 에 의해 지정된다.
 
-```
+```go
 // make a new filterset
 f := NewFilters()
 
@@ -309,7 +309,7 @@ Go의 경우 쌍방향 통신을 실시하는 경로 (Connection, Stream) 는 �
 
 ![libp2p Layer 세부 동작](/images/ipfs_id12.png)
 
-```
+```go
 // transport connection
 type Conn io.ReadWriteCloser
 func (c *Conn) Write(data []byte) error {
@@ -456,7 +456,7 @@ Upgrade 된 Connection 을 사용하여 데이터 송신/수신하는 경우 모
 ![암호 생성](/images/ipfs_id25.png)
 
 포인트는
-  
+
 - 2의 검증에서 접속하고 싶은 multiaddr 와 PublicKey가 일치함을 알 수 있으므로 제삼자 증명은 불필요
   - 즉, 클라이언트가 multiaddr 로 접속처를 지정한다. '이 공개키를 가진 사람과 잇고 싶다' 라는의미
 - 4.4 로 서명 능력을 체크
@@ -529,7 +529,7 @@ Upgrade 된 Connection 을 사용하여 데이터 송/수신하는 경우, Strea
 
 ![Stream Connection](/images/ipfs_id30.png)
 
-```
+```c++
 [js-libp2p-spdy]
 
 const spdy = require('spdy-transport') // Nodejs의 SPDY 구현 모듈
@@ -544,7 +544,7 @@ const spdyMuxer = spdy.connection.create(conn, { // Stream 을 받고 SPDY Conne
 })
 ```
 
-```
+```go
 [go-smux-yamux]
 
 import (
@@ -680,7 +680,7 @@ Swarm 내의 데이터 구조는 Connection 은 여러개 가질 수 있게 되�
 
 Swarm 은 Connection 을 은닉하고 있어 직접적인 조작은 공개하지 않고 접속 처리는 Stream 을 만들 때의 아래 체크 부분에서 필요하게 되어 이루어진다.
 
-```
+```c++
 [libp2p/go-libp2p-swarm/swarm.go]
 
 func (s *Swarm) NewStream(ctx context.Context, p peer.ID) (inet.Stream, error) {
@@ -772,7 +772,7 @@ Peer 에 대한 Dial 요구가 동시에 여러 온 경우 이전 Dial 처리가
 
 이미 연결할 수 없게 된 Peer 대해 계속 접속 요청을 해도 소용없기 때문에 일단 연결에 실패하면 Backoff 목록에 추가되어 다음 식에 나타난 시간이 경과하지 않으면 재시도 할 수 없게된다.
 
-```
+```tex
 // BackoffBase + BakoffCoef * PriorBackoffs^2
 until := (5 + 1 * (retryCount + retryCount)) * time.Second
 ```
@@ -817,7 +817,7 @@ Swarm 범위 밖이지만 이것도 libp2p 의 이념에서 multistream 을 이�
 
 실제로 [go-libp2p/p2p/host/basic/basic_host.go](https://github.com/libp2p/go-libp2p/blob/master/p2p/host/basic/basic_host.go) 에서 다음과 같이 사용하고 있다.
 
-```
+```c++
 [Dial 측]
 
 func (h *BasicHost) NewStream(ctx context.Context, p peer.ID, pids ...protocol.ID) (inet.Stream, error) {
@@ -845,7 +845,7 @@ func (h *BasicHost) NewStream(ctx context.Context, p peer.ID, pids ...protocol.I
   return s, nil
 }
 ```
-```
+```c++
 [Listen 측]
 
 // Host 인스턴스 생성시
@@ -887,7 +887,7 @@ func (h *BasicHost) SetStreamHandler(pid protocol.ID, handler inet.StreamHandler
   })
 }
 ```
-```
+```c++
 [사용하는 경우]
 
 // Register protocol

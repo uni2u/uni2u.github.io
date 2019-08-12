@@ -35,7 +35,7 @@ type IPFSObject struct {
 
 `ipfs object links <객체 hash>` 를 실행하면 그 객체 아래의 모든 IPFSLink 엔트리가 나열됩니다. 즉, IPFSLink 는 객체를 구성합니다.
 
-```
+```tex
 $ ipfs object links QmZV47ZKbJ1DCLoHWHGhXZ4EMqsyTsZRJUsZuRwEAoiesn
 
 QmUEHn7UnFyFMpJwkvotwuejnMX8XEkqxNsXMeDXJtiJyf 8019571 IZONE_violeta.mp4
@@ -49,7 +49,7 @@ QmXd18A2gF1rDbNntsDTX48jexiytU7Wi3dT1rWcqNKjeV 71      IZONE
 
 IPFS 대상은 하나의 문자열에 대한 경로를 쿼리할 수 있으며 경로는 전통적인 UNIX 파일 시스템에 있는 경로와 마찬가지로 MerkleDAG 의 links 로 로깅을 단순화 합니다.
 
-```
+```tex
 # 형식
 /ipfs/<hash-of-object>/<name-path-to-object>
 # 사용예
@@ -58,7 +58,7 @@ IPFS 대상은 하나의 문자열에 대한 경로를 쿼리할 수 있으며 �
 
 IPFS 개체는 다중 경로도 지원합니다.
 
-```
+```tex
 /ipfs/<hash-of-foo>/bar/baz
 /ipfs/<hash-of-bar>/baz
 /ipfs/<hash-of-baz>

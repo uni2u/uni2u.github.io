@@ -37,7 +37,7 @@ console.log(multistream.rmPrefix(prefixedBuf).toString())
 
 결과 출력:
 
-```
+```tex
 hex:   062f6a736f6e2f7b2268656c6c6f223a22776f726c64227d
 ascii: /json\n"{\"hello\":\"world\"}"
 ```
@@ -128,7 +128,7 @@ func main() {
 
 확인 테스트는 아래와 같이 수행합니다.
 
-```
+```tex
 $ go run multistream.go
 /cats :HELLO I LIKE CATS
 /dogs :HELLO I LIKE DOGS

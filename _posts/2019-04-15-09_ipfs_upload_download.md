@@ -18,7 +18,7 @@ IPFS 에서 데이터를 업로드하는 과정을 알아봅시다. 먼저 단�
 
 [1] 현재 디렉토리에서 foo.txt 파일 작성
 
-```
+```protobuf
 $ ipfs add foo.txt
 added QmTzeEKzcweAsSw2mQbcKLgm6TWqbuVCqZAHk5J9543CVZ foo.txt
  10 B / 10 B [=====================================] 100.00%
@@ -32,7 +32,7 @@ added QmTzeEKzcweAsSw2mQbcKLgm6TWqbuVCqZAHk5J9543CVZ foo.txt
 
 IPFS 노드 시작 명령은 다음과 같습니다.
 
-```
+```tex
 $ ipfs daemon
 ```
 

@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title: "IPFS - identity"
 categories:
@@ -14,7 +14,7 @@ meta: "Springfield"
 
 각 IPFS 노드에는 고유 한 ID 가 있으며 ID 는 NodeID 로 표시됩니다. IPFS 네트워크에 가입하기 전에 노드는 먼저 자신의 ID 를 생성해야 합니다. 공개 키는 S/Kademlia 정적 암호화 알고리즘에 의해 생성되며 해시 연산에 의해 NodeID 를 생성 합니다. C ++ 에서 NodeID 의 생성 과정은 다음과 같습니다:
 
-``` cpp
+``` c++
 // 난이도 (leading factor)를 0으로 설정
 difficulty =< integer parameter >
 // 노드 초기화
@@ -34,7 +34,7 @@ do{
 
 터미널에서 `ipfs id` 를 실행하면 다음과 같이 시스템의 IPFS 노드 정보가 표시됩니다.
 
-```
+```protobuf
 $ ipfs id
 {
   "ID": "QmXdSpUBx9Ut6q8LF8Wyt1Wi2wxmob6qnnT11uV3SmvUP3",

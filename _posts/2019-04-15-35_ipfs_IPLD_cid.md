@@ -30,7 +30,7 @@ CID 는 콘텐츠 주소 지정을위한 자가 기술 식별자 입니다. 콘�
 
 CIDv1 은 네 부분으로 구성됩니다.
 
-```
+```tex
 <cidv1> ::= <mb><version><mcp><mh>
 # or, expanded:
 <cidv1> ::= <multibase-prefix><cid-version><multicodec-packed-content-type><multihash-content-address>
@@ -66,7 +66,7 @@ _업그레이드 가능성_: CID 의 인코딩 된 버전을 업그레이드 할
 
 예를들어
 
-```
+```tex
 # TODO example
 # example CID
 # corresponding human readable CID
@@ -87,7 +87,7 @@ CIDv0 은 이전 버전과 호환되는 버전입니다.
 
 참조: https://github.com/ipld/cid#how-does-it-work-protocol-description
 
-```
+```tex
 <cidv1> ::= <multibase-prefix><cid-version><multicodec-packed-content-type><multihash-content-address>
 ```
 

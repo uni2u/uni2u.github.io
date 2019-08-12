@@ -50,7 +50,7 @@ IPLD 데이터 모델의 핵심은 그냥 JSON 입니다. 즉, (a) 일부 기본
 
 다음은 JSON 으로 대표되는 IPLD 객체입니다:
 
-```go
+```json
 {
   "name": "Vannevar Bush"
 }
@@ -58,7 +58,7 @@ IPLD 데이터 모델의 핵심은 그냥 JSON 입니다. 즉, (a) 일부 기본
 
 multihash 값이 QmAAA ... AAA 라고 가정합니다. 링크가 없고 문자열만 있습니다. 그러나 사용자는 여전히 keyname 으로 구문 분석 할 수 있습니다.
 
-```
+```tex
 $ ipld cat --json QmAAA...AAA
 {
   "name": "Vannevar Bush"
@@ -86,7 +86,7 @@ $ ipld cat --xml QmAAA...AAA
 
 노드 간의 merkle-link 가 IPLD 의 존재 이유입니다. IPLD 내의 링크는 노드 내에 포함된 특별한 형식일 뿐입니다.
 
-```go
+```json
 {
   "title": "As We May Think",
   "author": {
@@ -97,7 +97,7 @@ $ ipld cat --xml QmAAA...AAA
 
 위 데이터의 다중 해시 값이 QmBBB ... BBB 라고 가정합니다. 노드에는 QmAAA ... AAA 에 대한 subpath 링크 작성자가 있으므로 다음을 수행할 수 있습니다.
 
-```
+```tex
 $ ipld cat --json QmBBB...BBB
 {
   "title": "As We May Think",
@@ -127,7 +127,7 @@ $ ipld cat --json QmBBB...BBB/author/name
 
 예) 파일 시스템이 있고 노드 간의 권한 제어 또는 소유권에 대한 메타 정보를 분배하려고한다고 가정합니다. 해시 값이 QmCCC...CCC 인 객체 디렉토리가 있다고 가정합니다:
 
-```go
+```json
 {
   "foo": { // link wrapper with more properties
     "link": {"/": "QmCCC...111"} // the link
@@ -170,7 +170,7 @@ doge.jpg:
 
 데이터 구조에 고유 속성에 대한 설명을 추가하더라도 여전히 구문 분석 할 수 있습니다:
 
-```
+```tex
 $ ipld cat --json QmCCC...CCC/cat.jpg
 {
   "data": "\u0008\u0002\u0012��\u0008����\u0000\u0010JFIF\u0000\u0001\u0001\u0001\u0000H\u0000H..."
@@ -210,7 +210,7 @@ $ ipld cat --json QmCCC...CCC/doge.jpg/subfiles/1/
 
 현재 파서의 경우에도 중복 이름이 있는 속성이 없다는 점은 주목할 가치가 있습니다. 따라서 충돌을 피하기 위해 구문 분석 중에 항목의 첫 번째 항목만 읽습니다. 예) 다음과 같은 객체가 있습니다.
 
-```go
+```json
 {
   "name": "J.C.R. Licklider",
   "name": "Hans Moravec"
@@ -219,7 +219,7 @@ $ ipld cat --json QmCCC...CCC/doge.jpg/subfiles/1/
 
 이 순서대로 표준 형식으로 Canonical Format (json이 아닌 cbor) 이 표준 형식으로 나타나며 해당 해시 값은 QmDDD ... DDD 입니다. 오직 다음을 얻을 수 있습니다:
 
-```
+```tex
 $ ipld cat --json QmDDD...DDD
 {
   "name": "J.C.R. Licklider",
@@ -248,7 +248,7 @@ Unix 파일 시스템
 
 A small File (작은 파일)
 
-```go
+```json
 {
   "data": "hello world",
   "size": "11"
@@ -257,7 +257,7 @@ A small File (작은 파일)
 
 A Chunked File 일부
 
-```go
+```json
 {
   "size": "1424119",
   "subfiles": [
@@ -280,7 +280,7 @@ A Chunked File 일부
 
 A Directory 
 
-```go
+```json
 {
   "foo": {
     "link": {"/": "QmCCC...111"},
@@ -302,7 +302,7 @@ A Directory
 
 git blob 데이터 블록
 
-```go
+```json
 {
   "data": "hello world"
 }
@@ -310,7 +310,7 @@ git blob 데이터 블록
 
 git tree 구조
 
-```go
+```json
 {
   "foo": {
     "link": {"/": "QmCCC...111"},
@@ -329,7 +329,7 @@ git tree 구조
 
 git commit 구조
 
-```go
+```json
 {
   "tree": {"/": "e4647147e940e2fab134e7f3d8a40c2022cb36f3"},
   "parents": [
@@ -352,7 +352,7 @@ git commit 구조
 
 Bitcoin Block
 
-```go
+```json
 {
   "parent": {"/": "Qm000000002CPGAzmfdYPghgrFtYFB6pf1BqMvqfiPDam8"},
   "transactions": {"/": "QmTgzctfxxE8ZwBNGn744rL5R826EtZWzKvv2TF2dAcd9n"},
@@ -362,7 +362,7 @@ Bitcoin Block
 
 Bitcoin Transaction
 
-```go
+```tex
 ---
 inputs:
   - input: {/: Qmes5e1x9YEku2Y4kDgT6pjf91TPGsE2nJAaAKgwnUqR82}

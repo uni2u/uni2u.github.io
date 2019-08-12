@@ -39,7 +39,7 @@ IPFS 의 Node (peer) 는 분산되어 있기 때문에 각 Node 를 식별하기
 
 ![공개키를 활용한 NodeID 생성](/images/ipfs_id01.png)
 
-```
+```go
 type NodeId Multihash
 type Multihash []byte
 // self-describing cryptographic hash digest
@@ -73,7 +73,7 @@ Node 간 연결은 서로의 공개 키를 교환하고 `hash(n.PubKey) == NodeI
 
 자가 기술형 Hash 포멧 (self-describing hash format) 이라고 할 수 있다. Hash Digest 전에 자신의 사용하는 Hash 함수의 _'타입, 길이'_ 등 **메타 데이터** 정보를 포함하는 것이다.
 
-```
+```tex
 <function_code><digest_length><digest_bytes>
 ```
 
@@ -83,11 +83,11 @@ IPFS 에서는 multihash 라는 방식이 취해지고 있다.
 
 [_github.com/multiformats/multihash_](https://github.com/multiformats/multihash)
 
-```
+```tex
 <varint_hash_function_code><varint_digest_size_in_bytes><hash_function_output>
 ```
 
-```
+```tex
 // Binary
   hash    digest                     hash
 function   size                     digest

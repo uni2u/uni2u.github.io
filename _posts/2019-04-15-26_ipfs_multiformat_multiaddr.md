@@ -34,7 +34,7 @@ multiaddr 는 이러한 문제를 개선하기 위해 다음 기능을 제공합
 
 보통 형식:
 
-```
+```tex
 127.0.0.1:9090   # ip4. is this TCP? or UDP? or something else?
 [::1]:3217       # ip6. is this TCP? or UDP? or something else?
 
@@ -48,7 +48,7 @@ http://foo.com/bar/baz.jpg
 
 multiaddr 형식:
 
-```
+```tex
 /ip4/127.0.0.1/udp/9090/quic
 /ip6/::1/tcp/3217
 /ip4/127.0.0.1/tcp/80/http/baz.jpg
@@ -129,7 +129,7 @@ func main() {
 
 설치 확인 테스트는 아래와 같이 수행합니다.
 
-```
+```go
 $ go run multiaddr.go
 true
 [{ip4 4 [4] 32 false {0x4cd930 0x4cdd00 <nil>}} {udp 273 [142 2] 16 false {0x4cdd70 0x4cdf80 <nil>}}]

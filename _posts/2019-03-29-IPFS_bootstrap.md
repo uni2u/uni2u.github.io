@@ -26,7 +26,7 @@ _bootstrap_ 노드를 추가 및 제거하는 것은 매우 신중해야 합니�
 
 명령의 기본 형식은 다음과 같습니다.
 
-```
+```protobuf
  ipfs bootstrap <명령어>
 ```
 
@@ -35,7 +35,7 @@ _bootstrap_ 노드를 추가 및 제거하는 것은 매우 신중해야 합니�
 - add `<peer>`: bootstrap 목록에 노드 추가 (포트: 4001)
   - default bool: 기본 bootstrap 노드 추가
 
-```
+```protobuf
 $ ipfs bootstrap add /ip4/192.168.2.91/tcp/4001/ipfs/QmTvb4UDEqNpV6mizrbZyzjZyw7VWvUxgYbnsdTrFSXKYV
 added /ip4/192.168.2.91/tcp/4001/ipfs/QmTvb4UDEqNpV6mizrbZyzjZyw7VWvUxgYbnsdTrFSXKYV
 node exit 0
@@ -44,7 +44,7 @@ node exit 0
 - rm `<peer>`: bootstrap 목록에 노드 제거
   - all bool: 모든 bootstrap 노드 삭제
 
-```
+```protobuf
 $ ipfs bootstrap rm  
 /ip6/2400:6180:0:d0::151:6001/tcp/4001/ipfs/QmSoLSafTMBsPKadTEgaXctDQVcqN88CNLHXMkTNwMKPnu
 create new datastore
@@ -54,7 +54,7 @@ node exit 0
 
 - `list`: 현재 부트 스트랩 노드 리스트
 
-```
+```protobuf
 $ ipfs bootstrap list  
 /dnsaddr/bootstrap.libp2p.io/ipfs/QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN  
 /dnsaddr/bootstrap.libp2p.io/ipfs/QmQCU2EcMqAqQPR2i9bChDtGNJchTbq5TbXJJ16u19uLTa  
@@ -75,7 +75,7 @@ $ ipfs bootstrap list
 
 ipfs 네트워크에서 노드는 `Qm` 으로 시작하는 46비트 해시 값으로 식별됩니다. 개발 디버그를 사용하여 링크 노드의 정보를 출력하면 다음 노드 정보를 찾을 수 있습니다.
 
-```
+```protobuf
 netNotifiee conn:[<peer.ID cJCLDD> <peer.ID QCU2Ec> <peer.ID UuQGw9> <peer.ID SoLPpp>],curconn:<peer.ID SoLPpp>
 ```
 
@@ -85,7 +85,7 @@ netNotifiee conn:[<peer.ID cJCLDD> <peer.ID QCU2Ec> <peer.ID UuQGw9> <peer.ID So
 
 _bootstrap_ 이 노드 정보를 편집하는 매커니즘은 사설 ipfs 네트워크를 구축하기 위한 기반을 제공합니다. 즉, 로컬 노드의 일부는 외부 네트워크에 연결되어 있지 않고 ipfs의 기본 네트워크에 연결되어 있지 않지만 기본적으로 로컬 네트워크의 노드에 연결되어 ipfs 개인 네트워크를 상호 연결할 수 있습니다.
 
-```
+```protobuf
 $ ipfs bootstrap list
 create new datastore
 /ip4/192.168.2.91/tcp/4001/ipfs/QmTvb4UDEqNpV6mizrbZyzjZyw7VWvUxgYbnsdTrFSXKYV
