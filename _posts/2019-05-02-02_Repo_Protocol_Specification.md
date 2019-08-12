@@ -67,6 +67,6 @@ Requester                     Repo
     |                           |
 ```
 
-### About Freshness
+### :: About Freshness
 
 repo 로 freshness (신선도?) 를 처리하는 솔루션은 명확하게 정의되지 않았으므로 생산자 (producer) 는 repo 에 콘텐츠를 담을 때 freshness 를 관리 (쓸모없는 콘텐츠 삭제) 하여야 합니다. MustBeFresh selector 는 repo 에서 콘텐츠를 가지고 오거나 (fetching), repo command 를 처리할 때 무시 (ignored) 됩니다.

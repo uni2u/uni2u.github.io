@@ -17,7 +17,7 @@ Repo deletion protocol 은 [Repo Command](03_Repo_Command.html) 를 사용합니
 
 ## Basic operations
 
-### Deletion command interest semantics
+### :: Deletion command interest semantics
 
 Command verb:  **delete**
 
@@ -29,7 +29,7 @@ _Deletion command interest_ 는 repo command 포멧을 따릅니다. 예:
 
 ## Formats
 
-### Deletion Command RepoCommandParameter
+### :: Deletion Command RepoCommandParameter
 
 _deletion command_ 의 포멧 RepoCommandParameter 는 Repo Command 를 따릅니다. Name, Selector, StartBlockId, EndBlockId, ProcessId 는 RepoCommandParameter 를 생성하는 데 사용됩니다.
 
@@ -41,11 +41,11 @@ StartBlockId 및 EndBlockId 는 세그먼트 데이터를 삭제하는데 사용
 
 ProcessId 는 클라이언트가 삭제 프로세스를 나타내기 위해 생성한 난수입니다. Repo 는 ProcessId 를 삭제 프로세스와 일치시킵니다.
 
-### Deletion Command Selectors
+### :: Deletion Command Selectors
 
 _Deletion command selector_ 는 [repo command selectors](http://redmine.named-data.net/projects/repo-ng/wiki/Repo_Protocol_Specification#Repo-Command-Selectors) 다음에 옵니다.
 
-### Deletion status check
+### :: Deletion status check
 
 deletion progress 동안 requester 는 _deletion status check command_ 를 전송하여 deletion progress 상태를 확인할 수 있습니다. _status check command_ 는 _signed interest_ 입니다. _deletion status check command_ 는 repo command 형식을 따릅니다. `<command verb>` 는 check 를 삭제하는 것과 같습니다. 예:
 
@@ -53,15 +53,15 @@ deletion progress 동안 requester 는 _deletion status check command_ 를 전�
 /ucla/cs/repo/delete/<RepoCommandParameter>/<timestamp>/<random-value>/<SignatureInfo>/<SignatureValue>
 ```
 
-### Deletion status check RepoCommandParameter
+### :: Deletion status check RepoCommandParameter
 
 Name 및 ProcessId 는 특정 삭제 프로세스를 나타내는데 사용됩니다. Repo 는 Name 과 ProcessId 를 사용하여 특정 삭제 프로세스를 일치시킵니다. 일치하면 repo 가 삭제 진행 상황에 응답합니다. Name 또는 ProcessId 중 하나만 일치하면 실패합니다.
 
-### Deletion Check Command Selectors
+### :: Deletion Check Command Selectors
 
 Selectors 는 지원되지 않습니다. Repo 는 deletion status check command 를 처리 할 때 selectors 를 무시합니다.
 
-### Deletion status response
+### :: Deletion status response
 
 _Deletion status_ 응답은 _repo deletion command_ 및 _repo deletion check command_ 의 응답으로 사용됩니다.
 
@@ -104,7 +104,7 @@ StatusCode Definition:
 4. 응답 코드 404 (상태 코드: 404)
 5. 삭제 상태 확인 (상태 코드 : 300)
 
-### Protocol diagram:
+### :: Protocol diagram:
 
 ```
 Requester                     Repo 

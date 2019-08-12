@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title: "IPFS - ipld-cid"
 categories:
@@ -74,7 +74,7 @@ _업그레이드 가능성_: CID 의 인코딩 된 버전을 업그레이드 할
 
 ## 버전
 
-### CIDv0
+### :: CIDv0
 
 CIDv0 은 이전 버전과 호환되는 버전입니다.
 
@@ -83,7 +83,7 @@ CIDv0 은 이전 버전과 호환되는 버전입니다.
 - cid-version 은 항상 cidv0
 - multihash 는 다음과 같이 표현됩니다. cidv0 :: = <_multihash-content-address_>
 
-### CIDv1
+### :: CIDv1
 
 참조: https://github.com/ipld/cid#how-does-it-work-protocol-description
 

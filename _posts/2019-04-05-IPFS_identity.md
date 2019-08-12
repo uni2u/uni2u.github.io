@@ -113,7 +113,7 @@ sha1      4 bytes   4 byte sha1 digest
 ### 1.2.1 키생성
 
 Node.js의 경우는 [_js-libp2p-crypto_](https://github.com/libp2p/js-libp2p-crypto) 가 제공되고 있다. 브라우저용으로 WebCrypt API에 대한 대응도 하고 있다.  
-  
+
 Go의 경우는 [_go-libp2p-crypto_](https://github.com/libp2p/go-libp2p-crypto) 가 제공되고 있다.
 
 ### 1.2.2 PeerID 생성
@@ -124,16 +124,16 @@ PeerID 를 생성하기 전에, 생성한 키의 회전을 높일 수 있는 연
 ![RSA, protobuf, Base64 를 활용한 PeerID 생성](/images/ipfs_id03.png)
 
 Node.js의 경우 [_js-peer-id_](https://github.com/libp2p/js-peer-id) 가 생성되어 있다. 실제로는 [_js-peer-info_](https://github.com/libp2p/js-peer-info) 가 Peer 추상모델을 작성할 때 호출된다.  
-  
+
 Go의 경우는 [_go-libp2p-peer_](https://github.com/libp2p/go-libp2p-peer) 가 담당한다.
 
 ### 1.2.3 Peer 및 키 정보 보존
-  
+
 교환된 Peer 정보를 저장하기 위한 모듈도 구성되어 있다.
 
 Node.js 의 경우는 [_js-peer-book_](https://github.com/libp2p/js-peer-book) 이 담당한다.  
 `Key=PeerID/Value=PeerInfo` 라는 Map 을 On-Memory 에 유지하면서 액세서를 공개하고 있다.  
-  
+
 Go의 경우 [_go-libp2p-peerstore_](https://github.com/libp2p/go-libp2p-peerstore) 에서 Interface 를 제공한다.
 
 Peer 정보와 Key 정보의 보존 외에 PeerMetadeta (Peer 마다 추가 정보) 를 보존할 수 있도록 되어 있다. 그 외,
