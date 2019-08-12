@@ -92,7 +92,7 @@ CNM에는 몇 가지 상위 레벨의 구성물이 있다. 이들은 모두 OS �
 
 `docker network ls` 출력에서 볼 수 있듯이, 도커 네트워크 드라이버는 스코프 라는 개념이 있다. 네트워크 스코프는 `local` 또는 `swarm` 범위인 드라이버의 도메인이다. Local 스코프 드라이버는 호스트의 범위 내에서 연결 및 네트워크 서비스(예: DNS 또는 IPAM)를 제공한다. Swarm 스코프 드라이버는 Swarm 클러스터 전반에서 연결 및 네트워크 서비스를 제공한다. Swarm 스코프 네트워크는 전체 클러스터에서 동일한 네트워크 ID를 가지고 있고, 반면에 Local 스코프 네트워크는 각 호스트에 고유한 네트워크 ID를 가지고 있다.
 
-```protobuf
+```
 $ docker network ls
 NETWORK ID          NAME                DRIVER              SCOPE
 1475f03fbecb        bridge              bridge              local
@@ -173,7 +173,7 @@ c97909a4b198        none                null                local
 
 ![](https://success.docker.com/api/images/.%2Frefarch%2Fnetworking%2Fimages%2Fhost-driver.png)
 
-```protobuf
+```
 #호스트 네트워크에 컨테이너를 생성함
 $ docker run -itd --net host --name C1 alpine sh
 $ docker run -itd --net host --name nginx
@@ -217,7 +217,7 @@ $ curl localhost
 
 독립 실행형 도커 호스트에서, `bridge`는 다른 네트워크가 지정되지 않은 경우 컨테이너가 연결되는 기본 네트워크다. 다음 예에서 컨테이너는 네트워크 매개변수 없이 생성된다. 도커 엔진은 기본적으로 이를 브리지 네트워크에 연결한다. 컨테이너 내부 `eth0`을 주목하라. 이는 `bridge` 드라이버에 의해 생성되고 도커 네이티브 IPAM 드라이버에 의해 주소가 지정된다.
 
-```protobuf
+```
 #"c1"이라는 이름의 busybox 컨테이너를 만들고 해당 IP 주소를 표시
 host $ docker run -it --name c1 busybox sh
 c1 # ip 주소
@@ -231,7 +231,7 @@ c1 # ip 주소
 
 호스트의 `brctl` 툴은 호스트 네트워크 네임 스페이스에 존재하는 리눅스 브리지를 표시한다. `docker0`이라 부르는 단일 브리지가 표시된다. `docker0`에는 하나의 인터페이스 `vetha3788c4`가 있는데, 이 인터페이스는 브리지에서 컨테이너 `c1` 내부의 `eth0` 인터페이스에 대한 연결을 제공한다.
 
-```protobuf
+```
 host $ brctl show
 bridge name      bridge id            STP enabled    interfaces
 docker0          8000.0242504b5200    no             vethb64e8b8
@@ -239,7 +239,7 @@ docker0          8000.0242504b5200    no             vethb64e8b8
 
 컨테이너 `c1` 내부의 컨테이너 라우팅 테이블은 컨테이너의 `eth0`로 트래픽을 전달하고, 따라서 `docker0` 브리지로 이동한다.
 
-```protobuf
+```
 c1# ip 라우트
 default via 172.17.0.1 dev eth0
 172.17.0.0/16 dev eth0  src 172.17.0.2
@@ -251,7 +251,7 @@ default via 172.17.0.1 dev eth0
 
 호스트 라우팅 테이블이 보여주는 것처럼, 글로벌 네트워크 네임스페이스의 IP 인터페이스는 이제 `docker0`을 포함한다. 호스트 라우팅 테이블은 외부 네트워크에서 `doker0`과 `eth0` 사이의 연결시켜 컨테이너 내부에서 외부 네트워크로의 경로를 완성한다.
 
-```protobuf
+```
 host $ ip route
 default via 172.31.16.1 dev eth0
 172.17.0.0/16 dev docker0  proto kernel  scope link  src 172.17.42.1
@@ -271,7 +271,7 @@ default via 172.31.16.1 dev eth0
 
 사용자 정의 `bridge` 네트워크 아래에는 2개의 컨테이너가 연결되어 있다. 서브넷이 지정되고, 네트워크는 `my_bridge`로 이름이 붙여진다. 하나의 컨테이너에는 IP 매개변수가 제공되지 않으므로, IPAM 드라이버는 서브넷에 사용 가능한 다음 IP를 할당한다. 다른 컨테이너에는 IP가 지정되어 있다.
 
-```protobuf
+```
 $ docker network create -d bridge --subnet 10.0.0.0/24 my_bridge
 $ docker run -itd --name c2 --net my_bridge busybox sh
 $ docker run -itd --name c3 --net my_bridge --ip 10.0.0.254 busybox sh
@@ -279,7 +279,7 @@ $ docker run -itd --name c3 --net my_bridge --ip 10.0.0.254 busybox sh
 
 `brctl`은 이제 호스트에 두번째 리눅스 `bridge`를 나타낸다. 리눅스 브리지의 이름인 `br-4bcc22f5e5b9`는 `my_bridge` 네트워크의 네트워크 ID와 일치한다. `my_bridge`는 또한 컨테이너 `c2`와 `c3`에 연결된 2개의 `veth` 인터페이스가 있다.
 
-```protobuf
+```
 $ brctl show
 bridge name      bridge id            STP enabled    interfaces
 br-b5db4578d8c9  8000.02428d936bb1    no             vethc9b3282
@@ -295,7 +295,7 @@ e1cac9da3116        bridge              bridge              local
 
 글로벌 네트워크 네임스페이스 인터페이스 목록은 도커 엔진에 의해 인스턴스화된 리눅스 네트워킹 서킷을 보여준다. 각 `veth` 및 리눅스 브리지 인터페이스는 리눅스 브리지 중 하나와 컨테이너 네트워크 네임스페이스 사이의 링크로 나타난다.
 
-```protobuf
+```
 $ ip link
 
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536
@@ -316,7 +316,7 @@ $ ip link
 
 인그레스 액세스는 명시적인 포트 퍼블리싱을 통해 제공된다. 포트 퍼블리싱은 도커 엔진에 의해 수행되며 UCP 또는 엔진 CLI를 통해 제어할 수 있다. 서비스나 컨테이너를 노출하도록 특정 또는 무작위로 선택된 포트를 구성할 수 있다. 포트는 특정(또는 모든) 호스트 인터페이스에서 수신 대기하도록 설정할 수 있으며, 모든 트래픽은 이 포트에서 포트 및 컨테이너 내부의 인터페이스로 매핑된다.
 
-```protobuf
+```
 $ docker run -d --name C2 --net my_bridge -p 5000:80 nginx
 ```
 
@@ -362,7 +362,7 @@ VXLAN은 언더레이 IP/UDP 헤더 내에 컨테이너 Layer 2 프레임을 배
 
 다음 예제는 오버레이 네트워크를 생성하고 그 네트워크에 컨테이너를 연결한다. 도커 Swarm/UCP는 자동으로 오버레이 네트워크를 생성한다. 다음 예제는 Swarm 또는 UCP를 미리 설정해야 한다.
 
-```protobuf
+```
 #오버레이 드라이버로 "ovnet"이라는 이름의 오버레이 생성
 $ docker network create -d overlay --subnet 10.1.0.0/24 ovnet
 
@@ -372,7 +372,7 @@ $ docker service create --network ovnet nginx
 
 오버레이 네트워크가 생성되면 호스트 내부에 여러 개의 인터페이스와 브리지가 생성되고, 이 컨테이너 내부에 두 개의 인터페이스도 생성된다는 점에 주목해야 한다.
 
-```protobuf
+```
 #이 서비스의 컨테이너를 들여다 보면 내부 인터페이스를 볼 수 있다
 conatiner$ ip address
 
@@ -412,7 +412,7 @@ Swarm & UCP는 클러스터 포트 퍼블리싱 외부에서 서비스에 액세
 
 `ingress` 모드 포트 퍼블리싱은 [Swarm Routing Mesh](https://success.docker.com/api/asset/.%2Frefarch%2Fnetworking%2F#routingmesh)를 사용하여 서비스 태스크 간에 로드 밸런싱을 적용한다. 인그레스 모드는 모든 UCP/Swarm 노드에 노출된 포트를 퍼블리싱한다. 퍼블리시된 포트로 들어오는 트래픽은 라우팅 메쉬에 의해 로드 밸런싱되고 라운드 로빈 로드 밸런싱을 통해 서비스의 정상적인 태스크 중 하나로 이동된다. 특정 호스트가 서비스 태스크를 실행하고 있지 않더라도 이 포트는 호스트에 퍼블리시되고 태스크가 있는 호스트에 로드 밸런싱된다.
 
-```protobuf
+```
 $ docker service create --replicas 2 --publish mode=ingress,target=80,published=8080 nginx
 ```
 
@@ -422,7 +422,7 @@ $ docker service create --replicas 2 --publish mode=ingress,target=80,published=
 
 `host` 모드 포트 퍼블리싱은 특정 서비스 태스크가 실행 중인 호스트의 포트만 노출한다. 포트는 해당 호스트의 컨테이너에 직접 매핑된다. 포트 충돌을 방지하기 위해 각 호스트에서 특정 서비스의 단일 태스크만 실행할 수 있다.
 
-```protobuf
+```
 $ docker service create --replicas 2 --publish mode=host,target=80,published=8080 nginx
 ```
 
@@ -453,7 +453,7 @@ MACVLAN 네트워크를 구성할 때, 게이트웨이 주소가 필요하다. �
 
 이 예제는 호스트의 `eth0`에 MACVLAN 네트워크를 바인딩한다. 또한 두 개의 컨테이너를 `mvnet` MACVLAN 네트워크에 연결하고 그들 사이에서 핑(ping)할 수 있다는 것을 보여준다. 각 컨테이너는 물리적 네트워크 서브넷 `192.168.0.0/24`에 주소가 있고, 기본 게이트웨이는 물리적 네트워크의 인터페이스이다.
 
-```protobuf
+```
 #호스트의 eth0에 바인딩된 MACVLAN 네트워크 "mvnet"생성
 $ docker network create -d macvlan --subnet 192.168.0.0/24 --gateway 192.168.0.1 -o parent=eth0 mvnet
 
@@ -475,7 +475,7 @@ PING 127.0.0.1 (127.0.0.1): 56 data bytes
 
 `macvlan` 드라이버가 하위 인터페이스로 인스턴스화되면 호스트와 L2의 세그먼트 컨테이너에 대한 VLAN 트렁킹할 수 있다. `macvlan` 드라이버는 자동으로 하위 인터페이스를 만들고, 이를 컨테이너 인터페이스에 연결한다. 그 결과, 각 컨테이너는 다른 VLAN에 있으며 트래픽이 물리적 네트워크에서 라우팅되지 않는 한, 컨테이너 간의 통신은 불가능하다.
 
-```protobuf
+```
 #VLAN 10에 macvlan10 네트워크 생성
 $ docker network create -d macvlan --subnet 192.168.10.0/24 --gateway 192.168.10.1 -o parent=eth0.10 macvlan10
 
@@ -545,7 +545,7 @@ $ docker run -it --name c2--net macvlan20 --ip 192.168.20.2 busybox sh
 VIP를 보기 위해서는, 다음과 같이 `docker service inspect my_service````
 를 실행한다.
 
-```protobuf
+```
 # mynet이라 부르는 오버레이 네트워크 생성
 $ docker network create -d overlay mynet
 a59umzkdj2r0ua7x8jxd84dhr
@@ -576,7 +576,7 @@ $ docker service inspect myservice
 
 서비스를 시작하면 애플리케이션에 대한 외부 DNS 레코드를 만들어 모든 도커 Swarm 노드 중 일부 또는 전부에 매핑할 수 있다. 클러스터의 모든 노드가 라우팅 메쉬 라우팅 기능이 있는 노드처럼 보이므로 컨테이너가 실행되는 위치에 대해 걱정할 필요가 없다.
 
-```protobuf
+```
 # 2개의 복제본을 사용하여 서비스를 생성하고 클러스터에 포트 8000을 내보내기
 $ docker service create --name app --replicas 2 --network appnet -p 8000:80 nginx
 ```
@@ -683,7 +683,7 @@ netshoot과 같은 트러블슈팅 컨테이너를 사용하는 것의 장점은
 
 이 모델은 네이티브 도커 `bridge` 네트워크 드라이버의 기본 동작이다. `bridge` 드라이버는 호스트 내부에 전용 네트워크를 생성하고 외부 연결을 위해 호스트 인터페이스에 외부 포트 매핑을 제공한다.
 
-```protobuf
+```
 $ docker network create -d bridge petsBridge
 
 $ docker run -d --net petsBridge --name db consul
@@ -701,7 +701,7 @@ Starting web container e750c649a6b5
 
 아래의 출력은 우리의 컨테이너가 `petsBridge` 네트워크의 `172.19.0.0/24` IP 공간으로부터 개인 IP를 할당받았다는 것을 보여준다. 도커는 다른 IPAM 드라이버가 지정되지 않은 경우, 내장 IPAM 드라이버를 사용하여 적절한 서브넷에서 IP를 제공한다.
 
-```protobuf
+```
 $ docker inspect --format {{.NetworkSettings.Networks.petsBridge.IPAddress}} web
 172.19.0.3
 
@@ -717,7 +717,7 @@ $ docker inspect --format {{.NetworkSettings.Networks.petsBridge.IPAddress}} db
 
 다음 예에서는, 각 서비스의 위치가 수동으로 설정되어, 외부 서비스 검색을 시뮬레이션한다. `db` 서비스의 위치는 `DB` 환경 변수를 통해 웹으로 전달된다.
 
-```protobuf
+```
 # 백엔드 db 서비스를 생성하여 포트 8500에 노출
 host-A $ docker run -d -p 8500:8500 --name db consul
 
@@ -750,7 +750,7 @@ host-B $ docker run -d -p 8000:5000 -e 'DB=172.31.21.237:8500' --name web chrch/
 
 다음은 Swarm을 검사하고, 오버레이 네트워크를 생성한 후, 해당 오버레이 네트워크에 일부 서비스를 프로비저닝하는 방법을 보여준다. 이 명령들은 UCP/Swarm 컨트롤러 노드에서 실행된다.
 
-```protobuf
+```
 # 이미 생성된 이 swarm 클러스터에 참여하는 노드 표시
 $ docker node ls
 ID                           HOSTNAME          STATUS  AVAILABILITY  MANAGER STATUS
@@ -795,7 +795,7 @@ t222cnez6n7h  web   replicated  0/1       chrch/docker-pets:1.0
 
 이 예제에서 Pets 애플리케이션은 `host-A` 및 `host-B`에 배포된다.
 
-```protobuf
+```
 # 두 호스트에 로컬 macvlan 네트워크 생성
 host-A $ docker network create -d macvlan --subnet 192.168.0.0/24 --gateway 192.168.0.1 -o parent=eth0 petsMacvlan
 host-B $ docker network create -d macvlan --subnet 192.168.0.0/24 --gateway 192.168.0.1 -o parent=eth0 petsMacvlan

@@ -19,7 +19,7 @@ multicodec 은 자가 기술 형식을 포함하는 자가 기술 코덱입니�
 
 multicodec 으로 식별되는 많은 양의 데이터는 다음과 같습니다.
 
-```protobuf
+```
 <multicodec><encoded-data> 
 
 ＃ 생략할 수 있음：
@@ -28,7 +28,7 @@ multicodec 으로 식별되는 많은 양의 데이터는 다음과 같습니다
 
 또 다른 유용한 시나리오는 multicodec 을 키 액세스의 일부로 사용하는 것입니다. 예를 들면 다음과 같습니다.
 
-```protobuf
+```
 # suppose we have a value and a key to retrieve it
 "<key>" -> <value>
 

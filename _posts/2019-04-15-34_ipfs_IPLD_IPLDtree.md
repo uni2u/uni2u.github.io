@@ -58,7 +58,7 @@ IPLD 데이터 모델의 핵심은 그냥 JSON 입니다. 즉, (a) 일부 기본
 
 multihash 값이 QmAAA ... AAA 라고 가정합니다. 링크가 없고 문자열만 있습니다. 그러나 사용자는 여전히 keyname 으로 구문 분석 할 수 있습니다.
 
-```protobuf
+```
 $ ipld cat --json QmAAA...AAA
 {
   "name": "Vannevar Bush"
@@ -97,7 +97,7 @@ $ipld cat --xml QmAAA...AAA
 
 위 데이터의 다중 해시 값이 QmBBB ... BBB 라고 가정합니다. 노드에는 QmAAA ... AAA 에 대한 subpath 링크 작성자가 있으므로 다음을 수행할 수 있습니다.
 
-```protobuf
+```
 $ ipld cat --json QmBBB...BBB
 {
   "title": "As We May Think",
@@ -170,7 +170,7 @@ doge.jpg:
 
 데이터 구조에 고유 속성에 대한 설명을 추가하더라도 여전히 구문 분석 할 수 있습니다:
 
-```protobuf
+```
 $ ipld cat --json QmCCC...CCC/cat.jpg
 {
   "data": "\u0008\u0002\u0012��\u0008����\u0000\u0010JFIF\u0000\u0001\u0001\u0001\u0000H\u0000H..."
@@ -219,14 +219,14 @@ $ ipld cat --json QmCCC...CCC/doge.jpg/subfiles/1/
 
 이 순서대로 표준 형식으로 Canonical Format (json이 아닌 cbor) 이 표준 형식으로 나타나며 해당 해시 값은 QmDDD ... DDD 입니다. 오직 다음을 얻을 수 있습니다:
 
-```protobuf
-$ipld cat --json QmDDD...DDD
+```
+$ ipld cat --json QmDDD...DDD
 {
   "name": "J.C.R. Licklider",
   "name": "Hans Moravec"
 }
 
-$ipld cat --json QmDDD...DDD/name
+$ ipld cat --json QmDDD...DDD/name
 "J.C.R. Licklider"
 ```
 
@@ -362,7 +362,7 @@ Bitcoin Block
 
 Bitcoin Transaction
 
-```tex
+```
 ---
 inputs:
   - input: {/: Qmes5e1x9YEku2Y4kDgT6pjf91TPGsE2nJAaAKgwnUqR82}

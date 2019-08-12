@@ -16,7 +16,7 @@ IPFS 네트워크에서 데이터 저장소는 중복 될 수 있습니다. 이�
 
 데이터는 IPFS 스토리지에 블록으로 저장됩니다. IPFS 에서 데이터를 분할하는 방법은 여러 가지가 있습니다. 분할 방법은 IPFS 소스 코드 `core/commands/add.go` 코드에 설명되어 있습니다.
 
-```protobuf
+```
 The chunker option, '-s', specifies the chunking strategy that dictates
 how to break files into blocks. Blocks with same content can
 be deduplicated. The default is a fixed block size of

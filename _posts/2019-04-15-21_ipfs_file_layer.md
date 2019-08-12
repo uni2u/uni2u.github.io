@@ -103,7 +103,7 @@ IPFS 에서 _commit_ 객체는 버전 히스토리에 있는 객체의 스냅샷
   ]
 }
 ```
-```json
+```
 $ ipfs file-cat <ccc111-hash> --json
 {
   "data": {

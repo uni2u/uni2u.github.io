@@ -34,7 +34,7 @@ do{
 
 터미널에서 `ipfs id` 를 실행하면 다음과 같이 시스템의 IPFS 노드 정보가 표시됩니다.
 
-```protobuf
+```
 $ ipfs id
 {
   "ID": "QmXdSpUBx9Ut6q8LF8Wyt1Wi2wxmob6qnnT11uV3SmvUP3",

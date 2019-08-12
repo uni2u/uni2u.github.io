@@ -16,7 +16,7 @@ meta: "Springfield"
 ipfs 네트워크에 업로드 된 파일의 크기가 설정된 크기 (기본값은 256k)를 초과하면 시스템은 파일을 블록으로 분할하여 따로 저장합니다. 블록 명령은 이러한 블록을 조작하는 데 사용됩니다.
 블록 명령 형식은 다음과 같습니다:
 
-```protobuf
+```
 ipfs block <명령어>
 ```
 
@@ -35,7 +35,7 @@ ipfs block <명령어>
 
 - `stat <hash>`: hash 값 및 블록 크기를 포함하여 블록에 대한 정보 표시
 
-```protobuf
+```
 $ ipfs block put hello.txt
 QmSoLV4Bbm51jM9C4gDYZQ9Cy3U6aXMJDAbzgu2fzaDs64
 

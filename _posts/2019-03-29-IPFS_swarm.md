@@ -17,7 +17,7 @@ ipfs 네트워크에서 노드에 대한 연결을 모니터하고 유지 보수
 Swarm 명령은 `swarm` 구성 요소를 조작하는 데 사용됩니다.
 기본 형식은 다음과 같습니다:
 
-```protobuf
+```
 ipfs swarm <명령어>
 ```
 
@@ -40,7 +40,7 @@ ipfs swarm <명령어>
   - 부속 명령을 사용하여 필터 추가 및 제거
   - 주소 형식은 IPFS 멀티 주소
 
-```protobuf
+```
 /ip4/19.168.0.0/ipcidr/16
 는
 192.168.0.0/16
@@ -54,7 +54,7 @@ ipfs swarm <명령어>
   - streams bool : 동시에 열려있는 스트림에 대한 각 노드 정보
   - latency bool : 각 피어 대기 시간 정보
 
-```protobuf
+```
 $ ipfs swarm peers
 /ip4/104.131.131.82/tcp/4001/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ
 /ip4/178.62.61.185/tcp/4001/ipfs/QmSoLMeWqB7YGVLJN3pNLQpmmEk35v6wYtsMGLzSr5QBU3

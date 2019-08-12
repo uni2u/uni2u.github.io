@@ -17,7 +17,7 @@ ipfs 네트워크에서 업로드한 파일 하나하나가 하나의 object 이
 object 명령은 ipfs 에서 DAG 객체와 상호 작용하는 데 사용됩니다.
 기본 형식은 다음과 같습니다:
 
-```protobuf
+```
 ipfs object <명령어> hash
 ```
 

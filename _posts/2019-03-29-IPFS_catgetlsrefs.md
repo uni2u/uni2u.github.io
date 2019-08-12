@@ -18,7 +18,7 @@ meta: "Springfield"
 
 cat 명령은 ipfs 네트워크에있는 파일의 내용을 표시하는 데 사용됩니다. 형식은 다음과 같습니다:
 
-```protobuf
+```
 ipfs cat [options] 파일hash
 ```
 
@@ -29,7 +29,7 @@ ipfs cat [options] 파일hash
 
 다음과 같이 사용됩니다:
 
-```protobuf
+```
 $ ipfs cat QmSoLSafTMBsPKadTEgaXctDQVcqN88CNLHXMkTNwMKPnu
 "hi, I am IZ*ONE"
 
@@ -47,7 +47,7 @@ $ ipfs cat -l 8 QmSoLSafTMBsPKadTEgaXctDQVcqN88CNLHXMkTNwMKPnu
 
 get 명령은 ipfs 네트워크에서 로컬로 파일을 다운로드하는 데 사용됩니다. 형식은 다음과 같습니다:
 
-```protobuf
+```
 ipfs get [options] 파일hash
 ```
 
@@ -62,7 +62,7 @@ ipfs get [options] 파일hash
 
 ls 명령은 파일의 각 조각에 대한 정보를 나열하는 데 사용됩니다 (조각이있는 경우). 형식은 다음과 같습니다:
 
-```protobuf
+```
 ipfs ls [options] 파일hash
 ```
 
@@ -70,7 +70,7 @@ ipfs ls [options] 파일hash
 
 - v: 출력에 헤더 추가
 
-```protobuf
+```
 $ ipfs add -s size-10240 wechat.jpg
 added QmaWLzjB6Y5RdkThm6TCxoK5ZnFRypxTNdK52QLGdoTvAs wechat.jpg
 
@@ -96,7 +96,7 @@ QmUXSHDHLyz3kxsFGdEc29JjLoJoeGamTKvbu84FfZ2VXv 4534
 
 refs 명령은 파일의 관련 조각을 나열하는 데 사용됩니다. 형식은 다음과 같습니다:
 
-```protobuf
+```
 ipfs refs [options] 파일hash
 ```
 
