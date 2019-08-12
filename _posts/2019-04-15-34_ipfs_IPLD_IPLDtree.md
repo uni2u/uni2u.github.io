@@ -59,12 +59,12 @@ IPLD 데이터 모델의 핵심은 그냥 JSON 입니다. 즉, (a) 일부 기본
 multihash 값이 QmAAA ... AAA 라고 가정합니다. 링크가 없고 문자열만 있습니다. 그러나 사용자는 여전히 keyname 으로 구문 분석 할 수 있습니다.
 
 ```protobuf
-$ipld cat --json QmAAA...AAA
+$ ipld cat --json QmAAA...AAA
 {
   "name": "Vannevar Bush"
 }
 
-$ipld cat --json QmAAA...AAA/name
+$ ipld cat --json QmAAA...AAA/name
 "Vannevar Bush"
 ```
 
@@ -98,7 +98,7 @@ $ipld cat --xml QmAAA...AAA
 위 데이터의 다중 해시 값이 QmBBB ... BBB 라고 가정합니다. 노드에는 QmAAA ... AAA 에 대한 subpath 링크 작성자가 있으므로 다음을 수행할 수 있습니다.
 
 ```protobuf
-$ipld cat --json QmBBB...BBB
+$ ipld cat --json QmBBB...BBB
 {
   "title": "As We May Think",
   "author": {
@@ -106,16 +106,16 @@ $ipld cat --json QmBBB...BBB
   }
 }
 
-$ipld cat --json QmBBB...BBB/author
+$ ipld cat --json QmBBB...BBB/author
 {
   "name": "Vannevar Bush"
 }
 
-$ipld cat --yml QmBBB...BBB/author
+$ ipld cat --yml QmBBB...BBB/author
 ---
 name: "Vannevar Bush"
 
-$ipld cat --json QmBBB...BBB/author/name
+$ ipld cat --json QmBBB...BBB/author/name
 "Vannevar Bush"
 ```
 
@@ -171,12 +171,12 @@ doge.jpg:
 데이터 구조에 고유 속성에 대한 설명을 추가하더라도 여전히 구문 분석 할 수 있습니다:
 
 ```protobuf
-$ipld cat --json QmCCC...CCC/cat.jpg
+$ ipld cat --json QmCCC...CCC/cat.jpg
 {
   "data": "\u0008\u0002\u0012��\u0008����\u0000\u0010JFIF\u0000\u0001\u0001\u0001\u0000H\u0000H..."
 }
 
-$ipld cat --json QmCCC...CCC/doge.jpg
+$ ipld cat --json QmCCC...CCC/doge.jpg
 {
   "subfiles": [
     {
@@ -191,14 +191,14 @@ $ipld cat --json QmCCC...CCC/doge.jpg
   ]
 }
 
-$ipld cat --yml QmCCC...CCC/doge.jpg
+$ ipld cat --yml QmCCC...CCC/doge.jpg
 ---
 subfiles:
   - /: QmPHPs1P3JaWi53q5qqiNauPhiTqa3S1mbszcVPHKGNWRh
   - /: QmPCuqUTNb21VDqtp5b8VsNzKEMtUsZCCVsEUBrjhERRSR
   - /: QmS7zrNSHEt5GpcaKrwdbnv1nckBreUxWnLaV4qivjaNr3
 
-$ipld cat --json QmCCC...CCC/doge.jpg/subfiles/1/
+$ ipld cat --json QmCCC...CCC/doge.jpg/subfiles/1/
 {
   "data": "\u0008\u0002\u0012��\u0008����\u0000\u0010JFIF\u0000\u0001\u0001\u0001\u0000H\u0000H..."
 }

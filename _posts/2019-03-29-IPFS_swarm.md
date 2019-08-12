@@ -55,7 +55,7 @@ ipfs swarm <명령어>
   - latency bool : 각 피어 대기 시간 정보
 
 ```protobuf
-$ipfs swarm peers
+$ ipfs swarm peers
 /ip4/104.131.131.82/tcp/4001/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ
 /ip4/178.62.61.185/tcp/4001/ipfs/QmSoLMeWqB7YGVLJN3pNLQpmmEk35v6wYtsMGLzSr5QBU3
 ```

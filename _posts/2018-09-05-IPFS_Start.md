@@ -86,7 +86,7 @@ _Size_ 필드는 P2P 네트워킹을 최적화하는 데 주로 사용되며 개
 IPFS Object 는 일반적으로 Base58 로 인코딩 된 해시로 참조됩니다. 예를 들어 IPFS CLI Tool 을 사용하여 해시 QmarHSr9aaSNaPSR6KFPbuLV9aqJfTk1y9Bpdwline 에서 IPFS Object 를 살펴보면 다음과 같습니다.
 
 ```protobuf
-$ipfs object get QmarHSr9aSNaPSR6G9KFPbuLV9aEqJfTk1y9B8pdwqK4Rq
+$ ipfs object get QmarHSr9aSNaPSR6G9KFPbuLV9aEqJfTk1y9B8pdwqK4Rq
 {"Links": [{
 "Name": "AnotherName",
 "Hash": "QmVtYjNij3KeyGmcgg7yVXWskLaBtov3UYL9pgcGK3MCWu",

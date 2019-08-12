@@ -129,7 +129,7 @@ func main() {
 
 설치 확인 테스트는 아래와 같이 수행합니다.
 
-```go
+```protobuf
 $ go run multiaddr.go
 true
 [{ip4 4 [4] 32 false {0x4cd930 0x4cdd00 <nil>}} {udp 273 [142 2] 16 false {0x4cdd70 0x4cdf80 <nil>}}]

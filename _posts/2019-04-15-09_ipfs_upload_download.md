@@ -19,7 +19,7 @@ IPFS 에서 데이터를 업로드하는 과정을 알아봅시다. 먼저 단�
 [1] 현재 디렉토리에서 foo.txt 파일 작성
 
 ```protobuf
-$ipfs add foo.txt
+$ ipfs add foo.txt
 added QmTzeEKzcweAsSw2mQbcKLgm6TWqbuVCqZAHk5J9543CVZ foo.txt
  10 B / 10 B [=====================================] 100.00%
 ```
@@ -33,7 +33,7 @@ added QmTzeEKzcweAsSw2mQbcKLgm6TWqbuVCqZAHk5J9543CVZ foo.txt
 IPFS 노드 시작 명령은 다음과 같습니다.
 
 ```protobuf
-$ipfs daemon
+$ ipfs daemon
 ```
 
 IPFS 데몬 명령을 시작한 후 내 노드가 IPFS 네트워크에 연결되면 내 로컬 데이터를 전체 네트워크에 공유 할 수 있습니다. 하지만 내 파일 해시값은 나만 알고 있으며 다른 사람들은 액세스 할 수 없으므로 foo.txt 데이터는 내 노드에만 로컬로 저장되며 다른 네트워크 노드는 데이터를 저장하지 않습니다. 노드를 끄면 IPFS 네트워크의 foo.txt 데이터가 존재하지 않게 됩니다.

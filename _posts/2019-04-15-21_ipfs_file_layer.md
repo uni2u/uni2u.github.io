@@ -62,24 +62,24 @@ IPFS 에서 Tree 객체는 디렉토리를 나타내는 Git 트리와 비슷하�
 
 ```go
 {
-    "data":["blob","list","blob"], // tree 데이터 객체 유형 배열
-    "links":[
-        {
-            "hash":"XLYkgq61DYaq8Nhkcqy7LcnSA7dSHQ78x",
-            "name":"less",
-            "size":189458
-        },
-        {
-            "hash":"XLHBNsgoepUDKL8dkd9Hesa5io9sdxi7n",
-            "name":"script",
-            "size":19442
-        },
-        {
-            "hash":"XLWVQKJII8v7dggkfdhHSFlkaw9yjs7dj",
-            "name":"template",
-            "size":5286
-        } // trees 는 이름이 없음
-    ]
+  "data":["blob","list","blob"], // tree 데이터 객체 유형 배열
+  "links":[
+    {
+       "hash":"XLYkgq61DYaq8Nhkcqy7LcnSA7dSHQ78x",
+       "name":"less",
+       "size":189458
+    },
+    {
+       "hash":"XLHBNsgoepUDKL8dkd9Hesa5io9sdxi7n",
+       "name":"script",
+       "size":19442
+    },
+    {
+       "hash":"XLWVQKJII8v7dggkfdhHSFlkaw9yjs7dj",
+       "name":"template",
+       "size":5286
+    } // trees 는 이름이 없음
+  ]
 }
 ```
 

@@ -129,7 +129,7 @@ func main() {
 확인 테스트는 아래와 같이 수행합니다.
 
 ```protobuf
-$go run multistream.go
+$ go run multistream.go
 /cats :HELLO I LIKE CATS
 /dogs :HELLO I LIKE DOGS
 ```

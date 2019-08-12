@@ -99,7 +99,7 @@ func main() {
 설치 확인 테스트는 아래와 같이 수행합니다.
 
 ```protobuf
-$go run multihash.go
+$ go run multihash.go
 hex:11140beec7b5ea3f0fdbc95dodd47f3c5bc275da8a33
 obj:sha1 0x11 20 0beec7b5ea3f0fdbc95d0dd47f3c5bc275da8a33
 ```

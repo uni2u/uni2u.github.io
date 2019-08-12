@@ -30,7 +30,7 @@ ipfs id <peerID>: ipfs 노드 ID 정보 표시
 - `<addr>`: 주소
 
 ```protobuf
-$ipfs id QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ -f ="<aver>"
+$ ipfs id QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ -f ="<aver>"
 go-ipfs/0.4.15/
 ```
 
