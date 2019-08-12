@@ -14,7 +14,7 @@ meta: "Springfield"
 
 repo 의 insert, delete 및 기타 작업의 Command 는 [_Signed Interests_](https://redmine.named-data.net/projects/ndn-cxx/wiki/SignedInterest) 형식으로 인코딩됩니다.
 
-```tex
+```protobuf
 /<repo-prefix>/<command-verb>/................./.........................................
                               \______  _______/ \__________________  ___________________/
                                      \/                            \/
@@ -38,7 +38,7 @@ name 의미 (semantics) 는 다음과 같은 컴포넌트로 정의됩니다:
 
 repo 의 prefix 인 _/ucla/cs/repo/_ 는 다음과 같이 정의됩니다:
 
-```tex
+```protobuf
 /ucla/cs/repo/<command verb>/<RepoCommandParameter>/<timestamp>/<random-value>/<SignatureInfo>/<SignatureValue>
 ```
 

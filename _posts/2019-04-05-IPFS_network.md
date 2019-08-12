@@ -67,13 +67,13 @@ libp2p 에서는 **multiaddr** 방식이라고 설명하고 있다.
 
 [_multiformats/multiaddr_](https://github.com/multiformats/multiaddr)
 
-```tex
+```protobuf
 /<protoName string>/<value string> + <protoName string>/<value string> + ...
 ```
 
 IPFS 의 Node Address 의 경우 다음과 같이 `<multiaddr>+/ipfs/<Node ID>` 포맷으로 나타낸다.
 
-```tex
+```protobuf
 /ip4/127.0.0.1/tcp/9000/ipfs/QmYJyUMAcXEw1b5bFfbBbzYu5wyyjLMRHXGUkCXpag74Fu
 # Address :
 #   IP          : 127.0.0.1
@@ -83,7 +83,7 @@ IPFS 의 Node Address 의 경우 다음과 같이 `<multiaddr>+/ipfs/<Node ID>` 
 
 multihash 의 특징으로서 ~ over ~ 를 다층적으로 표현할 수 있다.
 
-```tex
+```protobuf
 # IPFS over TCP over IPv6 (typical TCP)
 /ip6/fe80::8823:6dff:fee7:f172/tcp/4001/ipfs/QmYJyUMAcXEw1b5bFfbBbzYu5wyyjLMRHXGUkCXpag74Fu
 
@@ -583,7 +583,7 @@ libp2p 에서는 `multistream` 방식으로 표현한다. multistream 에서는 
 
 [_multistream - properties - libp2p/specs_](https://github.com/libp2p/specs/blob/master/7-properties.md#752-multistream---self-describing-protocol-stream)
 
-```
+```protobuf
 /<protoName string>/<version string>
 ```
 
@@ -772,7 +772,7 @@ Peer 에 대한 Dial 요구가 동시에 여러 온 경우 이전 Dial 처리가
 
 이미 연결할 수 없게 된 Peer 대해 계속 접속 요청을 해도 소용없기 때문에 일단 연결에 실패하면 Backoff 목록에 추가되어 다음 식에 나타난 시간이 경과하지 않으면 재시도 할 수 없게된다.
 
-```tex
+```protobuf
 // BackoffBase + BakoffCoef * PriorBackoffs^2
 until := (5 + 1 * (retryCount + retryCount)) * time.Second
 ```

@@ -85,7 +85,7 @@ _Size_ 필드는 P2P 네트워킹을 최적화하는 데 주로 사용되며 개
 
 IPFS Object 는 일반적으로 Base58 로 인코딩 된 해시로 참조됩니다. 예를 들어 IPFS CLI Tool 을 사용하여 해시 QmarHSr9aaSNaPSR6KFPbuLV9aqJfTk1y9Bpdwline 에서 IPFS Object 를 살펴보면 다음과 같습니다.
 
-```tex
+```protobuf
 $ipfs object get QmarHSr9aSNaPSR6G9KFPbuLV9aEqJfTk1y9B8pdwqK4Rq
 {"Links": [{
 "Name": "AnotherName",
@@ -117,21 +117,21 @@ IPFS는 파일과 디렉토리로 구성된 파일 시스템을 쉽게 나타낼
 
 _ipfs add_ 명령을 사용하여 IPFS에 작은 파일을 추가 할 수 있습니다:
 
-```tex
+```protobuf
 user@user-VBox:~/tmp$ ipfs add test_dir/hello.txt
 added QmfM2r8seH2GiRaC4esTjeraXEachRt8ZsSeGaWTPLyMoG test_dir/hello.txt
 ```
 
 _ipfs cat_ 명령을 사용하여 위의 IPFS Object 의 파일 내용을 볼 수 있습니다.
 
-```tex
+```protobuf
 user@user-VBox:~/tmp$ ipfs cat QmfM2r8seH2GiRaC4esTjeraXEachRt8ZsSeGaWTPLyMoG
 Hello World!
 ```
 
 _ipfs object get_ 명령을 사용하여 기본 구조를 볼 수 있습니다.
 
-```tex
+```protobuf
 user@user-VBox:~/tmp$ ipfs object get QmfM2r8seH2GiRaC4esTjeraXEachRt8ZsSeGaWTPLyMoG
 {"Links": [],
 "Data": "\u0008\u0002\u0012\rHello World!\n\u0018\r"}
@@ -145,7 +145,7 @@ user@user-VBox:~/tmp$ ipfs object get QmfM2r8seH2GiRaC4esTjeraXEachRt8ZsSeGaWTPL
 
 큰 파일 (> 256 kB)은 <256 kB 인 파일 청크에 대한 링크 목록으로 표시되며이 Object 는 큰 파일을 나타내는 최소 데이터만 표시됩니다. 파일 청크에 대한 링크는 빈 문자열을 이름으로 갖습니다.
 
-```tex
+```protobuf
 user@user-VBox:~/tmp$ ipfs add test_dir/bigfile.js
 added QmR45FmbVVrixReBwJkhEKde2qwHYaQzGxu4ZoDeswuF9w test_dir/bigfile.js
 user@user-VBox:~/tmp$ ipfs object get QmR45FmbVVrixReBwJkhEKde2qwHYaQzGxu4ZoDeswuF9w

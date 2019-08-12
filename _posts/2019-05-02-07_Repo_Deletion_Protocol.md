@@ -23,7 +23,7 @@ Command verb:  **delete**
 
 _Deletion command interest_ 는 repo command 포멧을 따릅니다. 예:
 
-```tex
+```protobuf
 /ucla/cs/repo/delete/<RepoCommandParameter>/<timestamp>/<random-value>/<SignatureInfo>/<SignatureValue>
 ```
 
@@ -49,7 +49,7 @@ _Deletion command selector_ 는 [repo command selectors](http://redmine.named-da
 
 deletion progress 동안 requester 는 _deletion status check command_ 를 전송하여 deletion progress 상태를 확인할 수 있습니다. _status check command_ 는 _signed interest_ 입니다. _deletion status check command_ 는 repo command 형식을 따릅니다. `<command verb>` 는 check 를 삭제하는 것과 같습니다. 예:
 
-```tex
+```protobuf
 /ucla/cs/repo/delete/<RepoCommandParameter>/<timestamp>/<random-value>/<SignatureInfo>/<SignatureValue>
 ```
 

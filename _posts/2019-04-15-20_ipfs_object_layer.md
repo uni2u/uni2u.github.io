@@ -35,8 +35,8 @@ type IPFSObject struct {
 
 `ipfs object links <객체 hash>` 를 실행하면 그 객체 아래의 모든 IPFSLink 엔트리가 나열됩니다. 즉, IPFSLink 는 객체를 구성합니다.
 
-```tex
-$ ipfs object links QmZV47ZKbJ1DCLoHWHGhXZ4EMqsyTsZRJUsZuRwEAoiesn
+```protobuf
+$ipfs object links QmZV47ZKbJ1DCLoHWHGhXZ4EMqsyTsZRJUsZuRwEAoiesn
 
 QmUEHn7UnFyFMpJwkvotwuejnMX8XEkqxNsXMeDXJtiJyf 8019571 IZONE_violeta.mp4
 QmaFN5uLVBujrsQ6HFzToxUAbtV9z7MfvCtmLrscS9npf3 52173   IZONE_LaViAnRose.jpeg

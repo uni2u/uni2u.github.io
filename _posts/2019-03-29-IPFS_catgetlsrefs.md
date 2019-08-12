@@ -30,16 +30,16 @@ ipfs cat [options] 파일hash
 다음과 같이 사용됩니다:
 
 ```protobuf
-$ ipfs cat QmSoLSafTMBsPKadTEgaXctDQVcqN88CNLHXMkTNwMKPnu
+$ipfs cat QmSoLSafTMBsPKadTEgaXctDQVcqN88CNLHXMkTNwMKPnu
 "hi, I am IZ*ONE"
 
-$ ipfs cat -o 10 QmSoLSafTMBsPKadTEgaXctDQVcqN88CNLHXMkTNwMKPnu
+$ipfs cat -o 10 QmSoLSafTMBsPKadTEgaXctDQVcqN88CNLHXMkTNwMKPnu
 Z*ONE"
 
-$ ipfs cat -o 1 QmSoLSafTMBsPKadTEgaXctDQVcqN88CNLHXMkTNwMKPnu
+$ipfs cat -o 1 QmSoLSafTMBsPKadTEgaXctDQVcqN88CNLHXMkTNwMKPnu
 hi, I am IZ*ONE"
 
-$ ipfs cat -l 8 QmSoLSafTMBsPKadTEgaXctDQVcqN88CNLHXMkTNwMKPnu
+$ipfs cat -l 8 QmSoLSafTMBsPKadTEgaXctDQVcqN88CNLHXMkTNwMKPnu
 "hi, I am
 ```
 
@@ -71,10 +71,10 @@ ipfs ls [options] 파일hash
 - v: 출력에 헤더 추가
 
 ```protobuf
-$ ipfs add -s size-10240 wechat.jpg
+$ipfs add -s size-10240 wechat.jpg
 added QmaWLzjB6Y5RdkThm6TCxoK5ZnFRypxTNdK52QLGdoTvAs wechat.jpg
 
-$ ipfs ls QmaWLzjB6Y5RdkThm6TCxoK5ZnFRypxTNdK52QLGdoTvAs
+$ipfs ls QmaWLzjB6Y5RdkThm6TCxoK5ZnFRypxTNdK52QLGdoTvAs
 QmY6AWeX52Pemc54pv6jFUvwaA1VBH7yFqLZv6A64MSEWg 10251
 QmSCKPtkEpffpKUasSxMqicDN7vbSxhw8k7BwGBFbjSDai 10251
 QmQ2DZqTnHF3F9mqtSD66jvKDGUanBgEfUxRDTtMQJuQZp 10251
@@ -82,7 +82,7 @@ QmdejejQH5wP6fKrmkBHRqtevFvUrTeAEHpMcnEAGTmkDY 10251
 QmWimAR2tjeJBcsBtJPkU3VxQRdieHcYyaK5fnAJCd4Byj 10251
 QmUXSHDHLyz3kxsFGdEc29JjLoJoeGamTKvbu84FfZ2VXv 4534
 
-$ ipfs ls -v QmaWLzjB6Y5RdkThm6TCxoK5ZnFRypxTNdK52QLGdoTvAs
+$ipfs ls -v QmaWLzjB6Y5RdkThm6TCxoK5ZnFRypxTNdK52QLGdoTvAs
 Hash                                           Size  Name
 QmY6AWeX52Pemc54pv6jFUvwaA1VBH7yFqLZv6A64MSEWg 10251
 QmSCKPtkEpffpKUasSxMqicDN7vbSxhw8k7BwGBFbjSDai 10251

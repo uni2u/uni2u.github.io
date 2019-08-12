@@ -29,7 +29,7 @@ Command verb: **insert**
 name semantics 는 `insert` 라는 repo command 포멧을 따릅니다.
 예를들어 `<repo prefix>` 를 _/ucla/cs/repo_ 로 지정하면 다음과 같습니다:
 
-```tex
+```protobuf
 /ucla/cs/repo/insert/<RepoCommandParameter>/<timestamp>/<random-value>/<SignatureInfo>/<SignatureValue>
 ```
 
@@ -41,7 +41,7 @@ insert 진행 중에 요청자 (requester) 는 insert 진행 상태를 확인하
 
 insert check 와 같습니다. 예:
 
-```tex
+```protobuf
 /ucla/cs/repo/insert check/<RepoCommandParameter>/<timestamp>/<random-value>/<SignatureInfo>/<SignatureValue>
 ```
 

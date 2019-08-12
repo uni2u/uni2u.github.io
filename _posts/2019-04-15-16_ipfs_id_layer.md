@@ -35,7 +35,7 @@ do{
 터미널에서 `ipfs id` 를 실행하면 다음과 같이 시스템의 IPFS 노드 정보가 표시됩니다.
 
 ```protobuf
-$ ipfs id
+$ipfs id
 {
   "ID": "QmXdSpUBx9Ut6q8LF8Wyt1Wi2wxmob6qnnT11uV3SmvUP3",
   "PublicKey": "CAASpgIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCh7fHOV1X0LEsqxxlY+wRRuMGZ+E7sMAWXfMj8NLenv3KpIX8pHy0lk/H6VCCjKB+t4e2Rb+Px9Uwh2YjRlLaaMkBYN27COVBdtL9sH5ZW2BZ6x00Deg+gWoO0xs5rzadtk45vV44RzxYDuGCT0GW79WgTBUi0s1O00LE6p+wOrZdk6UGYjUEzL3nD6CRMPoQbVtV8WGBWFksoyM+bnlyyCcFhw0suN5Yf8OicwGIDznsjniSOrku9QpoFU1B96SKMmfqiXZC+KyzFfKp/U1lFmfp7wlYObUYpMkcWI0/bRzdursQGga7xXyKwQJ5ZGouSANt6cClTMnOUHGLCFzzNAgMBAAE=",

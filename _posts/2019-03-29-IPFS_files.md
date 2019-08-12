@@ -13,7 +13,7 @@ meta: "Springfield"
 
 # IPFS files
 
-```tex
+```protobuf
 ipfs files <명령어>
 ```
 
@@ -49,26 +49,26 @@ ipfs files <명령어>
   - e bool: 파일이 존재하지 않으면 생성
   - t bool: 파일을 작성하기 전에 원본 내용을 지우고 처음부터 작성
 
-```tex
-$ ipfs files ls
+```protobuf
+$ipfs files ls
 h
 hide
 hide1
 
-$ ipfs files stat /h
+$ipfs files stat /h
 QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN
 Size: 19
 CumulativeSize: 77
 ChildBlocks: 1
 Type: file
 
-$ ipfs files stat /hide
+$ipfs files stat /hide
 QmQCU2EcMqAqQPR2i9bChDtGNJchTbq5TbXJJ16u19uLTa
 Size: 0
 CumulativeSize: 4
 ChildBlocks: 0
 Type: directory
 
-$ ipfs files read /h
+$ipfs files read /h
 add wechat 18191727
 ```

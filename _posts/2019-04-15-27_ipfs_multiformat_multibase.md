@@ -48,7 +48,7 @@ base64urlpad  U       rfc4648 - with padding
 
 예:
 
-```tex
+```protobuf
 4D756C74696261736520697320617765736F6D6521205C6F2F  # base16 (hex)
 JV2WY5DJMJQXGZJANFZSAYLXMVZW63LFEEQFY3ZP            # base32
 YAjKoNbau5KiqmHPmSxYCvn66dA1vLmwbt                  # base58
@@ -71,7 +71,7 @@ multibase 설치는 다음을 사용합니다.
 
 multiaddr 패키지는 패키지 gx 에 의존하기 때문에 multiaddr 을 사용하려면 다음이 필요합니다.
 
-```go
+```protobuf
 go get -u github.com/whyrusleeping/gx
 go get -u github.com/whyrusleeping/gx-go
 cd <your-project-repository>

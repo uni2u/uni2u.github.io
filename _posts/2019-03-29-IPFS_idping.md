@@ -17,7 +17,7 @@ meta: "Springfield"
 
 ## Id
 
-```tex
+```protobuf
 ipfs id <peerID>: ipfs 노드 ID 정보 표시
 ```
 
@@ -29,21 +29,21 @@ ipfs id <peerID>: ipfs 노드 ID 정보 표시
 - `<pubkey>`: 공개 키
 - `<addr>`: 주소
 
-```tex
-$ ipfs id QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ -f ="<aver>"
+```protobuf
+$ipfs id QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ -f ="<aver>"
 go-ipfs/0.4.15/
 ```
 
 ## Ping
 
-```tex
+```protobuf
 ipfs ping <peerID>: 노드에 ping 패킷 보냄
 ```
 
 라우팅 시스템을 통해 노드를 발견하고 ping 메시지를 전송하며 왕복 지연 정보를 확인합니다.
 `-n` 옵션을 사용하여 int 형식의 보낼 핑 메시지 수를 설정할 수 있습니다. (기본값 10)
 
-```tex
+```protobuf
 ipfs ping QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ
 Looking up peer QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ
 PING QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ.
