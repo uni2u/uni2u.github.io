@@ -57,4 +57,4 @@ Fn Project 도 다른 프레임워크와 마찬가지로 Trigger 에 해당하�
 
 ### 6) Platform9 fission ([https://fission.io](https://fission.io/))
 
-Fission 은 Kubernetes-native 서버리스 프레임워크 이다. CLI, HTTP/MQ/Timer 등의 Trigger, Runtime Engine 구성으로 이루어지며 Kubernetes 상에서 pod 로 구동된다.
+Fission 은 Kubernetes-native 서버리스 프레임워크로서 CLI, HTTP/MQ/Timer 등의 Trigger, Runtime Engine 구성으로 이루어지며 Kubernetes 상에서 pod 로 구동된다.
