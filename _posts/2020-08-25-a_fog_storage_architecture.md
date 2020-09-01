@@ -152,3 +152,38 @@ _**One-Hop Distributed Hash Table**:_ hash function 과 gossip 방식의 혼합�
 
 #### 2.2.2. Existing Cloud storage solutions
 
+이 섹션은 기존 클라우드 인프라의 오브젝트 저장소를 제시하고 Fog 환경에 적용 평가를 제안한다.
+
+특히 데이터를 찾기 위해 이전 섹션 (섹션 2.2.1) 에서 제시한 메커니즘에 의존하는 Rados, Cassandra, IPFS 에 중점을 둔다.
+
+_**Rados**:_ Rados 는 CRUSH 라는 hashing function 을 사용하여 데이터를 찾는다. 선출된 노드는 네트워크 토폴로지를 설명하는 맵과 모든 스토리지 노드 및 클라이언트에 대한 배치 제한 사항을 배포하는 역할을 한다. 이후 각 노드는 네트워크 교환없이 각 오브젝트의 위치를 로컬로 계산할 수 있다. Rados 주요 장점은 hash function 으로 네트워크 트래픽을 포함하지만 Paxos 프로토콜을 사용하여 모든 노드에 네트워크 토폴로지 설명을 배포하기 때문에 네트워크 파티셔닝이 동작하지 않는다. 또한 기존에 저장된 데이터를 이동하는 것이 쉽지 않기 때문에 이동성에 대한 지원이 제한된다.
+
+_**Cassandra**:_ Facebook 에서 개발한 것으로 gossip 과 hash function 을 활용하는 'one-hop DHT' 를 사용한다. Cassandra 에서 각 노드는 네트워크 토폴로지에 대한 지식을 보내기 위해 무작위로 선택된 다른 노드에 주기적으로 연결한다. 이후 Rados 와 같이 다른 요청없이 각 노드에서 오브젝트를 찾을 수 있다. Rados 와 차이점은 토폴로지를 설명하는 맵이 노드에 분산되는 방식이다. Cassandra 의 장단점은 Rados 와 동일하지만 토폴로지 설명을 배포하기 위해 Paxos 프로토콜을 사용하지 않으므로 Brewer 정리에 따라 네트워크 파티셔닝을 사용할 수 있다.
+
+_**IPFS**:_ BitTorrent 프로토콜을 사용하여 노드간 데이터를 교환하고 Kademlia DHT 를 통해 오브젝트 복제본을 저장하는 노드를 찾는 오브젝트 저장소이다. 장점은 각 노드가 네트워크 토폴로지에 대한 제한된 지식을 가지고 있기 때문에 요청된 노드에 복제본은 생성하는 것으로 네트워크 파티셔닝을 지원한다. 그러나 단점은 불변 (immutable) 오브젝트를 사용하는 것이다. 이것은 오브젝트는 수정될 수 없음을 의미하며 DHT 가 네트워크 트래을 포함하지 않는다.
+
+아래 표에 위 내용을 요약하였다. 대부분 엄청난 숫자의 서버를 대상으로 높은 대기시간과 이기종 네트워크 링크로 연결된 다중 사이트 환경에서 작동하는 것을 염두하지 않고 설계되었다. 일부 분산 파일시스템인 XtreemFS, GFarm, GlobalFS 등과 같은 WAN 링크와 상호 연결된 다중 사이트 환경을 지원하는 것이 있지만 오브젝트 스토리지가 아닌 파일 시스템인 관계로 중앙 집중식 접근 방식에 의존하기 때문에 Fog 에서 기대하는 성능을 나타내지 않는다. 
+
+||제안 (Purpose)|장점 (Advantages)|단점 (Disadvantage)|
+|:---:|:---|:---|:---|
+|Rados|- CRUSH hash function 과 Paxos 프로토콜에 의존하는 오브젝트 스토리지|- 네트워크 교환 없이 데이터 탐색 (CRUSH)|- (Paxos 프로토콜) 네트워크 파티셔닝이 동작하지 않음 <br>- 확장이 어려움 (Paxos 프로토콜)</br> <br>- 저장된 데이터 이동의 어려움</br>|
+|Cassandra|- hash function 및 gossip 프로토콜에 의존하는 Key/Value store|- 네트워크 교환없이 데이터 배치 <br>- (gossip) 네트워크 파티셔닝 가능</br>|- 저장된 데이터 이동이 어려움|
+|IPFS|- BitTorrent 프로토콜 및 DHT 에 의존하는 P2P 오브젝트 저장소|- 데이터를 새 위치로 자동 재배치: 액세스 시간 개션 <br>- 네트워크 파티셔닝 가능</br>|- DHT 는 네트워크 트래픽을 포함하지 않음 <br>- immutable 오브젝트 활용</br>|
+
+### 2.3. How existing solutions fit the properties
+
+스토리지 솔루션을 처음부터 개발하지 않기 위해 Fog 인프라를 도입 (Rados, Cassandra, IPFS) 한 오브젝트 저장소를 배포하고 성능과 Fog 스토리지에 대한 평가를 진행하였다. 아래 표를 보면 기존 해결책이 Fog 스토리지의 속성을 충족하지 않는다는 것을 알 수 있다. Rados 는 Paxos 알고리즘을 사용하면 서비스 파티셔닝의 경우 데이터를 사용할 수 없게되고 Cassandra 의 경우 사용자가 이동하는 사이트에 저장된 오브젝트를 이동하여 액세스 시간을 늘리는 유연성이 부족하다. IPFS 는 배치 전략이 없기 때문에 기본 이동성만 제공한다. 클라이언트는 원하는 위치에 쓰고 오브젝트 저장소는 각 데이터 오브젝트가 기록된 위치를 추적한다.
+
+||Rados|Cassandra|IPFS|
+|:---|:---:|:---:|:---:|
+|Data locality|Yes|Yes|Yes|
+|Network containment|Yes|Yes|**No**|
+|Disconnected mode|**No**|Yes|**Partially**|
+|Mobility support|**Partially**|**Partially**|Natively|
+|Scalability|**No**|Yes|Yes|
+
+결과적으로 IPFS 오브젝트 저장소를 활용할 것을 제안하고 모든 속성이 충족될 수 있도록 Fog 환경에서 동작을 위한 수정사항을 제안한다. 이동성 지원은 스토리지 핵심에서 배치 전략을 수정하지 않고 추가할 수 없는 필수 속성이기 때문에 IPFS 로 시작하기로 결정하였다.
+
+## 3. Designing a scalable and efficient Fog Layer
+
+
