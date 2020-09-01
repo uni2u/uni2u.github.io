@@ -166,9 +166,9 @@ _**IPFS**:_ BitTorrent 프로토콜을 사용하여 노드간 데이터를 교�
 
 ||제안 (Purpose)|장점 (Advantages)|단점 (Disadvantage)|
 |:---:|:---|:---|:---|
-|Rados|- CRUSH hash function 과 Paxos 프로토콜에 의존하는 오브젝트 스토리지|- 네트워크 교환 없이 데이터 탐색 (CRUSH)|- (Paxos 프로토콜) 네트워크 파티셔닝이 동작하지 않음 <br>- 확장이 어려움 (Paxos 프로토콜)</br> <br>- 저장된 데이터 이동의 어려움</br>|
-|Cassandra|- hash function 및 gossip 프로토콜에 의존하는 Key/Value store|- 네트워크 교환없이 데이터 배치 <br>- (gossip) 네트워크 파티셔닝 가능</br>|- 저장된 데이터 이동이 어려움|
-|IPFS|- BitTorrent 프로토콜 및 DHT 에 의존하는 P2P 오브젝트 저장소|- 데이터를 새 위치로 자동 재배치: 액세스 시간 개션 <br>- 네트워크 파티셔닝 가능</br>|- DHT 는 네트워크 트래픽을 포함하지 않음 <br>- immutable 오브젝트 활용</br>|
+|Rados|- CRUSH hash function 과 Paxos 프로토콜에 의존하는 오브젝트 스토리지|- 네트워크 교환 없이 데이터 탐색 (CRUSH)|- (Paxos 프로토콜) 네트워크 파티셔닝이 동작하지 않음<br>- 확장이 어려움 (Paxos 프로토콜)</br><br>- 저장된 데이터 이동의 어려움</br>|
+|Cassandra|- hash function 및 gossip 프로토콜에 의존하는 Key/Value store|- 네트워크 교환없이 데이터 배치<br>- (gossip) 네트워크 파티셔닝 가능</br>|- 저장된 데이터 이동이 어려움|
+|IPFS|- BitTorrent 프로토콜 및 DHT 에 의존하는 P2P 오브젝트 저장소|- 데이터를 새 위치로 자동 재배치: 액세스 시간 개션 <br>- 네트워크 파티셔닝 가능</br>|- DHT 는 네트워크 트래픽을 포함하지 않음<br>- immutable 오브젝트 활용</br>|
 
 ### 2.3. How existing solutions fit the properties
 
@@ -185,5 +185,17 @@ _**IPFS**:_ BitTorrent 프로토콜을 사용하여 노드간 데이터를 교�
 결과적으로 IPFS 오브젝트 저장소를 활용할 것을 제안하고 모든 속성이 충족될 수 있도록 Fog 환경에서 동작을 위한 수정사항을 제안한다. 이동성 지원은 스토리지 핵심에서 배치 전략을 수정하지 않고 추가할 수 없는 필수 속성이기 때문에 IPFS 로 시작하기로 결정하였다.
 
 ## 3. Designing a scalable and efficient Fog Layer
+
+Fog 에서 사이트간 네트워크 교환은 비용이 많이 소요된다. 액세스 시간을 줄이는 것뿐만 아니라 (네트워크 파티셔닝으로 인한 무한 지연이 발생한 극단적인 경우) 네트워크 지연이 큰 환경에서 시스템이 동작할 수 있도록 하여야 한다.
+
+다음 섹션에서 IPFS 오브젝트 스토리지를 Fog 환경에 적용하는 것을 중점적으로 살펴본다. 섹션 3.1 에 제시한 첫번째 수정은 사용자가 로컬로 저장된 오브젝트에 접근하는 동안 네트워크를 억제하는 것이다. 이를 위해 IPFS 를 Scale-out NAS 와 결합할 것을 제안한다.
+
+두번째 수정은 데이터 저장 프로세스에서 네트워크 트래픽을 포함하도록 물리적 네트워크 토폴로지를 매핑하는 트리에 오브젝트의 위치를 저장하는 것으로 구성된다. 이것은 섹션 3.2 에서 다룬다.
+
+### 3.1. Reduction of inter-sites network traffic for locally stored data
+
+IPFS 가 오브젝트를 찾기 위하여 사용하는 DHT 가 네트워크 트래픽을 포함할 수 없는 이유를 설명한다. 둘째로 사용자가 사이트간 네트워크 요청을 보내지 않고도 연결된 사이트에 로컬로 저장된 오브젝트에 액세스할 수 있도록 IPFS 를 Scale-Out NAS 와 결합하는 방식을 설명한다.
+
+#### 3.1.1. Problem description
 
 
